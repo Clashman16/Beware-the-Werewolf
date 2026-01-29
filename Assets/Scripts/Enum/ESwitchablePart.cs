@@ -1,10 +1,10 @@
 namespace BWW.Enums
 {
-    public enum ESwitchablePart
-    {
-        WALL,
-        STAIRS,
-        DOOR,
-        WOOD_FENCE
-    }
+   public enum ESwitchablePart
+   {
+      WALL,
+      DOOR,
+      STAIRS,
+      WOOD_FENCE
+   }
 }
