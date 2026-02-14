@@ -16,7 +16,7 @@ MonoBehaviour:
   m_lstAllPossibleParts:
   - m_ePart: 0
     m_dCount: 3
-  - m_ePart: 1
+  - m_ePart: 2
     m_dCount: 1
   m_lstWaves:
   - {fileID: 11400000, guid: d8e7b6e5f824a9b418c0742dc6b1d4cb, type: 2}
