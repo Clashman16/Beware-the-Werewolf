@@ -24,7 +24,7 @@ namespace BWW.Managers.Map
          }
       }
 
-      private List<TowerBehaviour> m_lstAvailableSpawners;
+      private List<SpawnPointBehaviour> m_lstAvailableSpawners;
 
       EnemyPickerUtility m_enemyPicker;
 
@@ -46,20 +46,23 @@ namespace BWW.Managers.Map
 
       private EnemiesSpawnManager()
       {
-         m_lstAvailableSpawners = new List<TowerBehaviour>();
+         m_lstAvailableSpawners = new List<SpawnPointBehaviour>();
       }
 
       public void Init(List<int> p_lstEnabledTowerIds, List<ScriptableEnemyWave> p_lstWaves)
       {
          m_lstAvailableSpawners.Clear();
 
-         TowerBehaviour[] l_lstAllTowers = Object.FindObjectsByType<TowerBehaviour>(FindObjectsInactive.Exclude, FindObjectsSortMode.None);
+         SpawnPointBehaviour[] l_lstAllSpawnPoints = Object.FindObjectsByType<SpawnPointBehaviour>(FindObjectsInactive.Exclude, FindObjectsSortMode.None);
 
-         foreach (TowerBehaviour l_tower in l_lstAllTowers)
+         foreach (SpawnPointBehaviour l_spawnPoint in l_lstAllSpawnPoints)
          {
-            if (p_lstEnabledTowerIds.Contains(l_tower.TowerId))
+            TowerBehaviour l_tower = (TowerBehaviour) l_spawnPoint;
+
+            if ((l_tower != null && p_lstEnabledTowerIds.Contains(l_tower.TowerId))
+               || l_tower == null)
             {
-               m_lstAvailableSpawners.Add(l_tower);
+               m_lstAvailableSpawners.Add(l_spawnPoint);
             }
          }
 

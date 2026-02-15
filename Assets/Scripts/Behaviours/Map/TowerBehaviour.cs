@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace BWW.Behaviours.Map
 {
-    public class TowerBehaviour : MonoBehaviour
+    public class TowerBehaviour : GateBehaviour
     {
         [SerializeField] private int m_dTowerId;
 
