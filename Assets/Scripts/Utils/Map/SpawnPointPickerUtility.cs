@@ -1,4 +1,5 @@
 using BWW.Behaviours.Map;
+using BWW.Utils.Characters;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -47,7 +48,7 @@ namespace BWW.Utils.Map
 
          m_currentSpawnPoint = m_lstAvailableSpawners[l_dPickingId];
 
-         return l_dPickingId;
+         return 0;
       }
    }
 }
