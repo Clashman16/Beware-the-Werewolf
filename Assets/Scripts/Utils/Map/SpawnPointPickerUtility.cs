@@ -27,7 +27,7 @@ namespace BWW.Utils.Map
 
             TowerBehaviour l_tower = (TowerBehaviour) l_spawnPoint;
 
-            if ((l_tower != null && p_lstEnabledTowerIds.Contains(l_tower.TowerId))
+            if ((l_tower != null && p_lstEnabledTowerIds.Contains(l_tower.SpawnerId))
                || l_tower == null)
             {
                PossiblePicks.Add(l_spawnPoint.SpawnerId);

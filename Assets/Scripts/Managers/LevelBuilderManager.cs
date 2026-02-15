@@ -81,7 +81,7 @@ namespace BWW.Managers.Map
 
                if (l_lstSpawners[l_i].enabled)
                {
-                  l_lstEnabledSpawners.Add(l_lstSpawners[l_i].TowerId);
+                  l_lstEnabledSpawners.Add(l_lstSpawners[l_i].SpawnerId);
                }
             }
          }
@@ -131,7 +131,7 @@ namespace BWW.Managers.Map
 
                if (l_lstSpawners[l_i].enabled)
                {
-                  l_lstEnabledSpawners.Add(l_lstSpawners[l_i].TowerId);
+                  l_lstEnabledSpawners.Add(l_lstSpawners[l_i].SpawnerId);
                }
             }
          }

@@ -930,7 +930,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1a411cbceb22ef4caf27d30b17ba576, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_dTowerId: 3
+  m_dSpawnerId: 3
 --- !u!1 &407895226
 GameObject:
   m_ObjectHideFlags: 0
@@ -4750,6 +4750,7 @@ GameObject:
   - component: {fileID: 1664805596}
   - component: {fileID: 1664805598}
   - component: {fileID: 1664805597}
+  - component: {fileID: 1664805599}
   m_Layer: 0
   m_Name: Gate
   m_TagString: Untagged
@@ -4830,6 +4831,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1664805595}
   m_Mesh: {fileID: -8141524411919156058, guid: b54ed69feeea7fa489a3e6476e93f157, type: 3}
+--- !u!114 &1664805599
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1664805595}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a23ad6b35fc22b34fbadb826750b4fd2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BWW.Behaviours.Map.GateBehaviour
+  m_dSpawnerId: 7
 --- !u!1 &1706653203
 GameObject:
   m_ObjectHideFlags: 0
@@ -5366,7 +5380,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1a411cbceb22ef4caf27d30b17ba576, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_dTowerId: 2
+  m_dSpawnerId: 2
 --- !u!1 &1810756819
 GameObject:
   m_ObjectHideFlags: 0
@@ -5903,7 +5917,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1a411cbceb22ef4caf27d30b17ba576, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_dTowerId: 0
+  m_dSpawnerId: 0
 --- !u!1 &2025376521
 GameObject:
   m_ObjectHideFlags: 0
@@ -5915,6 +5929,7 @@ GameObject:
   - component: {fileID: 2025376522}
   - component: {fileID: 2025376524}
   - component: {fileID: 2025376523}
+  - component: {fileID: 2025376525}
   m_Layer: 0
   m_Name: Gate
   m_TagString: Untagged
@@ -5995,6 +6010,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2025376521}
   m_Mesh: {fileID: -8141524411919156058, guid: b54ed69feeea7fa489a3e6476e93f157, type: 3}
+--- !u!114 &2025376525
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2025376521}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a23ad6b35fc22b34fbadb826750b4fd2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BWW.Behaviours.Map.GateBehaviour
+  m_dSpawnerId: 6
 --- !u!1 &2025629516
 GameObject:
   m_ObjectHideFlags: 0
@@ -6432,7 +6460,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1a411cbceb22ef4caf27d30b17ba576, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_dTowerId: 1
+  m_dSpawnerId: 1
 --- !u!1 &2071331244
 GameObject:
   m_ObjectHideFlags: 0
@@ -6444,6 +6472,7 @@ GameObject:
   - component: {fileID: 2071331245}
   - component: {fileID: 2071331247}
   - component: {fileID: 2071331246}
+  - component: {fileID: 2071331248}
   m_Layer: 0
   m_Name: Gate
   m_TagString: Untagged
@@ -6524,6 +6553,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2071331244}
   m_Mesh: {fileID: -8141524411919156058, guid: b54ed69feeea7fa489a3e6476e93f157, type: 3}
+--- !u!114 &2071331248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2071331244}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a23ad6b35fc22b34fbadb826750b4fd2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BWW.Behaviours.Map.GateBehaviour
+  m_dSpawnerId: 5
 --- !u!1 &2083857563
 GameObject:
   m_ObjectHideFlags: 0
@@ -6754,6 +6796,7 @@ GameObject:
   - component: {fileID: 543450652881760815}
   - component: {fileID: 3469287836731555210}
   - component: {fileID: 1711813855889803584}
+  - component: {fileID: 3469287836731555211}
   m_Layer: 0
   m_Name: Gate
   m_TagString: Untagged
@@ -6975,6 +7018,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 919132148941252757}
   m_Mesh: {fileID: -8141524411919156058, guid: b54ed69feeea7fa489a3e6476e93f157, type: 3}
+--- !u!114 &3469287836731555211
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132148941252757}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a23ad6b35fc22b34fbadb826750b4fd2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BWW.Behaviours.Map.GateBehaviour
+  m_dSpawnerId: 4
 --- !u!33 &3469287837310542961
 MeshFilter:
   m_ObjectHideFlags: 0
