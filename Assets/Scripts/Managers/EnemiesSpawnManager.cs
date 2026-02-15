@@ -1,9 +1,7 @@
-using BWW.Behaviours.Map;
 using BWW.Enums;
 using BWW.ScriptableObjects.Map;
 using BWW.Utils.Map;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace BWW.Managers.Map
 {
@@ -24,9 +22,9 @@ namespace BWW.Managers.Map
          }
       }
 
-      private List<SpawnPointBehaviour> m_lstAvailableSpawners;
-
       EnemyPickerUtility m_enemyPicker;
+
+      SpawnPointPickerUtility m_spawnerPicker;
 
       private bool m_bIsReady;
 
@@ -44,27 +42,11 @@ namespace BWW.Managers.Map
          }
       }
 
-      private EnemiesSpawnManager()
-      {
-         m_lstAvailableSpawners = new List<SpawnPointBehaviour>();
-      }
+      private EnemiesSpawnManager(){}
 
       public void Init(List<int> p_lstEnabledTowerIds, List<ScriptableEnemyWave> p_lstWaves)
       {
-         m_lstAvailableSpawners.Clear();
-
-         SpawnPointBehaviour[] l_lstAllSpawnPoints = Object.FindObjectsByType<SpawnPointBehaviour>(FindObjectsInactive.Exclude, FindObjectsSortMode.None);
-
-         foreach (SpawnPointBehaviour l_spawnPoint in l_lstAllSpawnPoints)
-         {
-            TowerBehaviour l_tower = (TowerBehaviour) l_spawnPoint;
-
-            if ((l_tower != null && p_lstEnabledTowerIds.Contains(l_tower.TowerId))
-               || l_tower == null)
-            {
-               m_lstAvailableSpawners.Add(l_spawnPoint);
-            }
-         }
+         m_spawnerPicker = new SpawnPointPickerUtility(p_lstEnabledTowerIds);
 
          m_enemyPicker = new EnemyPickerUtility(p_lstWaves);
 
@@ -75,6 +57,10 @@ namespace BWW.Managers.Map
       public void Spawn()
       {
          EEnemyType l_eEnemy = (EEnemyType) m_enemyPicker.Pick();
+
+         m_spawnerPicker.Pick();
+
+         m_spawnerPicker.CurrentSpawnPoint.InstantiateEnemy(l_eEnemy);
       }
    }
 }
