@@ -19,6 +19,8 @@ namespace BWW.Managers.Map
          List<int> l_lstEnabledTowers = EnableTowers(p_levelConfig.MainSpawnerCount);
 
          InitSwitchableParts(p_levelConfig.AllPossibleParts, l_lstEnabledTowers);
+
+         EnemiesSpawnManager.Instance.Init(l_lstEnabledTowers, p_levelConfig.AllWaves);
       }
 
       private List<int> EnableTowers(int p_mainSpawnerCount)

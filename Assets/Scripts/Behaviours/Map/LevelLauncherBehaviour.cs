@@ -23,6 +23,8 @@ namespace BWW.Behaviours.Map
             ScriptableLevelConfiguration l_levelConfig = m_database.GetDataById(l_dCurrentLevelId);
 
             BuildCurrentLevel(l_levelConfig);
+
+            EnemiesSpawnManager.Instance.IsReady = true;
         }
 
         private void BuildCurrentLevel(ScriptableLevelConfiguration p_levelConfig)

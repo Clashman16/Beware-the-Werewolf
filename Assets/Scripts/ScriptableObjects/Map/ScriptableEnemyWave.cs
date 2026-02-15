@@ -7,5 +7,10 @@ namespace BWW.ScriptableObjects.Map
     public class ScriptableEnemyWave : ScriptableObject
     {
         [SerializeField] private List<EnemyCount> m_lstAllPossibleEnemies;
-    }
+
+      public List<EnemyCount> AllPossibleEnemies
+      {
+         get => m_lstAllPossibleEnemies;
+      }
+   }
 }

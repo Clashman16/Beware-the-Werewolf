@@ -4,11 +4,21 @@ using UnityEngine;
 
 namespace BWW.ScriptableObjects.Map
 {
-    [Serializable]
-    public struct EnemyCount
-    {
-        [SerializeField] private EEnemyType m_ePart;
+   [Serializable]
+   public struct EnemyCount
+   {
+      [SerializeField] private EEnemyType m_eEnemy;
 
-        [SerializeField] private int m_dCount;
-    }
+      public EEnemyType Enemy
+      {
+         get => m_eEnemy;
+      }
+
+      [SerializeField] private int m_dCount;
+
+      public int Count
+      {
+         get => m_dCount;
+      }
+   }
 }
