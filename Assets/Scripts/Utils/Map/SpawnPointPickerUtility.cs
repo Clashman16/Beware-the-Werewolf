@@ -15,7 +15,7 @@ namespace BWW.Utils.Map
          get => m_currentSpawnPoint;
       }
 
-      public SpawnPointPickerUtility(List<int> p_lstEnabledTowerIds) : base()
+      public SpawnPointPickerUtility(List<int> p_lstEnabledTowerIds, EnemyAppearancePickerUtility p_enemyAppearancePicker) : base()
       {
          m_lstAvailableSpawners = new Dictionary<int, SpawnPointBehaviour>();
 
@@ -33,6 +33,8 @@ namespace BWW.Utils.Map
                PossiblePicks.Add(l_spawnPoint.SpawnerId);
 
                m_lstAvailableSpawners.Add(l_spawnPoint.SpawnerId, l_spawnPoint);
+
+               l_spawnPoint.EnemyAppearancePicker = p_enemyAppearancePicker;
             }
          }
       }

@@ -1,4 +1,5 @@
 using BWW.Enums;
+using BWW.Utils.Characters;
 using UnityEngine;
 
 namespace BWW.Behaviours.Map
@@ -12,9 +13,18 @@ namespace BWW.Behaviours.Map
          get => m_dSpawnerId;
       }
 
+      EnemyAppearancePickerUtility m_enemyAppearancePicker;
+
+      public EnemyAppearancePickerUtility EnemyAppearancePicker
+      {
+         set => m_enemyAppearancePicker = value;
+      }
+
       public void InstantiateEnemy(EEnemyType p_eEnemyType)
       {
+         m_enemyAppearancePicker.Pick();
 
+         Instantiate(m_enemyAppearancePicker.CurrentAppearance);
       }
    }
 }

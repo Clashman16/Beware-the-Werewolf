@@ -1,5 +1,6 @@
 using BWW.Enums;
 using BWW.ScriptableObjects.Map;
+using BWW.Utils.Characters;
 using BWW.Utils.Map;
 using System.Collections.Generic;
 
@@ -24,6 +25,8 @@ namespace BWW.Managers.Map
 
       EnemyPickerUtility m_enemyPicker;
 
+      EnemyAppearancePickerUtility m_enemyAppearancePicker;
+
       SpawnPointPickerUtility m_spawnerPicker;
 
       private bool m_bIsReady;
@@ -42,11 +45,14 @@ namespace BWW.Managers.Map
          }
       }
 
-      private EnemiesSpawnManager(){}
+      private EnemiesSpawnManager()
+      {
+         m_enemyAppearancePicker = new EnemyAppearancePickerUtility();
+      }
 
       public void Init(List<int> p_lstEnabledTowerIds, List<ScriptableEnemyWave> p_lstWaves)
       {
-         m_spawnerPicker = new SpawnPointPickerUtility(p_lstEnabledTowerIds);
+         m_spawnerPicker = new SpawnPointPickerUtility(p_lstEnabledTowerIds, m_enemyAppearancePicker);
 
          m_enemyPicker = new EnemyPickerUtility(p_lstWaves);
 
