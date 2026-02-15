@@ -1,11 +1,10 @@
 using BWW.Enums;
 using BWW.ScriptableObjects.Map;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace BWW.Utils.Map
 {
-   public class EnemyPickerUtility
+   public class EnemyPickerUtility : SpawnPickingUtility
    {
       private List<ScriptableEnemyWave> m_lstWaves;
 
@@ -13,19 +12,13 @@ namespace BWW.Utils.Map
 
       private Dictionary<EEnemyType, int> m_lstRemainingEnemies;
 
-      private int m_dLastEnemyId;
-
-      private List<EEnemyType> m_lstPossibleEnemies;
-
-      public EnemyPickerUtility(List<ScriptableEnemyWave> p_lstWaves)
+      public EnemyPickerUtility(List<ScriptableEnemyWave> p_lstWaves) : base()
       {
          m_lstWaves = p_lstWaves;
 
          m_dWaveId = 0;
 
          m_lstRemainingEnemies = new Dictionary<EEnemyType, int>();
-
-         m_lstPossibleEnemies = new List<EEnemyType>();
 
          PrepareNextWave();
       }
@@ -38,45 +31,27 @@ namespace BWW.Utils.Map
          {
             m_lstRemainingEnemies.Add(enemyQty.Enemy, enemyQty.Count);
 
-            m_lstPossibleEnemies.Add(enemyQty.Enemy);
+            PossiblePicks.Add((int) enemyQty.Enemy);
          }
 
-         m_dLastEnemyId = -1;
+         LastPickedId = -1;
       }
 
-      private int GetRandomEnemyId()
+      public override int Pick()
       {
-         return Random.Range(0, m_lstPossibleEnemies.Count);
-      }
+         int l_dRandomEnemyId = base.Pick();
 
-      public int Pick()
-      {
-         if(m_dLastEnemyId == -1)
-         {
-            m_dLastEnemyId = GetRandomEnemyId();
-         }
-
-         int l_dRandomEnemyId = GetRandomEnemyId();
-
-         if(m_dLastEnemyId == l_dRandomEnemyId)
-         {
-            if(MathUtils.HeadsOrTails())
-            {
-               l_dRandomEnemyId = GetRandomEnemyId();
-            }
-         }
-
-         EEnemyType l_ePickedEnemy = m_lstPossibleEnemies[l_dRandomEnemyId];
+         EEnemyType l_ePickedEnemy = (EEnemyType) PossiblePicks[l_dRandomEnemyId];
 
          m_lstRemainingEnemies[l_ePickedEnemy] -= 1;
 
          if(m_lstRemainingEnemies[l_ePickedEnemy] == 0)
          {
-            m_dLastEnemyId = -1;
+            LastPickedId = -1;
 
             m_lstRemainingEnemies.Remove(l_ePickedEnemy);
 
-            m_lstPossibleEnemies.Remove(l_ePickedEnemy);
+            PossiblePicks.Remove((int) l_ePickedEnemy);
 
             if (m_lstRemainingEnemies.Count == 0)
             {
@@ -92,7 +67,7 @@ namespace BWW.Utils.Map
          }
          else
          {
-            m_dLastEnemyId = l_dRandomEnemyId;
+            LastPickedId = l_dRandomEnemyId;
          }
 
          return (int) l_ePickedEnemy;
