@@ -12,4 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e72234c25b10c446968cb0d821e7e90, type: 3}
   m_Name: VillagerGenderDatabase
   m_EditorClassIdentifier: Assembly-CSharp::BWW.ScriptableObjects.Characters.EnemyAppearanceDatabase
-  m_lstAppearances: []
+  m_lstGenders:
+  - {fileID: 1367987251427142842, guid: 716032423d216c94699181b8a0f61c45, type: 3}
+  - {fileID: 5639453077833490615, guid: 94943c5c3684b6c4eb379b72c0eecbc3, type: 3}
