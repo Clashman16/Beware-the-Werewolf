@@ -20,7 +20,7 @@ namespace BWW.Managers.Map
 
          InitSwitchableParts(p_levelConfig.AllPossibleParts, l_lstEnabledTowers);
 
-         EnemiesSpawnManager.Instance.Init(l_lstEnabledTowers, p_levelConfig.AllWaves);
+         VillagersSpawnManager.Instance.Init(l_lstEnabledTowers, p_levelConfig.AllWaves);
       }
 
       private List<int> EnableTowers(int p_mainSpawnerCount)

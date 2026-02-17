@@ -5,13 +5,13 @@ using UnityEngine;
 namespace BWW.ScriptableObjects.Map
 {
    [Serializable]
-   public struct EnemyCount
+   public struct VillagerCount
    {
-      [SerializeField] private EEnemyType m_eEnemy;
+      [SerializeField] private EVillagerType m_eVillager;
 
-      public EEnemyType Enemy
+      public EVillagerType Villager
       {
-         get => m_eEnemy;
+         get => m_eVillager;
       }
 
       [SerializeField] private int m_dCount;

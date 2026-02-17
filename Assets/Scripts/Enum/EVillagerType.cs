@@ -1,6 +1,6 @@
 namespace BWW.Enums
 {
-    public enum EEnemyType
+    public enum EVillagerType
     {
         WITH_NOTHING,
         WITH_WOOD,

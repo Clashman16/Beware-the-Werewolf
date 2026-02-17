@@ -16,7 +16,7 @@ namespace BWW.Utils.Map
          get => m_currentSpawnPoint;
       }
 
-      public SpawnPointPickerUtility(List<int> p_lstEnabledTowerIds, EnemyAppearancePickerUtility p_enemyAppearancePicker) : base()
+      public SpawnPointPickerUtility(List<int> p_lstEnabledTowerIds, VillagerGenderPickerUtility p_enemyAppearancePicker) : base()
       {
          m_lstAvailableSpawners = new Dictionary<int, SpawnPointBehaviour>();
 

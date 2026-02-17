@@ -10,8 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bce70a6bd7ce4204c8ddf558cd4306ea, type: 3}
-  m_Name: 3_Wood
+  m_Name: 2_Nothing_1_Wood
   m_EditorClassIdentifier: 
-  m_lstAllPossibleEnemies:
-  - m_ePart: 1
-    m_dCount: 3
+  m_lstAllPossibleVillagers:
+  - m_eVillager: 0
+    m_dCount: 2
+  - m_eVillager: 1
+    m_dCount: 1

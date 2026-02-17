@@ -24,7 +24,7 @@ namespace BWW.Behaviours.Map
 
             BuildCurrentLevel(l_levelConfig);
 
-            EnemiesSpawnManager.Instance.IsReady = true;
+            VillagersSpawnManager.Instance.IsReady = true;
         }
 
         private void BuildCurrentLevel(ScriptableLevelConfiguration p_levelConfig)

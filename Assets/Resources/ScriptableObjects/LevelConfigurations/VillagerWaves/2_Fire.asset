@@ -9,7 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e72234c25b10c446968cb0d821e7e90, type: 3}
-  m_Name: EnemyAppearanceDatabase
-  m_EditorClassIdentifier: Assembly-CSharp::BWW.ScriptableObjects.Characters.EnemyAppearanceDatabase
-  m_lstAppearances: []
+  m_Script: {fileID: 11500000, guid: bce70a6bd7ce4204c8ddf558cd4306ea, type: 3}
+  m_Name: 2_Fire
+  m_EditorClassIdentifier: 
+  m_lstAllPossibleVillagers:
+  - m_eVillager: 2
+    m_dCount: 2

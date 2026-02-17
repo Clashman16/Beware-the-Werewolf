@@ -13,18 +13,18 @@ namespace BWW.Behaviours.Map
          get => m_dSpawnerId;
       }
 
-      EnemyAppearancePickerUtility m_enemyAppearancePicker;
+      VillagerGenderPickerUtility m_villagerGenderPicker;
 
-      public EnemyAppearancePickerUtility EnemyAppearancePicker
+      public VillagerGenderPickerUtility EnemyAppearancePicker
       {
-         set => m_enemyAppearancePicker = value;
+         set => m_villagerGenderPicker = value;
       }
 
-      public void InstantiateEnemy(EEnemyType p_eEnemyType)
+      public void InstantiateVillager(EVillagerType p_eEnemyType)
       {
-         m_enemyAppearancePicker.Pick();
+         m_villagerGenderPicker.Pick();
 
-         Instantiate(m_enemyAppearancePicker.CurrentAppearance);
+         Instantiate(m_villagerGenderPicker.CurrentGender);
       }
    }
 }
