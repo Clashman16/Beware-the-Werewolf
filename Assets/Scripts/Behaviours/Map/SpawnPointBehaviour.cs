@@ -1,3 +1,4 @@
+using BWW.Behaviours.Characters;
 using BWW.Enums;
 using BWW.Utils.Characters;
 using UnityEngine;
@@ -22,9 +23,11 @@ namespace BWW.Behaviours.Map
 
       public void InstantiateVillager(EVillagerType p_eEnemyType)
       {
-         m_villagerGenderPicker.Pick();
+         bool l_bIsCharacterFemale = m_villagerGenderPicker.Pick() == 1;
 
-         Instantiate(m_villagerGenderPicker.CurrentGender);
+         GameObject l_goVillager = Instantiate(m_villagerGenderPicker.CurrentGender);
+
+         l_goVillager.GetComponent<VillagerAppearanceBehaviour>().UpdateAppearance(l_bIsCharacterFemale);
       }
    }
 }

@@ -35,7 +35,7 @@ namespace BWW.Utils.Characters
 
          m_goCurrentGender = m_database.Genders[l_dAppearanceId];
 
-         return 0;
+         return l_dAppearanceId;
       }
    }
 }
