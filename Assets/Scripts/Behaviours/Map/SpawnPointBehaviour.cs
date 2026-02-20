@@ -23,7 +23,7 @@ namespace BWW.Behaviours.Map
          set => m_villagerGenderPicker = value;
       }
 
-      public void InstantiateVillager(EVillagerType p_eEnemyType)
+      public virtual GameObject InstantiateVillager(EVillagerType p_eEnemyType)
       {
          bool l_bIsCharacterFemale = m_villagerGenderPicker.Pick() == 1;
 
@@ -34,6 +34,8 @@ namespace BWW.Behaviours.Map
          l_villager.UpdateAppearance(l_bIsCharacterFemale);
 
          StartCoroutine(LoopSpawn());
+
+         return l_goVillager;
       }
 
       private IEnumerator LoopSpawn()
