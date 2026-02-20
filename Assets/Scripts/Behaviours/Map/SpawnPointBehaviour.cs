@@ -1,6 +1,8 @@
 using BWW.Behaviours.Characters;
 using BWW.Enums;
+using BWW.Managers.Map;
 using BWW.Utils.Characters;
+using System.Collections;
 using UnityEngine;
 
 namespace BWW.Behaviours.Map
@@ -30,6 +32,15 @@ namespace BWW.Behaviours.Map
          VillagerAppearanceBehaviour l_villager = l_goVillager.GetComponent<VillagerAppearanceBehaviour>();
 
          l_villager.UpdateAppearance(l_bIsCharacterFemale);
+
+         StartCoroutine(LoopSpawn());
+      }
+
+      private IEnumerator LoopSpawn()
+      {
+         yield return new WaitForSeconds(5);
+
+         VillagersSpawnManager.Instance.Spawn();
       }
    }
 }
