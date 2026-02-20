@@ -8,7 +8,7 @@ namespace BWW.Utils.Characters
 {
    public class VillagerGenderPickerUtility : SpawnPickingUtility
    {
-      private const string m_sDatabasePath = "ScriptableObjects/Characters/EnemyAppearanceDatabase";
+      private const string m_sDatabasePath = "ScriptableObjects/Characters/VillagerGenderDatabase";
 
       private ScriptableVillagerGenderDatabase m_database;
 
