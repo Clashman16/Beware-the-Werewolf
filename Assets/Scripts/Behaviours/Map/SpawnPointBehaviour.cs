@@ -27,7 +27,9 @@ namespace BWW.Behaviours.Map
 
          GameObject l_goVillager = Instantiate(m_villagerGenderPicker.CurrentGender);
 
-         l_goVillager.GetComponent<VillagerAppearanceBehaviour>().UpdateAppearance(l_bIsCharacterFemale);
+         VillagerAppearanceBehaviour l_villager = l_goVillager.GetComponent<VillagerAppearanceBehaviour>();
+
+         l_villager.UpdateAppearance(l_bIsCharacterFemale);
       }
    }
 }
