@@ -1,5 +1,7 @@
 using BWW.ScriptableObjects.Characters;
 using BWW.Utils.Map;
+using BWW.Utils.Save;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace BWW.Utils.Characters
@@ -29,7 +31,18 @@ namespace BWW.Utils.Characters
 
       public override int Pick()
       {
-         int l_dRandomIndex = base.Pick();
+         int l_dRandomIndex;
+
+         Dictionary<bool, int> l_lstAreVillagerWomenCount = CurrentGameVillagersDatabase.Instance.Village.AreVillagerWomenCount;
+
+         if (l_lstAreVillagerWomenCount[true] == l_lstAreVillagerWomenCount[false])
+         {
+            l_dRandomIndex = base.Pick();
+         }
+         else
+         {
+            l_dRandomIndex = l_lstAreVillagerWomenCount[true] > l_lstAreVillagerWomenCount[false] ? 0 : 1;
+         }
 
          int l_dAppearanceId = PossiblePicks[l_dRandomIndex];
 
