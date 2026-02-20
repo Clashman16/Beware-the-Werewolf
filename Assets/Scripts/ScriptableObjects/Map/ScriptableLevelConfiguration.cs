@@ -20,9 +20,9 @@ namespace BWW.ScriptableObjects.Map
             get => m_lstAllPossibleParts;
         }
 
-        [SerializeField] private List<ScriptableEnemyWave> m_lstWaves;
+        [SerializeField] private List<ScriptableVillagersWave> m_lstWaves;
 
-        public List<ScriptableEnemyWave> AllWaves
+        public List<ScriptableVillagersWave> AllWaves
         {
             get => m_lstWaves;
         }

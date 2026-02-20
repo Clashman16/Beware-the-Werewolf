@@ -19,6 +19,8 @@ namespace BWW.Managers.Map
          List<int> l_lstEnabledTowers = EnableTowers(p_levelConfig.MainSpawnerCount);
 
          InitSwitchableParts(p_levelConfig.AllPossibleParts, l_lstEnabledTowers);
+
+         VillagersSpawnManager.Instance.Init(l_lstEnabledTowers, p_levelConfig.AllWaves);
       }
 
       private List<int> EnableTowers(int p_mainSpawnerCount)
@@ -79,7 +81,7 @@ namespace BWW.Managers.Map
 
                if (l_lstSpawners[l_i].enabled)
                {
-                  l_lstEnabledSpawners.Add(l_lstSpawners[l_i].TowerId);
+                  l_lstEnabledSpawners.Add(l_lstSpawners[l_i].SpawnerId);
                }
             }
          }
@@ -129,7 +131,7 @@ namespace BWW.Managers.Map
 
                if (l_lstSpawners[l_i].enabled)
                {
-                  l_lstEnabledSpawners.Add(l_lstSpawners[l_i].TowerId);
+                  l_lstEnabledSpawners.Add(l_lstSpawners[l_i].SpawnerId);
                }
             }
          }

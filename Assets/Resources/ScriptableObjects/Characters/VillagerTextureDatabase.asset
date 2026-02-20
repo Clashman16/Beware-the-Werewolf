@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3efe05c9311dc44997afc8fc63c9385, type: 3}
+  m_Name: VillagerTextureDatabase
+  m_EditorClassIdentifier: Assembly-CSharp::BWW.ScriptableObjects.Characters.ScriptableVillagerTextureDatabase
+  m_lstTextures:
+  - m_sTextureKey: skin_her_knight_0
+    m_texture: {fileID: 2800000, guid: ed23c82826d63c2439de9e075743252e, type: 3}
+  - m_sTextureKey: skin_her_knight_1
+    m_texture: {fileID: 2800000, guid: 90e4539969bba3347b6bf7a4981b6670, type: 3}
+  - m_sTextureKey: skin_her_poor_0
+    m_texture: {fileID: 2800000, guid: 1f751b626658c5a4580f5e3c1c80f73e, type: 3}
+  - m_sTextureKey: skin_her_poor_1
+    m_texture: {fileID: 2800000, guid: 0a38c28aba72c9d4d8773879032c7ab4, type: 3}
+  - m_sTextureKey: skin_her_rich_0
+    m_texture: {fileID: 2800000, guid: 13c8ce83f94442d47978d72947ad9b8c, type: 3}
+  - m_sTextureKey: skin_her_rich_1
+    m_texture: {fileID: 2800000, guid: 7af237b04aa559249a1f1830fdde1bd8, type: 3}
+  - m_sTextureKey: skin_him_knight_0
+    m_texture: {fileID: 2800000, guid: 69d4eac5f7086514d8619629b11db739, type: 3}
+  - m_sTextureKey: skin_him_knight_1
+    m_texture: {fileID: 2800000, guid: 87ea26d05735d94499880a66576aca3b, type: 3}
+  - m_sTextureKey: skin_him_poor_0
+    m_texture: {fileID: 2800000, guid: 58c49bfa38cabfe40b94c78479d67491, type: 3}
+  - m_sTextureKey: skin_him_poor_1
+    m_texture: {fileID: 2800000, guid: 35e3e4f6178f9f2479b1b468088d33e1, type: 3}
+  - m_sTextureKey: skin_him_rich_0
+    m_texture: {fileID: 2800000, guid: beef3de3d50ae5e49a33f71ec2686dc9, type: 3}
+  - m_sTextureKey: skin_him_rich_1
+    m_texture: {fileID: 2800000, guid: 0cdaaf4487cffa14385fe72ba4e0d22d, type: 3}
