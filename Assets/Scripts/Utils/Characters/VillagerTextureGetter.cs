@@ -27,7 +27,9 @@ namespace BWW.Utils.Characters
       {
          ScriptableVillagerTextureDatabase l_database = Resources.Load<ScriptableVillagerTextureDatabase>("ScriptableObjects/Characters/VillagerTextureDatabase");
 
-         foreach(VillagerTexture l_tex in l_database.Textures)
+         m_lstTextures = new Dictionary<string, Texture2D>();
+
+         foreach (VillagerTexture l_tex in l_database.Textures)
          {
             m_lstTextures.Add(l_tex.Key, l_tex.Texture);
          }

@@ -71,7 +71,7 @@ namespace BWW.Behaviours.Characters
 
          l_data.AreVillagerWomenCount[m_bIsCharacterFemale] += 1;
 
-         MeshRenderer l_renderer = GetComponentInChildren<MeshRenderer>();
+         SkinnedMeshRenderer l_renderer = GetComponentInChildren<SkinnedMeshRenderer>();
 
          Material l_material = l_renderer.sharedMaterial;
 
