@@ -1,3 +1,4 @@
+using BWW.Behaviours.Map;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
@@ -9,6 +10,8 @@ namespace BWW.Behaviours.Characters
       private NavMeshAgent m_agent;
 
       private Vector3 m_vecTarget;
+
+      private NavMeshPath m_path;
 
       private void Start()
       {
@@ -33,12 +36,45 @@ namespace BWW.Behaviours.Characters
          transform.position = l_hit.position;
          m_agent.enabled = true;
 
-         MoveToTarget();
+         PrepareToMove();
       }
 
-      public void MoveToTarget()
+      public void PrepareToMove()
       {
-         m_agent.SetDestination(m_vecTarget);
+         m_path = new NavMeshPath();
+
+         if(m_agent.CalculatePath(m_vecTarget, m_path))
+         {
+            Vector3 l_vecStartPosition = transform.position + Vector3.up * 0.5f;
+
+            Vector3 l_vecNextPosition = m_path.corners[1];
+
+            Vector3 l_vecDirection = (l_vecNextPosition - l_vecStartPosition).normalized;
+
+            float l_fDistance = Vector3.Distance(l_vecNextPosition, l_vecStartPosition);
+
+            int l_dLayerMaskId = LayerMask.GetMask("CastleGate");
+
+            if (Physics.Raycast(l_vecStartPosition, l_vecDirection, out RaycastHit l_hit, l_fDistance, l_dLayerMaskId))
+            {
+               if (l_hit.collider != null)
+               {
+                  GateAnimationBehaviour l_gateAnimation = l_hit.collider.GetComponent<GateAnimationBehaviour>();
+
+                  if (l_gateAnimation != null)
+                  {
+                     l_gateAnimation.GatePosition = l_hit.point;
+
+                     l_gateAnimation.VillagerBehindGate = this;
+                  }
+               }
+            }
+         }
+      }
+
+      public void ResumeMove()
+      {
+         m_agent.SetPath(m_path);
       }
    }
 }

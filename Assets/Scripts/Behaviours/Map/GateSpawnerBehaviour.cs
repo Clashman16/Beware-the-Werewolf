@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace BWW.Behaviours.Map
 {
-   public class GateBehaviour : SpawnPointBehaviour
+   public class GateSpawnerBehaviour : SpawnPointBehaviour
    {
       public override GameObject InstantiateVillager(EVillagerType p_eEnemyType)
       {

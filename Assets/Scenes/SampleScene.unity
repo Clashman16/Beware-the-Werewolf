@@ -319,11 +319,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tower (2)
       objectReference: {fileID: 0}
-    - target: {fileID: 8678240387249361697, guid: 5b24a238022eb204bab3be1e1451f565,
-        type: 3}
-      propertyPath: m_dSpawnerId
-      value: 2
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -910,6 +905,11 @@ PrefabInstance:
       propertyPath: m_dSpawnerId
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 8810519921115242931, guid: 5b24a238022eb204bab3be1e1451f565,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.02000049
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1102,6 +1102,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Tower
+      objectReference: {fileID: 0}
+    - target: {fileID: 8678240387249361697, guid: 5b24a238022eb204bab3be1e1451f565,
+        type: 3}
+      propertyPath: m_dSpawnerId
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
