@@ -29,6 +29,8 @@ namespace BWW.Managers.Map
 
       public void BuildSurface()
       {
+         m_navMeshSurface.RemoveData();
+
          m_navMeshSurface.BuildNavMesh();
       }
    }
