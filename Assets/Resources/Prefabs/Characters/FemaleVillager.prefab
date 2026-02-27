@@ -620,7 +620,7 @@ GameObject:
   - component: {fileID: 3875854780912377133}
   - component: {fileID: 8776829211067749482}
   m_Layer: 0
-  m_Name: characterLargeFemale
+  m_Name: characterLarge
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
