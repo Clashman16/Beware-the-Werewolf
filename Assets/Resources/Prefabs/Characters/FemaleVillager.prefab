@@ -2034,6 +2034,8 @@ GameObject:
   m_Component:
   - component: {fileID: 228276585918849972}
   - component: {fileID: 4328562396880919500}
+  - component: {fileID: 8418860393830742888}
+  - component: {fileID: -5670833391371462438}
   m_Layer: 0
   m_Name: FemaleVillager
   m_TagString: Untagged
@@ -2070,3 +2072,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6efef35561da63f4a81fe26060e929f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BWW.Behaviours.Characters.VillagerAppearanceBehaviour
+--- !u!114 &8418860393830742888
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9184424939568102221}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48a67799cf288df4ab46c51c78b028d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BWW.Behaviours.Characters.VillagerMovementBehaviour
+--- !u!195 &-5670833391371462438
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9184424939568102221}
+  m_Enabled: 0
+  m_AgentTypeID: 0
+  m_Radius: 0.3
+  m_Speed: 1.25
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 0.75
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
