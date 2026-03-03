@@ -33,7 +33,7 @@ namespace BWW.Behaviours.Map
 
          l_villager.UpdateAppearance(l_bIsCharacterFemale);
 
-         StartCoroutine(LoopSpawn());
+         //StartCoroutine(LoopSpawn());
 
          return l_goVillager;
       }

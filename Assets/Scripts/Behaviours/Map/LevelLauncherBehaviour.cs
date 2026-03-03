@@ -37,6 +37,8 @@ namespace BWW.Behaviours.Map
             {
                 m_levelBuilder.BuildLevel(p_levelConfig);
             }
-        }
+
+            NavMeshManager.Instance.BuildSurface();
+      }
     }
 }
