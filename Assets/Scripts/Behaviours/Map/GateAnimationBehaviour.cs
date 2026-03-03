@@ -28,6 +28,11 @@ namespace BWW.Behaviours.Map
          set => m_vecGatePosition = value;
       }
 
+      public bool IsOpen
+      {
+         get => m_animator.GetBool(m_sAnimationKey);
+      }
+
       private void Start()
       {
          m_animator = GetComponent<Animator>();
@@ -52,7 +57,7 @@ namespace BWW.Behaviours.Map
          {
             if(m_animator.GetBool(m_sAnimationKey))
             {
-               if (Vector3.Distance(m_vecGatePosition, m_villagerBehindGate.transform.position + Vector3.up * 0.5f) >= 1)
+               if (Vector3.Distance(m_vecGatePosition, m_villagerBehindGate.HitPosition) >= 1)
                {
                   OpenGate(false);
 

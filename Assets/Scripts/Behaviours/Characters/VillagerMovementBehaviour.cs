@@ -13,6 +13,11 @@ namespace BWW.Behaviours.Characters
 
       private NavMeshPath m_path;
 
+      public Vector3 HitPosition
+      {
+         get => transform.position + Vector3.up * 0.5f;
+      }
+
       private void Start()
       {
          StartCoroutine(LaunchNavMeshAgent());
@@ -39,13 +44,46 @@ namespace BWW.Behaviours.Characters
          PrepareToMove();
       }
 
-      public void PrepareToMove()
+      private void Update()
+      {
+         GateAnimationBehaviour[] l_lstAllGates = FindObjectsByType<GateAnimationBehaviour>(FindObjectsSortMode.None);
+
+         int l_dGateCount = 0;
+
+         while(l_dGateCount < l_lstAllGates.Length)
+         {
+            GateAnimationBehaviour l_gate = l_lstAllGates[l_dGateCount];
+
+            if (!l_gate.IsOpen && Vector3.Distance(l_gate.transform.position, HitPosition) <= 1)
+            {
+               Vector3 l_vecDirection = (l_gate.transform.position - HitPosition).normalized;
+               Vector3 l_vecForward = transform.forward;
+
+               float l_fDot = Vector3.Dot(l_vecForward, l_vecDirection);
+
+               if (l_fDot > 0f)
+               {
+                  l_dGateCount = l_lstAllGates.Length;
+
+                  m_agent.ResetPath();
+
+                  l_gate.GatePosition = l_gate.transform.position;
+
+                  l_gate.VillagerBehindGate = this;
+               }
+            }
+
+            l_dGateCount += 1;
+         }
+      }
+
+      private void PrepareToMove()
       {
          m_path = new NavMeshPath();
 
          if(m_agent.CalculatePath(m_vecTarget, m_path))
          {
-            Vector3 l_vecStartPosition = transform.position + Vector3.up * 0.5f;
+            Vector3 l_vecStartPosition = HitPosition;
 
             Vector3 l_vecNextPosition = m_path.corners[1];
 
