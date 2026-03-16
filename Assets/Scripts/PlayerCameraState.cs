@@ -12,6 +12,14 @@ namespace BWW.Player
          set => m_bIsMoving = value;
       }
 
+      private bool m_bIsForwardZoom;
+
+      public bool IsForwardZoom
+      {
+         get => m_bIsForwardZoom;
+         set => m_bIsForwardZoom = value;
+      }
+
       private EMouseButton m_eSimulatedButton;
 
       public EMouseButton SimulatedButton
