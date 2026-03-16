@@ -8,7 +8,7 @@ namespace BWW.Behaviours.Player
    {
       private Vector3 m_vecMovePivot;
 
-      private double[] m_lstZoomLimits;
+      private int[] m_lstZoomLimits;
 
       PlayerCameraState m_state;
 
@@ -26,7 +26,7 @@ namespace BWW.Behaviours.Player
       {
          m_vecMovePivot = new Vector3(18.0540009f, 0, -34.9550018f);
 
-         m_lstZoomLimits = new[]{ 2, 5.13 };
+         m_lstZoomLimits = new[]{ 3, 7 };
       }
 
       private void Update()
