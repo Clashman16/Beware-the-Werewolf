@@ -1,4 +1,5 @@
 using BWW.Managers.Map;
+using BWW.Managers.Player;
 using BWW.Managers.Save;
 using BWW.ScriptableObjects.Map;
 using UnityEngine;
@@ -39,6 +40,8 @@ namespace BWW.Behaviours.Map
             }
 
             NavMeshManager.Instance.BuildSurface();
+
+            PlayerCameraManager l_camera = PlayerCameraManager.Instance; // Init the player camera
       }
     }
 }
