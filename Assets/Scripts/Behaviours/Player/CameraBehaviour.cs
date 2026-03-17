@@ -31,7 +31,10 @@ namespace BWW.Behaviours.Player
 
       private void Update()
       {
+         if(GridManager.Instance.SelectedCell == null)
+         {
          m_state.UpdateState();
+         }
 
          if(m_state.IsMoving)
          {
