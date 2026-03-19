@@ -1,6 +1,6 @@
 using BWW.Enums;
 using BWW.Utils.Characters;
-using BWW.Utils.Save;
+using BWW.Utils.Map;
 using UnityEngine;
 
 namespace BWW.Behaviours.Characters

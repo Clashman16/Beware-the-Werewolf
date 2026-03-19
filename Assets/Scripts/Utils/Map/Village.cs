@@ -1,7 +1,7 @@
 using BWW.Enums;
 using System.Collections.Generic;
 
-namespace BWW.Utils.Save
+namespace BWW.Utils.Map
 {
    public struct VillageData
    {

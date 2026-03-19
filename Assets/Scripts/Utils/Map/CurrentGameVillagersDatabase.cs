@@ -1,7 +1,7 @@
 using BWW.Behaviours.Characters;
 using System.Collections.Generic;
 
-namespace BWW.Utils.Save
+namespace BWW.Utils.Map
 {
    public sealed class CurrentGameVillagersDatabase
    {
