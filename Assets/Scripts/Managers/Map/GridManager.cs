@@ -1,6 +1,7 @@
 using BWW.Behaviours.Map;
 using BWW.Managers.Player;
 
+
 namespace BWW.Managers.Map
 {
    public sealed class GridManager
@@ -43,8 +44,6 @@ namespace BWW.Managers.Map
                   if (PlayerInventoryManager.Instance.MaterialCount[l_sFirstMaterialKey] > 0)
                   {
                      PlayerInventoryManager.Instance.MaterialCount[l_sFirstMaterialKey] -= 1;
-
-
                   }
                }
             }
