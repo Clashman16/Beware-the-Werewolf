@@ -20,12 +20,12 @@ namespace BWW.Player
          set => m_bIsForwardZoom = value;
       }
 
-      private EMouseButton m_eSimulatedButton;
+      private EControls m_eSimulatedControl;
 
-      public EMouseButton SimulatedButton
+      public EControls SimulatedControl
       {
-         get => m_eSimulatedButton;
-         set => m_eSimulatedButton = value;
+         get => m_eSimulatedControl;
+         set => m_eSimulatedControl = value;
       }
 
       public abstract void UpdateState();

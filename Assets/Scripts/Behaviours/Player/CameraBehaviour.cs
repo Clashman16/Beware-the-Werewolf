@@ -39,7 +39,7 @@ namespace BWW.Behaviours.Player
          
          if(m_state.IsMoving)
          {
-            if(m_state.SimulatedButton == EMouseButton.SCROLL)
+            if(m_state.SimulatedControl == EControls.ZOOM)
             {
                float l_fCurrentPosition = transform.position.y;
 
@@ -53,7 +53,7 @@ namespace BWW.Behaviours.Player
             }
             else
             {
-               float l_fAngle = m_state.SimulatedButton == EMouseButton.LEFT ? 1 : -1;
+               float l_fAngle = m_state.SimulatedControl == EControls.CAMERA_LEFT ? 1 : -1;
 
                transform.RotateAround(m_vecMovePivot, Vector3.up, l_fAngle);
             }

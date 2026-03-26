@@ -9,23 +9,28 @@ namespace BWW.Player
       {
          float l_fmouseScrollDelta = Input.mouseScrollDelta.y;
 
-         if (l_fmouseScrollDelta < 0f || l_fmouseScrollDelta > 0f)
+         if (l_fmouseScrollDelta != 0f)
          {
-            SimulatedButton = EMouseButton.SCROLL;
+            SimulatedControl = EControls.ZOOM;
 
             IsForwardZoom = l_fmouseScrollDelta > 0f;
 
             IsMoving = true;
          }
-         else if (Input.GetMouseButton((int) EMouseButton.LEFT))
+         else if (Input.GetKey(KeyCode.A)
+            || Input.GetKey(KeyCode.Q)
+            || Input.GetKey(KeyCode.LeftArrow))
          {
-            SimulatedButton = EMouseButton.LEFT;
+            SimulatedControl = EControls.CAMERA_LEFT;
 
             IsMoving = true;
          }
-         else if(Input.GetMouseButton((int) EMouseButton.RIGHT))
+         else if(Input.GetMouseButton((int) EControls.CAMERA_RIGHT)
+            || Input.GetKey(KeyCode.E)
+            || Input.GetKey(KeyCode.D)
+            || Input.GetKey(KeyCode.RightArrow))
          {
-            SimulatedButton = EMouseButton.RIGHT;
+            SimulatedControl = EControls.CAMERA_RIGHT;
 
             IsMoving = true;
          }
