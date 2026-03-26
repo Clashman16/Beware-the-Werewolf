@@ -19,9 +19,21 @@ namespace BWW.Managers.Map
          }
       }
 
+      private ItemPlacingUtility m_utility;
+
+      private ItemPlacerManager()
+      {
+         m_utility = new ItemPlacingUtility();
+      }
+
       public MovableItem PlaceItem(string p_sItemKey, GridCellBehaviour p_cell)
       {
-         return new MovableItem();
+         return m_utility.ShowItem(true, p_cell, p_sItemKey);
+      }
+
+      public MovableItem TakeItem(string p_sItemKey, GridCellBehaviour p_cell)
+      {
+         return m_utility.ShowItem(false, p_cell);
       }
    }
 }

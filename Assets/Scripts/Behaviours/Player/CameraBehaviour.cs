@@ -1,4 +1,5 @@
 using BWW.Enums;
+using BWW.Managers.Map;
 using BWW.Player;
 using UnityEngine;
 
@@ -33,9 +34,9 @@ namespace BWW.Behaviours.Player
       {
          if(GridManager.Instance.SelectedCell == null)
          {
-         m_state.UpdateState();
+            m_state.UpdateState();
          }
-
+         
          if(m_state.IsMoving)
          {
             if(m_state.SimulatedButton == EMouseButton.SCROLL)
@@ -57,6 +58,11 @@ namespace BWW.Behaviours.Player
                transform.RotateAround(m_vecMovePivot, Vector3.up, l_fAngle);
             }
          }
+      }
+
+      public void SetIsMoving(bool p_bIsMoving)
+      {
+         m_state.IsMoving = p_bIsMoving;
       }
    }
 }

@@ -1,6 +1,8 @@
 using BWW.Behaviours.Map;
+using BWW.Managers.UI;
+using BWW.Enums;
 using BWW.Managers.Player;
-
+using BWW.Utils.UI;
 
 namespace BWW.Managers.Map
 {
@@ -44,6 +46,10 @@ namespace BWW.Managers.Map
                   if (PlayerInventoryManager.Instance.MaterialCount[l_sFirstMaterialKey] > 0)
                   {
                      PlayerInventoryManager.Instance.MaterialCount[l_sFirstMaterialKey] -= 1;
+
+                     ItemFeedbackData l_feedback = new ItemFeedbackData(EItemFeedbackType.PLACE_ITEM, l_sFirstMaterialKey, m_selectedCell.transform.position, m_selectedCell);
+
+                     ItemFeedbackManager.Instance.AddToWaitingFeedbackPool(l_feedback);
                   }
                }
             }
@@ -53,12 +59,21 @@ namespace BWW.Managers.Map
                {
                   PlayerInventoryManager.Instance.HeldItem = m_selectedCell.PlacedItem;
 
+                  m_selectedCell.TakeItem();
+
                   m_selectedCell.PlacedItem = null;
                }
             }
 
             m_selectedCell = null;
          }
+      }
+
+      private const int m_dGridSize = 8;
+
+      public int GridSize
+      {
+         get => m_dGridSize;
       }
 
       private GridManager()
