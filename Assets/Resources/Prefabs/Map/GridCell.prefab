@@ -208,6 +208,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -90
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 32e8e03ff971b8f428492d073c6b7c39,
+        type: 3}
+      propertyPath: m_SortingLayer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 32e8e03ff971b8f428492d073c6b7c39,
         type: 3}
       propertyPath: m_Name
@@ -221,7 +226,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 32e8e03ff971b8f428492d073c6b7c39,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7027073083684755167}
   m_SourcePrefab: {fileID: 100100000, guid: 32e8e03ff971b8f428492d073c6b7c39, type: 3}
 --- !u!4 &2531069465980740416 stripped
 Transform:
@@ -229,6 +238,24 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2642086007031448747}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2912697460498299386 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 32e8e03ff971b8f428492d073c6b7c39,
+    type: 3}
+  m_PrefabInstance: {fileID: 2642086007031448747}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7027073083684755167
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2912697460498299386}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ec153a7881916c4cb596d3e1c275116, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BWW.Behaviours.Map.Items.MovableItem
 --- !u!1001 &3366556930953233227
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -302,6 +329,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -90
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: a542da8a55540c2498b67fada41dc534,
+        type: 3}
+      propertyPath: m_SortingLayer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: a542da8a55540c2498b67fada41dc534,
         type: 3}
       propertyPath: m_Name
@@ -315,8 +347,30 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a542da8a55540c2498b67fada41dc534,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2539984466775180333}
   m_SourcePrefab: {fileID: 100100000, guid: a542da8a55540c2498b67fada41dc534, type: 3}
+--- !u!1 &2484017085103341082 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: a542da8a55540c2498b67fada41dc534,
+    type: 3}
+  m_PrefabInstance: {fileID: 3366556930953233227}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2539984466775180333
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2484017085103341082}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ec153a7881916c4cb596d3e1c275116, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BWW.Behaviours.Map.Items.MovableItem
 --- !u!4 &2968664680578786464 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: a542da8a55540c2498b67fada41dc534,
