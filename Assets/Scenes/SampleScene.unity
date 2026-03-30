@@ -2394,7 +2394,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 0
   m_UseReflectionProbes: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
@@ -11152,6 +11152,12 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 947485751}
     m_Modifications:
+    - target: {fileID: 523524198426831758, guid: 5a563a8f1fbd3b144b773c35bc8738f0,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -502544524, guid: b0ad048f6277f8d4c80e3437a3044347,
+        type: 3}
     - target: {fileID: 1505862456562475496, guid: 5a563a8f1fbd3b144b773c35bc8738f0,
         type: 3}
       propertyPath: m_Pivot.x
@@ -11984,6 +11990,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4250527400162931185, guid: f300dcba5ed35ec4a9f6fb33b76eaf2e,
+        type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4871358977406818703, guid: f300dcba5ed35ec4a9f6fb33b76eaf2e,
         type: 3}
       propertyPath: m_Name
@@ -12343,6 +12354,12 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 947485751}
     m_Modifications:
+    - target: {fileID: 523524198426831758, guid: 5a563a8f1fbd3b144b773c35bc8738f0,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 892257438, guid: b0ad048f6277f8d4c80e3437a3044347,
+        type: 3}
     - target: {fileID: 1505862456562475496, guid: 5a563a8f1fbd3b144b773c35bc8738f0,
         type: 3}
       propertyPath: m_Pivot.x

@@ -4,6 +4,7 @@ using BWW.Enums;
 using BWW.Managers.Player;
 using BWW.Utils.UI;
 using UnityEngine;
+using BWW.Behaviours.UI;
 
 namespace BWW.Managers.Map
 {
@@ -48,7 +49,7 @@ namespace BWW.Managers.Map
 
                   if (PlayerInventoryManager.Instance.MaterialCount[l_sFirstMaterialKey] > 0)
                   {
-                     PlayerInventoryManager.Instance.MaterialCount[l_sFirstMaterialKey] -= 1;
+                     PlayerInventoryManager.Instance.AddMaterial(l_sFirstMaterialKey, -1);
 
                      ItemFeedbackData l_feedback = new ItemFeedbackData(EItemFeedbackType.PLACE_ITEM, l_sFirstMaterialKey, m_selectedCell.transform.position, m_selectedCell);
 

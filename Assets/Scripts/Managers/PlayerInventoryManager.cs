@@ -1,7 +1,9 @@
 using BWW.Behaviours.Map;
 using BWW.Behaviours.Map.Items;
+using BWW.Behaviours.UI;
 using BWW.Managers.Map;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace BWW.Managers.Player
 {
@@ -58,6 +60,13 @@ namespace BWW.Managers.Player
          p_cell.TakeItem();
       }
 
+      public void AddMaterial(string p_sMaterialKey, int l_dQuantity)
+      {
+         m_lstMaterialCount[p_sMaterialKey] += l_dQuantity;
+
+         GameObject.Find("ItemCounter").transform.Find(p_sMaterialKey).GetComponent<ItemCounterBehaviour>().UpdateCount(m_lstMaterialCount[p_sMaterialKey]);
+      }
+
       private PlayerInventoryManager()
       {
          m_lstMaterialCount = new Dictionary<string, int>();
@@ -71,7 +80,7 @@ namespace BWW.Managers.Player
             m_lstMaterialCount.Add(l_sKey, 0);
          }
 
-         m_lstMaterialCount["Bricks"] = 5;
+         AddMaterial("Bricks", 5);
 
          m_lstMaterialOrder.Add(0, "Bricks");
 
