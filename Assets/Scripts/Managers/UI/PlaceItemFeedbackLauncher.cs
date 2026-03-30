@@ -1,4 +1,6 @@
 using BWW.Behaviours.UI;
+using BWW.Enums;
+using BWW.Managers.Player;
 using BWW.Utils.UI;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -22,9 +24,18 @@ namespace BWW.Managers.UI
             {
                ItemFeedbackObjectPool.Enqueue(l_feedbackObject);
 
-               l_feedbackObject.Cell.PlaceItem(l_feedbackObject.ItemKey);
+               string l_sItemKey = l_feedbackObject.ItemKey;
+
+               l_feedbackObject.Cell.PlaceItem(l_sItemKey);
 
                l_feedbackObject.gameObject.SetActive(false);
+
+               if (PlayerInventoryManager.Instance.MaterialCount[l_sItemKey] == 0)
+               {
+                  ItemFeedbackData l_feedback = new ItemFeedbackData(EItemFeedbackType.LOOSE_MATERIAL, l_sItemKey, Vector3.zero);
+
+                  ItemFeedbackManager.Instance.AddToWaitingFeedbackPool(l_feedback);
+               }
             };
 
             l_feedbackObject.gameObject.SetActive(false);

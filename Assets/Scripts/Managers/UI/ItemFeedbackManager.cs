@@ -24,11 +24,15 @@ namespace BWW.Managers.UI
 
       private PlaceItemFeedbackLauncher m_placeItemFeedbackLauncher;
 
+      private MaterialFeedbackLauncher m_materialFeedbackLauncher;
+
       private ItemFeedbackManager()
       {
          m_lstWaitingFeedbackPool = new Queue<ItemFeedbackData>();
 
          m_placeItemFeedbackLauncher = new PlaceItemFeedbackLauncher();
+
+         m_materialFeedbackLauncher = new MaterialFeedbackLauncher();
       }
 
       public void AddToWaitingFeedbackPool(ItemFeedbackData p_data)
@@ -42,9 +46,16 @@ namespace BWW.Managers.UI
                m_placeItemFeedbackLauncher.HandleFeedback(p_data);
 
                break;
+
             case EItemFeedbackType.GET_MATERIAL:
+            case EItemFeedbackType.LOOSE_MATERIAL:
+
+               m_materialFeedbackLauncher.HandleFeedback(p_data);
+
                break;
+
             default:
+
                break;
          }
       }

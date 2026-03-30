@@ -4,6 +4,6 @@ namespace BWW.Enums
    {
       PLACE_ITEM,
       GET_MATERIAL,
-      NO_MORE_ITEM
+      LOOSE_MATERIAL
    }
 }
