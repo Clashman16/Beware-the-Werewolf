@@ -3,6 +3,7 @@ using BWW.Managers.UI;
 using BWW.Enums;
 using BWW.Managers.Player;
 using BWW.Utils.UI;
+using UnityEngine;
 
 namespace BWW.Managers.Map
 {
@@ -36,6 +37,10 @@ namespace BWW.Managers.Map
                if (PlayerInventoryManager.Instance.HeldItem != null)
                {
                   PlayerInventoryManager.Instance.PlaceHeldItem(m_selectedCell);
+
+                  ItemFeedbackData l_feedback = new ItemFeedbackData(EItemFeedbackType.RELEASE_ITEM, "", Vector3.zero);
+
+                  ItemFeedbackManager.Instance.AddToWaitingFeedbackPool(l_feedback);
                }
                else
                {
@@ -55,7 +60,11 @@ namespace BWW.Managers.Map
             {
                if (PlayerInventoryManager.Instance.HeldItem == null)
                {
-                  PlayerInventoryManager.Instance.HoldItem(m_selectedCell); 
+                  PlayerInventoryManager.Instance.HoldItem(m_selectedCell);
+
+                  ItemFeedbackData l_feedback = new ItemFeedbackData(EItemFeedbackType.TAKE_ITEM, PlayerInventoryManager.Instance.HeldItem.name, Vector3.zero);
+
+                  ItemFeedbackManager.Instance.AddToWaitingFeedbackPool(l_feedback);
                }
             }
 
