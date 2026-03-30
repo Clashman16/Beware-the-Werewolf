@@ -110,7 +110,29 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: iitem-counter-background_0
+      name: item-counter-background_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1500
+        width: 500
+        height: 500
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8d1cedc2bf20ccd41946857dd24a34bd
+      internalID: -1202276205
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: item-counter-background_1
       rect:
         serializedVersion: 2
         x: 500
@@ -125,14 +147,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5c0481f212b576d4da5428d94c1e3e43
-      internalID: -791098259
+      spriteID: c3b95201f741a8c4d81912c625c01d2e
+      internalID: -409301696
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: iitem-counter-background_1
+      name: item-counter-background_2
       rect:
         serializedVersion: 2
         x: 1000
@@ -147,14 +169,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a8946c3f2efe34e4eb4d424d99ebdbd2
-      internalID: -682071585
+      spriteID: ea9163d214b004444a1c4d5dba256982
+      internalID: 153805160
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: iitem-counter-background_2
+      name: item-counter-background_3
       rect:
         serializedVersion: 2
         x: 1500
@@ -169,14 +191,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dc52298ff3c586645bf34cfabffc68b9
-      internalID: -1130874860
+      spriteID: f5a8524280f0ad44183db0b2d6960379
+      internalID: -285116309
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: iitem-counter-background_3
+      name: item-counter-background_4
       rect:
         serializedVersion: 2
         x: 0
@@ -191,14 +213,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7d111f869d1327e47bf005b9a1f69986
-      internalID: -877584893
+      spriteID: c4781e46db64de146ab7590e7424c362
+      internalID: -1986986104
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: iitem-counter-background_4
+      name: item-counter-background_5
       rect:
         serializedVersion: 2
         x: 500
@@ -213,14 +235,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 475917d743497d143a15f1e3bfc9a8ca
-      internalID: -1411814676
+      spriteID: 2f7685d1d83b44f44912d8f568b899cc
+      internalID: -204571451
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: iitem-counter-background_5
+      name: item-counter-background_6
       rect:
         serializedVersion: 2
         x: 1000
@@ -235,14 +257,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9c4b58cd43362de49a912c3bc66b3460
-      internalID: -1313843912
+      spriteID: c762cdceca1393a4eb0d5940f534898c
+      internalID: 1743863065
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: iitem-counter-background_6
+      name: item-counter-background_7
       rect:
         serializedVersion: 2
         x: 1500
@@ -257,14 +279,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7f7d2df85a1f52843a68e6c72d938d3c
-      internalID: -308924765
+      spriteID: a4b9950b3726cc744a6d04c4d6edc561
+      internalID: 337223144
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: iitem-counter-background_7
+      name: item-counter-background_8
       rect:
         serializedVersion: 2
         x: 0
@@ -279,14 +301,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 23b8a4e9927afd24f8083ea3c91a5a8d
-      internalID: 882134836
+      spriteID: 554a48f9019c7b14eaba13e44d7fcfa8
+      internalID: -678804013
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: iitem-counter-background_8
+      name: item-counter-background_9
       rect:
         serializedVersion: 2
         x: 500
@@ -301,14 +323,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 374baf1cbafa3ea4fb5a5065860af647
-      internalID: -1535031233
+      spriteID: 64bb75c9a8fd63343adcc053e4fc7f20
+      internalID: 1489955429
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: iitem-counter-background_9
+      name: item-counter-background_10
       rect:
         serializedVersion: 2
         x: 1000
@@ -323,14 +345,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c86d8308295b97a4187b5350c37fe8aa
-      internalID: 735322103
+      spriteID: 1905fa85f341d3a48b9d37372192f6a9
+      internalID: 348779208
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: iitem-counter-background_10
+      name: item-counter-background_11
       rect:
         serializedVersion: 2
         x: 1500
@@ -345,14 +367,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b9a6b039df52d3341aa5d718ed7a8700
-      internalID: 1668660097
+      spriteID: f4109cc979f05044f830ccbb4b4f7750
+      internalID: 866680635
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: iitem-counter-background_11
+      name: item-counter-background_12
       rect:
         serializedVersion: 2
         x: 0
@@ -367,14 +389,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 76e9ffa3285e99141b40c04a58982232
-      internalID: -854737599
+      spriteID: 9f749aa3193ade34e910169b4ab7208f
+      internalID: -1639229482
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: iitem-counter-background_12
+      name: item-counter-background_13
       rect:
         serializedVersion: 2
         x: 500
@@ -389,14 +411,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b42eb587bb5d8ad418605b291d5a3dc9
-      internalID: 1226273776
+      spriteID: c44fc49e323eab4428e9b09b4390cd40
+      internalID: 936473993
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: iitem-counter-background_13
+      name: item-counter-background_14
       rect:
         serializedVersion: 2
         x: 1000
@@ -411,14 +433,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 06bd34caca0653c4698d83ed04608ad9
-      internalID: -736767870
+      spriteID: 132ba84f8de49694ca3bc61a15a97351
+      internalID: 326170296
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: iitem-counter-background_14
+      name: item-counter-background_15
       rect:
         serializedVersion: 2
         x: 1500
@@ -433,8 +455,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 47ec406d71411c541b1e30b8e9328518
-      internalID: -1509495376
+      spriteID: 318bf930f0a4c28408f0932a6ebeb4bf
+      internalID: 2020085342
       vertices: []
       indices: 
       edges: []
@@ -455,21 +477,22 @@ TextureImporter:
       - key: SpriteEditor.SliceSettings
         value: '{"sliceOnImport":false,"gridCellCount":{"x":4.0,"y":4.0},"gridSpriteSize":{"x":500.0,"y":500.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      iitem-counter-background_0: -791098259
-      iitem-counter-background_1: -682071585
-      iitem-counter-background_10: 1668660097
-      iitem-counter-background_11: -854737599
-      iitem-counter-background_12: 1226273776
-      iitem-counter-background_13: -736767870
-      iitem-counter-background_14: -1509495376
-      iitem-counter-background_2: -1130874860
-      iitem-counter-background_3: -877584893
-      iitem-counter-background_4: -1411814676
-      iitem-counter-background_5: -1313843912
-      iitem-counter-background_6: -308924765
-      iitem-counter-background_7: 882134836
-      iitem-counter-background_8: -1535031233
-      iitem-counter-background_9: 735322103
+      item-counter-background_0: -1202276205
+      item-counter-background_1: -409301696
+      item-counter-background_10: 348779208
+      item-counter-background_11: 866680635
+      item-counter-background_12: -1639229482
+      item-counter-background_13: 936473993
+      item-counter-background_14: 326170296
+      item-counter-background_15: 2020085342
+      item-counter-background_2: 153805160
+      item-counter-background_3: -285116309
+      item-counter-background_4: -1986986104
+      item-counter-background_5: -204571451
+      item-counter-background_6: 1743863065
+      item-counter-background_7: 337223144
+      item-counter-background_8: -678804013
+      item-counter-background_9: 1489955429
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
