@@ -43,6 +43,8 @@ namespace BWW.Behaviours.UI
 
       public override void Animate()
       {
+         m_vecAnimEndPosition = RectTransformUtility.WorldToScreenPoint(Camera.main, m_cell.transform.position);
+
          transform.position = Vector3.MoveTowards(transform.position, m_vecAnimEndPosition, m_fSpeed * Time.deltaTime);
       }
 
