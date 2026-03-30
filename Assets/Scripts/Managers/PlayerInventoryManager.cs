@@ -1,4 +1,6 @@
+using BWW.Behaviours.Map;
 using BWW.Behaviours.Map.Items;
+using BWW.Managers.Map;
 using System.Collections.Generic;
 
 namespace BWW.Managers.Player
@@ -38,7 +40,22 @@ namespace BWW.Managers.Player
       public MovableItem HeldItem
       {
          get => m_heldItem;
-         set => m_heldItem = value;
+      }
+
+      public void PlaceHeldItem(GridCellBehaviour p_cell)
+      {
+         string l_sItemKey = m_heldItem.name.Replace("Curve", "");
+
+         p_cell.PlacedItem = ItemPlacerManager.Instance.PlaceItem(l_sItemKey, p_cell);
+
+         m_heldItem = null;
+      }
+
+      public void HoldItem(GridCellBehaviour p_cell)
+      {
+         m_heldItem = p_cell.PlacedItem;
+
+         p_cell.TakeItem();
       }
 
       private PlayerInventoryManager()

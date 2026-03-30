@@ -35,9 +35,7 @@ namespace BWW.Managers.Map
             {
                if (PlayerInventoryManager.Instance.HeldItem != null)
                {
-                  m_selectedCell.PlacedItem = PlayerInventoryManager.Instance.HeldItem;
-
-                  PlayerInventoryManager.Instance.HeldItem = null;
+                  PlayerInventoryManager.Instance.PlaceHeldItem(m_selectedCell);
                }
                else
                {
@@ -57,11 +55,7 @@ namespace BWW.Managers.Map
             {
                if (PlayerInventoryManager.Instance.HeldItem == null)
                {
-                  PlayerInventoryManager.Instance.HeldItem = m_selectedCell.PlacedItem;
-
-                  m_selectedCell.TakeItem();
-
-                  m_selectedCell.PlacedItem = null;
+                  PlayerInventoryManager.Instance.HoldItem(m_selectedCell); 
                }
             }
 
