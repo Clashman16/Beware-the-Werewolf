@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 9171952480230213236}
   - component: {fileID: 984478196722694368}
   - component: {fileID: 83330326757505802}
+  - component: {fileID: 8682022166801771287}
   m_Layer: 5
   m_Name: PlaceItemFeedback
   m_TagString: Untagged
@@ -67,7 +68,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -308924765, guid: 1c77451a794d84348b43a2b0413b8707, type: 3}
+  m_Sprite: {fileID: -1986986104, guid: 1c77451a794d84348b43a2b0413b8707, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -89,6 +90,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4fa1342fcb20cf47aac35569d42f453, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BWW.Behaviours.UI.PlaceItemFeedbackBehaviour
+  m_fSpeed: 1200
+--- !u!95 &8682022166801771287
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4125352018936409909}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: df63c7c65af3d004eb590e8b37255340, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &6665605776475229355
 GameObject:
   m_ObjectHideFlags: 0
