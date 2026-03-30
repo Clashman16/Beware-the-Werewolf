@@ -20,16 +20,12 @@ namespace BWW.Managers.UI
          }
       }
 
-      private Queue<ItemFeedbackData> m_lstWaitingFeedbackPool;
-
       private PlaceItemFeedbackLauncher m_placeItemFeedbackLauncher;
 
       private MaterialFeedbackLauncher m_materialFeedbackLauncher;
 
       private ItemFeedbackManager()
       {
-         m_lstWaitingFeedbackPool = new Queue<ItemFeedbackData>();
-
          m_placeItemFeedbackLauncher = new PlaceItemFeedbackLauncher();
 
          m_materialFeedbackLauncher = new MaterialFeedbackLauncher();
@@ -37,8 +33,6 @@ namespace BWW.Managers.UI
 
       public void AddToWaitingFeedbackPool(ItemFeedbackData p_data)
       {
-         m_lstWaitingFeedbackPool.Enqueue(p_data);
-
          switch(p_data.Type)
          {
             case EItemFeedbackType.PLACE_ITEM:
