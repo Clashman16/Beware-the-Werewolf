@@ -14,7 +14,7 @@ namespace BWW.Managers.UI
       {
          ItemFeedbackObjectPool = new Queue<ItemFeedbackBehaviour>();
 
-         PlaceItemFeedbackBehaviour[] l_lstPlaceItemFeedback = Object.FindObjectsByType<PlaceItemFeedbackBehaviour>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+         PlaceItemFeedbackBehaviour[] l_lstPlaceItemFeedback = Object.FindObjectsByType<PlaceItemFeedbackBehaviour>(FindObjectsInactive.Include);
 
          foreach (PlaceItemFeedbackBehaviour l_feedbackObject in l_lstPlaceItemFeedback)
          {
@@ -56,7 +56,7 @@ namespace BWW.Managers.UI
          }
          else
          {
-            PlaceItemFeedbackBehaviour[] l_lstPlaceItemFeedback = Object.FindObjectsByType<PlaceItemFeedbackBehaviour>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+            PlaceItemFeedbackBehaviour[] l_lstPlaceItemFeedback = Object.FindObjectsByType<PlaceItemFeedbackBehaviour>(FindObjectsInactive.Include);
 
             if (l_lstPlaceItemFeedback.Length < 8)
             {

@@ -25,7 +25,7 @@ namespace BWW.Managers.Map
 
       private List<int> EnableTowers(int p_mainSpawnerCount)
       {
-         TowerBehaviour[] l_lstSpawners = Object.FindObjectsByType<TowerBehaviour>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+         TowerBehaviour[] l_lstSpawners = Object.FindObjectsByType<TowerBehaviour>(FindObjectsInactive.Include);
 
          int l_dTowerCount = l_lstSpawners.Length;
 
@@ -141,7 +141,7 @@ namespace BWW.Managers.Map
 
       private void InitSwitchableParts(List<SwitchablePartCount> p_lstSwitchablePartCount, List<int> p_lstEnabledTowers)
       {
-         SwitchablePartBehaviour[] l_lstSwitchableParts = Object.FindObjectsByType<SwitchablePartBehaviour>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+         SwitchablePartBehaviour[] l_lstSwitchableParts = Object.FindObjectsByType<SwitchablePartBehaviour>(FindObjectsInactive.Include);
 
          int l_dSwitchablePartsCount = l_lstSwitchableParts.Length;
 
