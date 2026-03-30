@@ -77,9 +77,9 @@ public class ItemPlacingUtility
 
             if (l_neighbor.PlacedItem != null && l_neighbor.PlacedItem.name == p_sItemKey)
             {
-               int l_dFirstPartRotationCount = (int) l_firstNeighbor.PlacedItem.transform.rotation.eulerAngles.x / 90;
+               int l_dFirstPartRotationCount = (int) l_firstNeighbor.PlacedItem.transform.localEulerAngles.x / 90;
 
-               int l_dScndPartRotationCount = (int)l_neighbor.PlacedItem.transform.rotation.eulerAngles.x / 90;
+               int l_dScndPartRotationCount = (int)l_neighbor.PlacedItem.transform.localEulerAngles.x / 90;
 
                if (l_dFirstPartRotationCount % 2 == 0 && l_dScndPartRotationCount % 2 != 0
                   || (l_dFirstPartRotationCount % 2 != 0 && l_dScndPartRotationCount % 2 == 0))
@@ -107,9 +107,9 @@ public class ItemPlacingUtility
 
             if (l_neighbor.PlacedItem != null && l_neighbor.PlacedItem.name == p_sItemKey)
             {
-               int l_dFirstPartRotationCount = (int)l_firstNeighbor.PlacedItem.transform.rotation.eulerAngles.x / 90;
+               int l_dFirstPartRotationCount = (int)l_firstNeighbor.PlacedItem.transform.localEulerAngles.x / 90;
 
-               int l_dScndPartRotationCount = (int)l_neighbor.PlacedItem.transform.rotation.eulerAngles.x / 90;
+               int l_dScndPartRotationCount = (int)l_neighbor.PlacedItem.transform.localEulerAngles.x / 90;
 
                if (l_dFirstPartRotationCount % 2 == 0 && l_dScndPartRotationCount % 2 != 0
                   || (l_dFirstPartRotationCount % 2 != 0 && l_dScndPartRotationCount % 2 == 0))
