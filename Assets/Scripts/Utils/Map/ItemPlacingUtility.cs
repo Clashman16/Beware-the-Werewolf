@@ -73,22 +73,28 @@ public class ItemPlacingUtility
 
          foreach (int l_dModificator in l_neigborIndexModificators)
          {
-            GridCellBehaviour l_neighbor = p_cell.Neighbors[p_cell.CellIndex+ l_dModificator];
+            int l_dNewIndex = p_cell.CellIndex + l_dModificator;
 
-            if (l_neighbor.PlacedItem != null && l_neighbor.PlacedItem.name == p_sItemKey)
+            if (p_cell.Neighbors.ContainsKey(l_dNewIndex))
             {
-               int l_dFirstPartRotationCount = (int) l_firstNeighbor.PlacedItem.transform.localEulerAngles.x / 90;
+               GridCellBehaviour l_neighbor = p_cell.Neighbors[l_dNewIndex];
 
-               int l_dScndPartRotationCount = (int)l_neighbor.PlacedItem.transform.localEulerAngles.x / 90;
-
-               if (l_dFirstPartRotationCount % 2 == 0 && l_dScndPartRotationCount % 2 != 0
-                  || (l_dFirstPartRotationCount % 2 != 0 && l_dScndPartRotationCount % 2 == 0))
+               if (l_neighbor.PlacedItem != null && l_neighbor.PlacedItem.name == p_sItemKey)
                {
-                  l_scndNeighbor = l_neighbor;
+                  int l_dFirstPartRotationCount = (int)l_firstNeighbor.PlacedItem.transform.localEulerAngles.x / 90;
 
-                  break;
-               } 
+                  int l_dScndPartRotationCount = (int)l_neighbor.PlacedItem.transform.localEulerAngles.x / 90;
+
+                  if (l_dFirstPartRotationCount % 2 == 0 && l_dScndPartRotationCount % 2 != 0
+                     || (l_dFirstPartRotationCount % 2 != 0 && l_dScndPartRotationCount % 2 == 0))
+                  {
+                     l_scndNeighbor = l_neighbor;
+
+                     break;
+                  }
+               }
             }
+            
          }
       }
       else
@@ -103,20 +109,25 @@ public class ItemPlacingUtility
 
          foreach (int l_dModificator in l_neigborIndexModificators)
          {
-            GridCellBehaviour l_neighbor = p_cell.Neighbors[p_cell.CellIndex + l_dModificator];
+            int l_dNewIndex = p_cell.CellIndex + l_dModificator;
 
-            if (l_neighbor.PlacedItem != null && l_neighbor.PlacedItem.name == p_sItemKey)
+            if (p_cell.Neighbors.ContainsKey(l_dNewIndex))
             {
-               int l_dFirstPartRotationCount = (int)l_firstNeighbor.PlacedItem.transform.localEulerAngles.x / 90;
+               GridCellBehaviour l_neighbor = p_cell.Neighbors[p_cell.CellIndex + l_dModificator];
 
-               int l_dScndPartRotationCount = (int)l_neighbor.PlacedItem.transform.localEulerAngles.x / 90;
-
-               if (l_dFirstPartRotationCount % 2 == 0 && l_dScndPartRotationCount % 2 != 0
-                  || (l_dFirstPartRotationCount % 2 != 0 && l_dScndPartRotationCount % 2 == 0))
+               if (l_neighbor.PlacedItem != null && l_neighbor.PlacedItem.name == p_sItemKey)
                {
-                  l_scndNeighbor = l_neighbor;
+                  int l_dFirstPartRotationCount = (int)l_firstNeighbor.PlacedItem.transform.localEulerAngles.x / 90;
 
-                  break;
+                  int l_dScndPartRotationCount = (int)l_neighbor.PlacedItem.transform.localEulerAngles.x / 90;
+
+                  if (l_dFirstPartRotationCount % 2 == 0 && l_dScndPartRotationCount % 2 != 0
+                     || (l_dFirstPartRotationCount % 2 != 0 && l_dScndPartRotationCount % 2 == 0))
+                  {
+                     l_scndNeighbor = l_neighbor;
+
+                     break;
+                  }
                }
             }
          }
