@@ -1,5 +1,6 @@
 using BWW.Enums;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace BWW.Player
 {
@@ -38,6 +39,21 @@ namespace BWW.Player
          {
             IsMoving = false;
          }
+      }
+
+      public override Vector3 GetPointerPosition()
+      {
+         return Input.mousePosition;
+      }
+
+      public override bool IsClickDown()
+      {
+         return Input.GetMouseButtonDown(0);
+      }
+
+      public override bool IsPointerOverUI()
+      {
+         return EventSystem.current.IsPointerOverGameObject();
       }
    }
 }

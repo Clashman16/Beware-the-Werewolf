@@ -1,3 +1,4 @@
+using BWW.Behaviours.Map.Items;
 using BWW.Enums;
 using BWW.Managers.Map;
 using BWW.Player;
@@ -7,6 +8,8 @@ namespace BWW.Behaviours.Player
 {
    public class CameraBehaviour : MonoBehaviour
    {
+      private const string m_sItemSelectionMask = "MovableItem";
+
       private Vector3 m_vecMovePivot;
 
       private int[] m_lstZoomLimits;
@@ -35,6 +38,23 @@ namespace BWW.Behaviours.Player
          if(GridManager.Instance.SelectedCell == null)
          {
             m_state.UpdateState();
+
+            if(m_state.IsClickDown() && !m_state.IsPointerOverUI())
+            {
+               Debug.Log("1");
+               Ray l_ray = GetComponent<Camera>().ScreenPointToRay(m_state.GetPointerPosition());
+
+               if (Physics.Raycast(l_ray, out RaycastHit l_hit, 100f, LayerMask.GetMask(m_sItemSelectionMask)))
+               {
+                  MovableItem l_item = l_hit.collider.GetComponent<MovableItem>();
+                  Debug.Log("2");
+                  if (l_item != null)
+                  {
+                     Debug.Log("3");
+                     GridManager.Instance.SelectItemOnGrid(l_item);
+                  }
+               }
+            }
          }
          
          if(m_state.IsMoving)

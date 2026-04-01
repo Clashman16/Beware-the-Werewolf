@@ -1,10 +1,10 @@
 using BWW.Behaviours.Map;
-using BWW.Managers.UI;
+using BWW.Behaviours.Map.Items;
 using BWW.Enums;
 using BWW.Managers.Player;
+using BWW.Managers.UI;
 using BWW.Utils.UI;
 using UnityEngine;
-using BWW.Behaviours.UI;
 
 namespace BWW.Managers.Map
 {
@@ -83,6 +83,18 @@ namespace BWW.Managers.Map
       private GridManager()
       {
          m_selectedCell = null;
+      }
+
+      public void SelectItemOnGrid(MovableItem p_selectedItem)
+      {
+         if (PlayerInventoryManager.Instance.HeldItem == null)
+         {
+            PlayerInventoryManager.Instance.HoldItem(p_selectedItem.GetComponentInParent<GridCellBehaviour>());
+
+            ItemFeedbackData l_feedback = new ItemFeedbackData(EItemFeedbackType.TAKE_ITEM, PlayerInventoryManager.Instance.HeldItem.name, Vector3.zero);
+
+            ItemFeedbackManager.Instance.AddToWaitingFeedbackPool(l_feedback);
+         }
       }
    }
 }

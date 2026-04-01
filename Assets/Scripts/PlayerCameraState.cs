@@ -1,4 +1,5 @@
 using BWW.Enums;
+using UnityEngine;
 
 namespace BWW.Player
 {
@@ -29,5 +30,11 @@ namespace BWW.Player
       }
 
       public abstract void UpdateState();
+
+      public abstract bool IsClickDown();
+
+      public abstract bool IsPointerOverUI();
+
+      public abstract Vector3 GetPointerPosition();
    }
 }
