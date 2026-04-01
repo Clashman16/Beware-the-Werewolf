@@ -1,4 +1,6 @@
+using BWW.Behaviours.Map.Items;
 using BWW.Enums;
+using BWW.Managers.Map;
 using BWW.Player;
 using UnityEngine;
 
@@ -6,9 +8,11 @@ namespace BWW.Behaviours.Player
 {
    public class CameraBehaviour : MonoBehaviour
    {
+      private const string m_sItemSelectionMask = "MovableItem";
+
       private Vector3 m_vecMovePivot;
 
-      private double[] m_lstZoomLimits;
+      private int[] m_lstZoomLimits;
 
       PlayerCameraState m_state;
 
@@ -26,16 +30,36 @@ namespace BWW.Behaviours.Player
       {
          m_vecMovePivot = new Vector3(18.0540009f, 0, -34.9550018f);
 
-         m_lstZoomLimits = new[]{ 2, 5.13 };
+         m_lstZoomLimits = new[]{ 3, 7 };
       }
 
       private void Update()
       {
-         m_state.UpdateState();
+         if(GridManager.Instance.SelectedCell == null)
+         {
+            m_state.UpdateState();
 
+            if(m_state.IsClickDown() && !m_state.IsPointerOverUI())
+            {
+               Debug.Log("1");
+               Ray l_ray = GetComponent<Camera>().ScreenPointToRay(m_state.GetPointerPosition());
+
+               if (Physics.Raycast(l_ray, out RaycastHit l_hit, 100f, LayerMask.GetMask(m_sItemSelectionMask)))
+               {
+                  MovableItem l_item = l_hit.collider.GetComponent<MovableItem>();
+                  Debug.Log("2");
+                  if (l_item != null)
+                  {
+                     Debug.Log("3");
+                     GridManager.Instance.SelectItemOnGrid(l_item);
+                  }
+               }
+            }
+         }
+         
          if(m_state.IsMoving)
          {
-            if(m_state.SimulatedButton == EMouseButton.SCROLL)
+            if(m_state.SimulatedControl == EControls.ZOOM)
             {
                float l_fCurrentPosition = transform.position.y;
 
@@ -49,11 +73,16 @@ namespace BWW.Behaviours.Player
             }
             else
             {
-               float l_fAngle = m_state.SimulatedButton == EMouseButton.LEFT ? 1 : -1;
+               float l_fAngle = m_state.SimulatedControl == EControls.CAMERA_LEFT ? 1 : -1;
 
                transform.RotateAround(m_vecMovePivot, Vector3.up, l_fAngle);
             }
          }
+      }
+
+      public void SetIsMoving(bool p_bIsMoving)
+      {
+         m_state.IsMoving = p_bIsMoving;
       }
    }
 }
