@@ -20,7 +20,7 @@ namespace BWW.Utils.Map
       {
          m_lstAvailableSpawners = new Dictionary<int, SpawnPointBehaviour>();
 
-         SpawnPointBehaviour[] l_lstAllSpawnPoints = Object.FindObjectsByType<SpawnPointBehaviour>(FindObjectsInactive.Exclude, FindObjectsSortMode.None);
+         SpawnPointBehaviour[] l_lstAllSpawnPoints = Object.FindObjectsByType<SpawnPointBehaviour>(FindObjectsInactive.Exclude);
 
          for(int l_i = 0; l_i < l_lstAllSpawnPoints.Length; l_i++)
          {
