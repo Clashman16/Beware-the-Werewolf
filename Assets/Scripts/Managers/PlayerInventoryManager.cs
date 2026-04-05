@@ -48,7 +48,7 @@ namespace BWW.Managers.Player
       {
          string l_sItemKey = m_heldItem.name.Replace("Curve", "");
 
-         p_cell.PlacedItem = ItemPlacerManager.Instance.PlaceItem(l_sItemKey, p_cell);
+         p_cell.PlaceItem(l_sItemKey);
 
          m_heldItem = null;
       }
