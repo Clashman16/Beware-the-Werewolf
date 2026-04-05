@@ -33,8 +33,6 @@ namespace BWW.Player
 
       public abstract bool IsClickDown();
 
-      public abstract bool IsPointerOverUI();
-
       public abstract Vector3 GetPointerPosition();
    }
 }

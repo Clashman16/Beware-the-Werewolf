@@ -1,8 +1,10 @@
+using BWW.Behaviours.Map;
 using BWW.Behaviours.Map.Items;
 using BWW.Enums;
 using BWW.Managers.Map;
 using BWW.Player;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace BWW.Behaviours.Player
 {
@@ -39,18 +41,16 @@ namespace BWW.Behaviours.Player
          {
             m_state.UpdateState();
 
-            if(m_state.IsClickDown() && !m_state.IsPointerOverUI())
+            if(m_state.IsClickDown())
             {
-               Debug.Log("1");
                Ray l_ray = GetComponent<Camera>().ScreenPointToRay(m_state.GetPointerPosition());
 
                if (Physics.Raycast(l_ray, out RaycastHit l_hit, 100f, LayerMask.GetMask(m_sItemSelectionMask)))
                {
                   MovableItem l_item = l_hit.collider.GetComponent<MovableItem>();
-                  Debug.Log("2");
+
                   if (l_item != null)
                   {
-                     Debug.Log("3");
                      GridManager.Instance.SelectItemOnGrid(l_item);
                   }
                }

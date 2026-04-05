@@ -50,10 +50,5 @@ namespace BWW.Player
       {
          return Input.GetMouseButtonDown(0);
       }
-
-      public override bool IsPointerOverUI()
-      {
-         return EventSystem.current.IsPointerOverGameObject();
-      }
    }
 }
