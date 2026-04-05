@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 1078887795332464423}
   - component: {fileID: 5154775676025082066}
   - component: {fileID: -6851705227532361952}
-  m_Layer: 0
+  - component: {fileID: 3754142992271545436}
+  m_Layer: 7
   m_Name: Hay Roll
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -103,3 +104,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca1d29410f6cc6d41a4fc3a7d2af657e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BWW.Behaviours.Map.Items.HayRollBehaviour
+--- !u!65 &3754142992271545436
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8206117174527357035}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.51603466, y: 0.22326468, z: 0.25212032}
+  m_Center: {x: 0, y: 0.19284268, z: -9.233084e-10}
