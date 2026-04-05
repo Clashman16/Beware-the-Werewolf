@@ -21,6 +21,8 @@ namespace BWW.Behaviours.UI
          {
             HayRollBehaviour[] l_lstHayRolls = PlayerInventoryManager.Instance.HeldItem.GetComponentsInChildren<HayRollBehaviour>();
 
+            l_sNewKey = l_sNewKey.Split(' ')[0];
+
             l_sNewKey = string.Concat(l_sNewKey, "_", l_lstHayRolls.Length.ToString());
          }
 

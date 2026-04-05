@@ -66,7 +66,12 @@ namespace BWW.Behaviours.Map
 
       public void PlaceItem(string p_sItemKey)
       {
-         m_placedItem = ItemPlacerManager.Instance.PlaceItem(p_sItemKey, this);
+         MovableItem l_newItem = ItemPlacerManager.Instance.PlaceItem(p_sItemKey, this);
+
+         if (m_placedItem == null)
+         {
+            m_placedItem = l_newItem;
+         }
       }
 
       public void TakeItem()

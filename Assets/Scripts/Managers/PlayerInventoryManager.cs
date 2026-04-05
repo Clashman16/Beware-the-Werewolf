@@ -48,16 +48,23 @@ namespace BWW.Managers.Player
       {
          string l_sItemKey = m_heldItem.name.Replace("Curve", "");
 
-         p_cell.PlacedItem = ItemPlacerManager.Instance.PlaceItem(l_sItemKey, p_cell);
+         p_cell.PlaceItem(l_sItemKey);
 
          m_heldItem = null;
       }
 
-      public void HoldItem(GridCellBehaviour p_cell)
+      public void HoldItemOnCell(GridCellBehaviour p_cell)
       {
          m_heldItem = p_cell.PlacedItem;
 
          p_cell.TakeItem();
+      }
+
+      public void HoldItem(MovableItem p_item)
+      {
+         m_heldItem = p_item;
+
+         p_item.gameObject.SetActive(false);
       }
 
       public void AddMaterial(string p_sMaterialKey, int l_dQuantity)
