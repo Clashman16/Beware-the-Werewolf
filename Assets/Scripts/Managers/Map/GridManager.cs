@@ -24,6 +24,8 @@ namespace BWW.Managers.Map
          }
       }
 
+      private bool m_bIgnoreNextClick;
+
       private GridCellBehaviour m_selectedCell;
 
       public GridCellBehaviour SelectedCell
@@ -31,6 +33,13 @@ namespace BWW.Managers.Map
          get => m_selectedCell;
          set
          {
+            if(m_bIgnoreNextClick)
+            {
+               m_bIgnoreNextClick = false;
+
+               return;
+            }
+
             m_selectedCell = value;
 
             if(m_selectedCell.PlacedItem == null)
@@ -87,6 +96,8 @@ namespace BWW.Managers.Map
 
       public void SelectItemOnGrid(MovableItem p_selectedItem)
       {
+         m_bIgnoreNextClick = true;
+
          if (PlayerInventoryManager.Instance.HeldItem == null)
          {
             PlayerInventoryManager.Instance.HoldItem(p_selectedItem.GetComponentInParent<GridCellBehaviour>());
