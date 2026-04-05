@@ -46,7 +46,7 @@ namespace BWW.Managers.Map
             {
                if (PlayerInventoryManager.Instance.HeldItem != null)
                {
-                  PlaceHeldItem();
+                  PlaceHeldItemOnCell();
                }
                else
                {
@@ -56,9 +56,7 @@ namespace BWW.Managers.Map
                   {
                      PlayerInventoryManager.Instance.AddMaterial(l_sFirstMaterialKey, -1);
 
-                     ItemFeedbackData l_feedback = new ItemFeedbackData(EItemFeedbackType.PLACE_ITEM, l_sFirstMaterialKey, m_selectedCell.transform.position, m_selectedCell);
-
-                     ItemFeedbackManager.Instance.AddToWaitingFeedbackPool(l_feedback);
+                     NotifyGridUpdate(EItemFeedbackType.PLACE_ITEM, l_sFirstMaterialKey, m_selectedCell.transform.position, m_selectedCell);
                   }
                }
             }
@@ -66,11 +64,7 @@ namespace BWW.Managers.Map
             {
                if(PlayerInventoryManager.Instance.HeldItem == null)
                {
-                  PlayerInventoryManager.Instance.HoldItemOnCell(m_selectedCell);
-
-                  ItemFeedbackData l_feedback = new ItemFeedbackData(EItemFeedbackType.TAKE_ITEM, PlayerInventoryManager.Instance.HeldItem.name, Vector3.zero);
-
-                  ItemFeedbackManager.Instance.AddToWaitingFeedbackPool(l_feedback);
+                  TakeItemOnCell();
                }
                else
                {
@@ -79,7 +73,7 @@ namespace BWW.Managers.Map
 
                   if (l_lstCellHayRoll.Length > 0 && l_lstPlayerlHayRoll.Length + l_lstCellHayRoll.Length <= 3)
                   {
-                     PlaceHeldItem();
+                     PlaceHeldItemOnCell();
                   }
                }
             }
@@ -88,11 +82,24 @@ namespace BWW.Managers.Map
          }
       }
 
-      private void PlaceHeldItem(GridCellBehaviour p_cell = null)
+      private void PlaceHeldItemOnCell(GridCellBehaviour p_cell = null)
       {
          PlayerInventoryManager.Instance.PlaceHeldItem(p_cell == null ? m_selectedCell : p_cell);
 
-         ItemFeedbackData l_feedback = new ItemFeedbackData(EItemFeedbackType.RELEASE_ITEM, "", Vector3.zero);
+         NotifyGridUpdate(EItemFeedbackType.RELEASE_ITEM, "", Vector3.zero, null);
+      }
+
+      private void TakeItemOnCell(GridCellBehaviour p_cell = null)
+      {
+         PlayerInventoryManager.Instance.HoldItemOnCell(p_cell == null ? m_selectedCell : p_cell);
+
+         NotifyGridUpdate(EItemFeedbackType.TAKE_ITEM, PlayerInventoryManager.Instance.HeldItem.name, Vector3.zero, null);
+      }
+
+
+      private void NotifyGridUpdate(EItemFeedbackType p_eType, string p_sItemKey, Vector3 p_vecPosition, GridCellBehaviour p_cell)
+      {
+         ItemFeedbackData l_feedback = new ItemFeedbackData(p_eType, p_sItemKey, p_vecPosition, p_cell);
 
          ItemFeedbackManager.Instance.AddToWaitingFeedbackPool(l_feedback);
       }
@@ -121,17 +128,11 @@ namespace BWW.Managers.Map
             {
                PlayerInventoryManager.Instance.HoldItem(p_selectedItem);
 
-               ItemFeedbackData l_feedback = new ItemFeedbackData(EItemFeedbackType.TAKE_ITEM, p_selectedItem.name, Vector3.zero);
-
-               ItemFeedbackManager.Instance.AddToWaitingFeedbackPool(l_feedback);
+               NotifyGridUpdate(EItemFeedbackType.TAKE_ITEM, p_selectedItem.name, Vector3.zero, null);
             }
             else
             {
-               PlayerInventoryManager.Instance.HoldItemOnCell(l_cell);
-
-               ItemFeedbackData l_feedback = new ItemFeedbackData(EItemFeedbackType.TAKE_ITEM, PlayerInventoryManager.Instance.HeldItem.name, Vector3.zero);
-
-               ItemFeedbackManager.Instance.AddToWaitingFeedbackPool(l_feedback);
+               TakeItemOnCell(l_cell);
             }
          }
          else
@@ -144,7 +145,7 @@ namespace BWW.Managers.Map
 
             if (l_lstCellHayRoll.Length > 0 && l_lstPlayerlHayRoll.Length + l_lstCellHayRoll.Length <= 3)
             {
-               PlaceHeldItem(l_cell);
+               PlaceHeldItemOnCell(l_cell);
             }
          }
       }
