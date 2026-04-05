@@ -120,6 +120,10 @@ namespace BWW.Managers.Map
             if(l_cell == null)
             {
                PlayerInventoryManager.Instance.HoldItem(p_selectedItem);
+
+               ItemFeedbackData l_feedback = new ItemFeedbackData(EItemFeedbackType.TAKE_ITEM, p_selectedItem.name, Vector3.zero);
+
+               ItemFeedbackManager.Instance.AddToWaitingFeedbackPool(l_feedback);
             }
             else
             {
