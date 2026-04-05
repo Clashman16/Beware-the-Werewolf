@@ -46,11 +46,7 @@ namespace BWW.Managers.Map
             {
                if (PlayerInventoryManager.Instance.HeldItem != null)
                {
-                  PlayerInventoryManager.Instance.PlaceHeldItem(m_selectedCell);
-
-                  ItemFeedbackData l_feedback = new ItemFeedbackData(EItemFeedbackType.RELEASE_ITEM, "", Vector3.zero);
-
-                  ItemFeedbackManager.Instance.AddToWaitingFeedbackPool(l_feedback);
+                  PlaceHeldItem();
                }
                else
                {
@@ -68,18 +64,37 @@ namespace BWW.Managers.Map
             }
             else
             {
-               if (PlayerInventoryManager.Instance.HeldItem == null)
+               if(PlayerInventoryManager.Instance.HeldItem == null)
                {
-                  PlayerInventoryManager.Instance.HoldItem(m_selectedCell);
+                  PlayerInventoryManager.Instance.HoldItemOnCell(m_selectedCell);
 
                   ItemFeedbackData l_feedback = new ItemFeedbackData(EItemFeedbackType.TAKE_ITEM, PlayerInventoryManager.Instance.HeldItem.name, Vector3.zero);
 
                   ItemFeedbackManager.Instance.AddToWaitingFeedbackPool(l_feedback);
                }
+               else
+               {
+                  HayRollBehaviour[] l_lstPlayerlHayRoll = PlayerInventoryManager.Instance.HeldItem.GetComponentsInChildren<HayRollBehaviour>();
+                  HayRollBehaviour[] l_lstCellHayRoll = m_selectedCell.PlacedItem.GetComponentsInChildren<HayRollBehaviour>();
+
+                  if (l_lstCellHayRoll.Length > 0 && l_lstPlayerlHayRoll.Length + l_lstCellHayRoll.Length <= 3)
+                  {
+                     PlaceHeldItem();
+                  }
+               }
             }
 
             m_selectedCell = null;
          }
+      }
+
+      private void PlaceHeldItem(GridCellBehaviour p_cell = null)
+      {
+         PlayerInventoryManager.Instance.PlaceHeldItem(p_cell == null ? m_selectedCell : p_cell);
+
+         ItemFeedbackData l_feedback = new ItemFeedbackData(EItemFeedbackType.RELEASE_ITEM, "", Vector3.zero);
+
+         ItemFeedbackManager.Instance.AddToWaitingFeedbackPool(l_feedback);
       }
 
       private const int m_dGridSize = 8;
@@ -100,11 +115,33 @@ namespace BWW.Managers.Map
 
          if (PlayerInventoryManager.Instance.HeldItem == null)
          {
-            PlayerInventoryManager.Instance.HoldItem(p_selectedItem.GetComponentInParent<GridCellBehaviour>());
+            GridCellBehaviour l_cell = p_selectedItem.transform.parent.GetComponent<GridCellBehaviour>();
 
-            ItemFeedbackData l_feedback = new ItemFeedbackData(EItemFeedbackType.TAKE_ITEM, PlayerInventoryManager.Instance.HeldItem.name, Vector3.zero);
+            if(l_cell == null)
+            {
+               PlayerInventoryManager.Instance.HoldItem(p_selectedItem);
+            }
+            else
+            {
+               PlayerInventoryManager.Instance.HoldItemOnCell(l_cell);
 
-            ItemFeedbackManager.Instance.AddToWaitingFeedbackPool(l_feedback);
+               ItemFeedbackData l_feedback = new ItemFeedbackData(EItemFeedbackType.TAKE_ITEM, PlayerInventoryManager.Instance.HeldItem.name, Vector3.zero);
+
+               ItemFeedbackManager.Instance.AddToWaitingFeedbackPool(l_feedback);
+            }
+         }
+         else
+         {
+            HayRollBehaviour[] l_lstPlayerlHayRoll = PlayerInventoryManager.Instance.HeldItem.GetComponentsInChildren<HayRollBehaviour>();
+
+            GridCellBehaviour l_cell = p_selectedItem.GetComponentInParent<GridCellBehaviour>();
+
+            HayRollBehaviour[] l_lstCellHayRoll = l_cell.GetComponentsInChildren<HayRollBehaviour>();
+
+            if (l_lstCellHayRoll.Length > 0 && l_lstPlayerlHayRoll.Length + l_lstCellHayRoll.Length <= 3)
+            {
+               PlaceHeldItem(l_cell);
+            }
          }
       }
    }

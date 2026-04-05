@@ -1,6 +1,7 @@
 using BWW.Behaviours.Map;
 using BWW.Behaviours.Map.Items;
 using BWW.Managers.Map;
+using BWW.Managers.Player;
 using BWW.Utils;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,9 +16,16 @@ public class ItemPlacingUtility
 
          switch(p_sItemKey)
          {
-            default:
+            case "Bricks":
+            case "Wood":
 
                l_goPlacedItem = GetWoodOrBricksPart(p_cell, p_sItemKey);
+
+               break;
+
+            default:
+
+               l_goPlacedItem = GetHayRollStack(p_cell);
 
                break;
          }
@@ -178,5 +186,61 @@ public class ItemPlacingUtility
 
          return l_trfCurve.gameObject;
       }
+   }
+
+   private GameObject GetHayRollStack(GridCellBehaviour p_cell)
+   {
+      GameObject l_goHayRollStack = PlayerInventoryManager.Instance.HeldItem.gameObject;
+
+      HayRollBehaviour[] l_lstHayRolls = p_cell.GetComponentsInChildren<HayRollBehaviour>();
+
+      Transform l_trfParent;
+
+      Vector3 l_vecPosition;
+
+      Vector3 l_vecRotation;
+
+      switch (l_lstHayRolls.Length)
+      {
+         case 1:
+
+            l_trfParent = p_cell.transform.GetComponentInChildren<HayRollBehaviour>().transform;
+
+            l_vecPosition = new Vector3(0, 0.257f, 0);
+
+            l_vecRotation = Vector3.zero;
+
+            break;
+
+         case 2:
+
+            l_trfParent = p_cell.transform.GetComponentInChildren<HayRollBehaviour>().transform.GetChild(0);
+
+            l_vecPosition = new Vector3(0, 0.257f, 0);
+
+            l_vecRotation = Vector3.zero;
+
+            break;
+
+         default:
+
+            l_trfParent = p_cell.transform;
+
+            l_vecPosition = new Vector3 (0, 0, 0.0163f);
+
+            l_vecRotation = new Vector3 (-90, 0, 0);
+
+            break;
+      }
+
+      Transform l_trfStack = l_goHayRollStack.transform;
+
+      l_trfStack.SetParent(l_trfParent);
+
+      l_trfStack.localPosition = l_vecPosition;
+
+      l_trfStack.localRotation = Quaternion.Euler(l_vecRotation);
+
+      return l_goHayRollStack;
    }
 }

@@ -53,11 +53,18 @@ namespace BWW.Managers.Player
          m_heldItem = null;
       }
 
-      public void HoldItem(GridCellBehaviour p_cell)
+      public void HoldItemOnCell(GridCellBehaviour p_cell)
       {
          m_heldItem = p_cell.PlacedItem;
 
          p_cell.TakeItem();
+      }
+
+      public void HoldItem(MovableItem p_item)
+      {
+         m_heldItem = p_item;
+
+         p_item.gameObject.SetActive(false);
       }
 
       public void AddMaterial(string p_sMaterialKey, int l_dQuantity)
