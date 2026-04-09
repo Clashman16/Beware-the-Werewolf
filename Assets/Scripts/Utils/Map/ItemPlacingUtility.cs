@@ -193,7 +193,7 @@ namespace BWW.Utils.Map
       {
          GameObject l_goHayRollStack = PlayerInventoryManager.Instance.HeldItem.gameObject;
 
-         HayRollBehaviour[] l_lstHayRolls = p_cell.GetComponentsInChildren<HayRollBehaviour>();
+         int l_dHayRollStackCount = GetHayRollStackCountOnCell(p_cell);
 
          Transform l_trfParent;
 
@@ -201,7 +201,7 @@ namespace BWW.Utils.Map
 
          Vector3 l_vecRotation;
 
-         switch (l_lstHayRolls.Length)
+         switch (l_dHayRollStackCount)
          {
             case 1:
 
@@ -243,6 +243,44 @@ namespace BWW.Utils.Map
          l_trfStack.localRotation = Quaternion.Euler(l_vecRotation);
 
          return l_goHayRollStack;
+      }
+
+      public int GetHayRollStackCountOnCell(GridCellBehaviour p_cell)
+      {
+         HayRollBehaviour[] l_lstHayRolls = p_cell.GetComponentsInChildren<HayRollBehaviour>();
+
+         return l_lstHayRolls.Length;
+      }
+
+      public int GetHayRollStackCount(HayRollBehaviour p_hayRoll)
+      {
+         HayRollBehaviour[] l_lstHayRolls = p_hayRoll.GetComponentsInChildren<HayRollBehaviour>();
+
+         return l_lstHayRolls.Length;
+      }
+
+      public bool CanPlaceHayRollStackOnCell(GridCellBehaviour p_cell, int p_dStackCount)
+      {
+         Dictionary<int, GridCellBehaviour> l_lstNeighbors = new Dictionary<int, GridCellBehaviour>();
+
+         foreach (KeyValuePair<int, GridCellBehaviour> l_pair in p_cell.Neighbors)
+         {
+            l_lstNeighbors.Add(l_pair.Key, l_pair.Value);
+         }
+
+         l_lstNeighbors.Add(p_cell.CellIndex, p_cell);
+
+         foreach (GridCellBehaviour l_neighbor in l_lstNeighbors.Values)
+         {
+            int l_dHayRollStackCount = GetHayRollStackCountOnCell(l_neighbor);
+
+            if (p_dStackCount + l_dHayRollStackCount >= 3)
+            {
+               return false;
+            }
+         }
+
+         return true;
       }
    }
 }
