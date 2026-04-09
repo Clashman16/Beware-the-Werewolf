@@ -32,7 +32,13 @@ namespace BWW.Behaviours.Map
          get => m_lstNeighbors;
       }
 
-      private void Start()
+
+      /**private void Start()
+      {
+         Init();
+      }**/
+
+      public void Init()
       {
          m_button = GetComponent<Button>();
 
@@ -57,7 +63,7 @@ namespace BWW.Behaviours.Map
 
             Transform l_trfNeighbor = transform.parent.Find($"GridCell ({l_dNeighborIndex})");
 
-            if(l_trfNeighbor != null)
+            if (l_trfNeighbor != null)
             {
                m_lstNeighbors.Add(l_dNeighborIndex, l_trfNeighbor.GetComponent<GridCellBehaviour>());
             }
