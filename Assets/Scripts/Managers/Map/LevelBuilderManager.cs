@@ -1,4 +1,6 @@
 using BWW.Behaviours.Map;
+using BWW.Behaviours.Map.Items;
+using BWW.Managers.Player;
 using BWW.ScriptableObjects.Map;
 using BWW.Utils;
 using BWW.Utils.Map;
@@ -11,11 +13,20 @@ namespace BWW.Managers.Map
    {
       public LevelBuilderManager(ScriptableLevelConfiguration p_levelConfig)
       {
+         GridCellBehaviour[] l_lstCells = Object.FindObjectsByType<GridCellBehaviour>(FindObjectsInactive.Include);
+
+         foreach(GridCellBehaviour l_cell in l_lstCells)
+         {
+            l_cell.Init();
+         }
+
          BuildLevel(p_levelConfig);
       }
 
       public void BuildLevel(ScriptableLevelConfiguration p_levelConfig)
       {
+         PlaceHayRollStacks();
+
          List<int> l_lstEnabledTowers = EnableTowers(p_levelConfig.MainSpawnerCount);
 
          InitSwitchableParts(p_levelConfig.AllPossibleParts, l_lstEnabledTowers);
@@ -288,6 +299,20 @@ namespace BWW.Managers.Map
                   }
                }
             }
+         }
+      }
+
+      private void PlaceHayRollStacks()
+      {
+         HayRollBehaviour[] l_lstHayRolls = Object.FindObjectsByType<HayRollBehaviour>();
+
+         foreach (HayRollBehaviour l_hayRoll in l_lstHayRolls)
+         {
+            PlayerInventoryManager.Instance.HoldItem(l_hayRoll);
+
+            GridCellBehaviour l_cell = ItemPlacerManager.Instance.GetCellToPlaceHayRoll(l_hayRoll);
+
+            PlayerInventoryManager.Instance.PlaceHeldItem(l_cell);
          }
       }
    }
