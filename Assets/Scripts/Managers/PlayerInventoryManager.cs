@@ -98,9 +98,9 @@ namespace BWW.Managers.Player
             m_lstMaterialCount.Add(l_sKey, 0);
          }
 
-         AddMaterial("Bricks", 5);
+         AddMaterial("Wood", 5);
 
-         m_lstMaterialOrder.Add(0, "Bricks");
+         m_lstMaterialOrder.Add(0, "Wood");
 
          m_heldItem = null;
       }
