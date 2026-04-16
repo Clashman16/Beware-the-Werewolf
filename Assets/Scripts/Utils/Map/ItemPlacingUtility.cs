@@ -90,9 +90,9 @@ namespace BWW.Utils.Map
 
                   if (l_neighbor.PlacedItem != null && l_neighbor.PlacedItem.name == p_sItemKey)
                   {
-                     int l_dFirstPartRotationCount = (int)l_firstNeighbor.PlacedItem.transform.localEulerAngles.x / 90;
+                     int l_dFirstPartRotationCount = (int)l_firstNeighbor.transform.localEulerAngles.z / 90;
 
-                     int l_dScndPartRotationCount = (int)l_neighbor.PlacedItem.transform.localEulerAngles.x / 90;
+                     int l_dScndPartRotationCount = (int)l_neighbor.transform.localEulerAngles.z / 90;
 
                      if (l_dFirstPartRotationCount % 2 == 0 && l_dScndPartRotationCount % 2 != 0
                         || (l_dFirstPartRotationCount % 2 != 0 && l_dScndPartRotationCount % 2 == 0))
@@ -126,9 +126,9 @@ namespace BWW.Utils.Map
 
                   if (l_neighbor.PlacedItem != null && l_neighbor.PlacedItem.name == p_sItemKey)
                   {
-                     int l_dFirstPartRotationCount = (int)l_firstNeighbor.PlacedItem.transform.localEulerAngles.x / 90;
+                     int l_dFirstPartRotationCount = (int)l_firstNeighbor.transform.localEulerAngles.z / 90;
 
-                     int l_dScndPartRotationCount = (int)l_neighbor.PlacedItem.transform.localEulerAngles.x / 90;
+                     int l_dScndPartRotationCount = (int)l_neighbor.transform.localEulerAngles.z / 90;
 
                      if (l_dFirstPartRotationCount % 2 == 0 && l_dScndPartRotationCount % 2 != 0
                         || (l_dFirstPartRotationCount % 2 != 0 && l_dScndPartRotationCount % 2 == 0))
@@ -148,8 +148,6 @@ namespace BWW.Utils.Map
          }
          else
          {
-            Transform l_trfCurve = p_cell.transform.Find(p_sItemKey + "Curve");
-
             int l_dFirstModificator = l_firstNeighbor.CellIndex - p_cell.CellIndex;
 
             int l_dScndModificator = l_scndNeighbor.CellIndex - p_cell.CellIndex;
@@ -162,12 +160,12 @@ namespace BWW.Utils.Map
             {
                case -9:
 
-                  l_dAngle = -3;
+                  l_dAngle = -1;
 
                   break;
                case -7:
 
-                  l_dAngle = -2;
+                  l_dAngle = 2;
 
                   break;
                case 7:
@@ -178,14 +176,14 @@ namespace BWW.Utils.Map
 
                default:
 
-                  l_dAngle = -1;
+                  l_dAngle = 1;
 
                   break;
             }
 
-            l_trfCurve.RotateAround(l_trfCurve.position, Vector3.up, l_dAngle * 90);
+            p_cell.transform.RotateAround(p_cell.transform.position, Vector3.up, l_dAngle * 90);
 
-            return l_trfCurve.gameObject;
+            return p_cell.transform.Find(p_sItemKey + "Curve").gameObject;
          }
       }
 
