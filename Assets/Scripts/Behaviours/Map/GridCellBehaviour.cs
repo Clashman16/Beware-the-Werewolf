@@ -85,6 +85,8 @@ namespace BWW.Behaviours.Map
          ItemPlacerManager.Instance.TakeItem(m_placedItem.name, this);
 
          m_placedItem = null;
+
+         transform.localRotation = Quaternion.Euler(0, 0, 0);
       }
    }
 }
