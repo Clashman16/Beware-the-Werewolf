@@ -1,7 +1,9 @@
 using BWW.Behaviours.Map;
 using BWW.Behaviours.Map.Items;
 using BWW.Behaviours.UI;
-using BWW.Managers.Map;
+using BWW.Enums;
+using BWW.Managers.UI;
+using BWW.Utils.UI;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -69,7 +71,16 @@ namespace BWW.Managers.Player
 
       public void AddMaterial(string p_sMaterialKey, int l_dQuantity)
       {
+         bool l_bNoMaterial = m_lstMaterialCount[p_sMaterialKey] == 0;
+
          m_lstMaterialCount[p_sMaterialKey] += l_dQuantity;
+
+         if (l_bNoMaterial)
+         {
+            ItemFeedbackData l_feedback = new ItemFeedbackData(EItemFeedbackType.GET_MATERIAL, p_sMaterialKey, Vector3.zero);
+
+            ItemFeedbackManager.Instance.AddToWaitingFeedbackPool(l_feedback);
+         }
 
          GameObject.Find("ItemCounter").transform.Find(p_sMaterialKey).GetComponent<ItemCounterBehaviour>().UpdateCount(m_lstMaterialCount[p_sMaterialKey]);
       }
