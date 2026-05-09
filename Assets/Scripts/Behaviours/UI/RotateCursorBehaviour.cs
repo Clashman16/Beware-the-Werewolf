@@ -4,9 +4,15 @@ namespace BWW.Behaviours.UI
 {
    public class RotateCursorBehaviour : MonoBehaviour
    {
-      public void Init(Vector3 p_vecPosition, float p_fAngle)
+      private Transform m_targetTrf;
+
+      public void Init(Transform p_targetTrf, float p_fAngle)
       {
-         transform.position = p_vecPosition;
+         m_targetTrf = p_targetTrf;
+
+         transform.position = m_targetTrf.position;
+
+         transform.localRotation = Quaternion.identity;
 
          Rotate(p_fAngle);
       }
