@@ -4,7 +4,6 @@ using BWW.Enums;
 using BWW.Managers.Map;
 using BWW.Player;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace BWW.Behaviours.Player
 {
