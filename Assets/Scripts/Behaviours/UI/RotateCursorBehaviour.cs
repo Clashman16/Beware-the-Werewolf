@@ -21,5 +21,24 @@ namespace BWW.Behaviours.UI
       {
          transform.RotateAround(transform.position, Vector3.up, p_fAngle);
       }
+
+      public void Check()
+      {
+         m_targetTrf = null;
+
+         gameObject.SetActive(false);
+      }
+
+      public void RotateTarget(bool p_bClockwise)
+      {
+         int l_dAngle = 90;
+
+         if(!p_bClockwise)
+         {
+            l_dAngle *= -1;
+         }
+
+         m_targetTrf.RotateAround(m_targetTrf.position, Vector3.up, l_dAngle);
+      }
    }
 }
