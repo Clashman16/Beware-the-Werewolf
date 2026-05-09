@@ -11859,6 +11859,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: RotateCursor
       objectReference: {fileID: 0}
+    - target: {fileID: 6365942081551041184, guid: d466cc7f02f32844e93cabc76bfaabc8,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8918329054257306011, guid: d466cc7f02f32844e93cabc76bfaabc8,
         type: 3}
       propertyPath: m_Pivot.x
