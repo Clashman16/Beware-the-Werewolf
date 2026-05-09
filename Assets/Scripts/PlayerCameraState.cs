@@ -1,3 +1,4 @@
+using BWW.Behaviours.UI;
 using BWW.Enums;
 using UnityEngine;
 
@@ -27,6 +28,26 @@ namespace BWW.Player
       {
          get => m_eSimulatedControl;
          set => m_eSimulatedControl = value;
+      }
+
+      private RotateCursorBehaviour m_rotateCursor;
+
+      public RotateCursorBehaviour RotateCursor
+      {
+         get => m_rotateCursor;
+      }
+
+      public bool IsRotatingItem
+      {
+         get
+         {
+            if (m_rotateCursor == null)
+            {
+               m_rotateCursor = Object.FindAnyObjectByType<RotateCursorBehaviour>(FindObjectsInactive.Include);
+            }
+
+            return m_rotateCursor.gameObject.activeSelf;
+         }
       }
 
       public abstract void UpdateState();

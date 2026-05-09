@@ -75,6 +75,11 @@ namespace BWW.Behaviours.Player
                float l_fAngle = m_state.SimulatedControl == EControls.CAMERA_LEFT ? 1 : -1;
 
                transform.RotateAround(m_vecMovePivot, Vector3.up, l_fAngle);
+
+               if(m_state.IsRotatingItem)
+               {
+                  m_state.RotateCursor.Rotate(l_fAngle);
+               }
             }
          }
       }
