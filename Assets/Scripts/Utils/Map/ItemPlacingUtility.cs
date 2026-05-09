@@ -1,5 +1,7 @@
 using BWW.Behaviours.Map;
 using BWW.Behaviours.Map.Items;
+using BWW.Behaviours.Player;
+using BWW.Behaviours.UI;
 using BWW.Managers.Map;
 using BWW.Managers.Player;
 using System.Collections.Generic;
@@ -32,6 +34,22 @@ namespace BWW.Utils.Map
             }
 
             l_goPlacedItem.SetActive(true);
+
+            if(l_goPlacedItem.transform.parent.GetComponent<HayRollBehaviour>() == null)
+            {
+               LevelLauncherBehaviour l_levelLauncher = Object.FindAnyObjectByType<LevelLauncherBehaviour>();
+
+               if(l_levelLauncher.IsLevelBuilt)
+               {
+                  CameraBehaviour l_camera = PlayerCameraManager.Instance.BWWCamera;
+
+                  RotateCursorBehaviour l_rotateCursor = l_camera.State.RotateCursor;
+
+                  l_rotateCursor.gameObject.SetActive(true);
+
+                  l_rotateCursor.Init(p_cell.transform.position, l_camera.transform.rotation.eulerAngles.y);
+               }
+            }
 
             return l_goPlacedItem.GetComponent<MovableItem>();
          }

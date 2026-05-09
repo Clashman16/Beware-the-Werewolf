@@ -34,7 +34,15 @@ namespace BWW.Player
 
       public RotateCursorBehaviour RotateCursor
       {
-         get => m_rotateCursor;
+         get
+         {
+            if (m_rotateCursor == null)
+            {
+               m_rotateCursor = Object.FindAnyObjectByType<RotateCursorBehaviour>(FindObjectsInactive.Include);
+            }
+
+            return m_rotateCursor;
+         }
       }
 
       public bool IsRotatingItem

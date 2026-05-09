@@ -6,42 +6,53 @@ using UnityEngine;
 
 namespace BWW.Behaviours.Map
 {
-    public class LevelLauncherBehaviour : MonoBehaviour
-    {
-        [SerializeField] private ScriptableLevelDatabase m_database;
+   public class LevelLauncherBehaviour : MonoBehaviour
+   {
+      [SerializeField] private ScriptableLevelDatabase m_database;
 
-        private LevelBuilderManager m_levelBuilder;
+      private LevelBuilderManager m_levelBuilder;
 
-        private void Start()
-        {
-            LaunchCurrentLevel();
-        }
+      private bool m_bIsLevelBuilt;
 
-        public void LaunchCurrentLevel()
-        {
-            int l_dCurrentLevelId = SaveManager.Instance.Save.CurrentLevelId;
-
-            ScriptableLevelConfiguration l_levelConfig = m_database.GetDataById(l_dCurrentLevelId);
-
-            BuildCurrentLevel(l_levelConfig);
-
-            VillagersSpawnManager.Instance.IsReady = true;
-        }
-
-        private void BuildCurrentLevel(ScriptableLevelConfiguration p_levelConfig)
-        {
-            if(m_levelBuilder == null)
-            {
-                m_levelBuilder = new LevelBuilderManager(p_levelConfig);
-            }
-            else
-            {
-                m_levelBuilder.BuildLevel(p_levelConfig);
-            }
-
-            NavMeshManager.Instance.BuildSurface();
-
-            PlayerCameraManager l_camera = PlayerCameraManager.Instance; // Init the player camera
+      public bool IsLevelBuilt
+      {
+         get => m_bIsLevelBuilt;
       }
-    }
+
+      private void Start()
+      {
+         LaunchCurrentLevel();
+      }
+
+      public void LaunchCurrentLevel()
+      {
+         int l_dCurrentLevelId = SaveManager.Instance.Save.CurrentLevelId;
+
+         ScriptableLevelConfiguration l_levelConfig = m_database.GetDataById(l_dCurrentLevelId);
+
+         BuildCurrentLevel(l_levelConfig);
+
+         VillagersSpawnManager.Instance.IsReady = true;
+      }
+
+      private void BuildCurrentLevel(ScriptableLevelConfiguration p_levelConfig)
+      {
+         m_bIsLevelBuilt = false;
+
+         if (m_levelBuilder == null)
+         {
+            m_levelBuilder = new LevelBuilderManager(p_levelConfig);
+         }
+         else
+         {
+            m_levelBuilder.BuildLevel(p_levelConfig);
+         }
+
+         NavMeshManager.Instance.BuildSurface();
+
+         PlayerCameraManager l_camera = PlayerCameraManager.Instance; // Init the player camera
+
+         m_bIsLevelBuilt = true;
+      }
+   }
 }
