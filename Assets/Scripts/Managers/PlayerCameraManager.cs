@@ -21,6 +21,13 @@ namespace BWW.Managers.Player
          }
       }
 
+      private CameraBehaviour m_camera;
+
+      public CameraBehaviour BWWCamera
+      {
+         get => m_camera;
+      }
+
       private PlayerCameraManager()
       {
          CameraBehaviour l_camera = Camera.main.GetComponent<CameraBehaviour>();
@@ -37,6 +44,8 @@ namespace BWW.Managers.Player
 #elif UNITY_ANDROID || UNITY_IOS
          Debug.Log("android app");
 #endif
+
+         m_camera = l_camera;
       }
    }
 }

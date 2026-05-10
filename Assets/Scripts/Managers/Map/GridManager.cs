@@ -1,5 +1,6 @@
 using BWW.Behaviours.Map;
 using BWW.Behaviours.Map.Items;
+using BWW.Behaviours.Player;
 using BWW.Enums;
 using BWW.Managers.Player;
 using BWW.Managers.UI;
@@ -24,6 +25,16 @@ namespace BWW.Managers.Map
          }
       }
 
+      private bool CanPlaceItem
+      {
+         get
+         {
+            CameraBehaviour l_camera = PlayerCameraManager.Instance.BWWCamera;
+            
+            return !l_camera.State.IsRotatingItem;
+         }
+      }
+
       private bool m_bIgnoreNextClick;
 
       private GridCellBehaviour m_selectedCell;
@@ -42,42 +53,45 @@ namespace BWW.Managers.Map
 
             m_selectedCell = value;
 
-            if(m_selectedCell.PlacedItem == null)
+            if(CanPlaceItem)
             {
-               if (PlayerInventoryManager.Instance.HeldItem != null)
+               if (m_selectedCell.PlacedItem == null)
                {
-                  PlaceHeldItemOnCell();
-               }
-               else
-               {
-                  string l_sFirstMaterialKey = PlayerInventoryManager.Instance.MaterialOrder[0];
-
-                  if (PlayerInventoryManager.Instance.MaterialCount[l_sFirstMaterialKey] > 0)
-                  {
-                     PlayerInventoryManager.Instance.AddMaterial(l_sFirstMaterialKey, -1);
-
-                     NotifyGridUpdate(EItemFeedbackType.PLACE_ITEM, l_sFirstMaterialKey, m_selectedCell.transform.position, m_selectedCell);
-                  }
-               }
-            }
-            else
-            {
-               if(PlayerInventoryManager.Instance.HeldItem == null)
-               {
-                  TakeItemOnCell();
-               }
-               else
-               {
-                  HayRollBehaviour[] l_lstPlayerlHayRoll = PlayerInventoryManager.Instance.HeldItem.GetComponentsInChildren<HayRollBehaviour>();
-                  HayRollBehaviour[] l_lstCellHayRoll = m_selectedCell.PlacedItem.GetComponentsInChildren<HayRollBehaviour>();
-
-                  if (l_lstCellHayRoll.Length > 0 && l_lstPlayerlHayRoll.Length + l_lstCellHayRoll.Length <= 3)
+                  if (PlayerInventoryManager.Instance.HeldItem != null)
                   {
                      PlaceHeldItemOnCell();
                   }
+                  else
+                  {
+                     string l_sFirstMaterialKey = PlayerInventoryManager.Instance.MaterialOrder[0];
+
+                     if (PlayerInventoryManager.Instance.MaterialCount[l_sFirstMaterialKey] > 0)
+                     {
+                        PlayerInventoryManager.Instance.AddMaterial(l_sFirstMaterialKey, -1);
+
+                        NotifyGridUpdate(EItemFeedbackType.PLACE_ITEM, l_sFirstMaterialKey, m_selectedCell.transform.position, m_selectedCell);
+                     }
+                  }
+               }
+               else
+               {
+                  if (PlayerInventoryManager.Instance.HeldItem == null)
+                  {
+                     TakeItemOnCell();
+                  }
+                  else
+                  {
+                     HayRollBehaviour[] l_lstPlayerlHayRoll = PlayerInventoryManager.Instance.HeldItem.GetComponentsInChildren<HayRollBehaviour>();
+                     HayRollBehaviour[] l_lstCellHayRoll = m_selectedCell.PlacedItem.GetComponentsInChildren<HayRollBehaviour>();
+
+                     if (l_lstCellHayRoll.Length > 0 && l_lstPlayerlHayRoll.Length + l_lstCellHayRoll.Length <= 3)
+                     {
+                        PlaceHeldItemOnCell();
+                     }
+                  }
                }
             }
-
+           
             m_selectedCell = null;
          }
       }

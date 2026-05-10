@@ -46,7 +46,7 @@ namespace BWW.Behaviours.Characters
 
       private void Update()
       {
-         GateAnimationBehaviour[] l_lstAllGates = FindObjectsByType<GateAnimationBehaviour>();
+         GateAnimationBehaviour[] l_lstAllGates = FindObjectsByType<GateAnimationBehaviour>(FindObjectsSortMode.None);
 
          int l_dGateCount = 0;
 

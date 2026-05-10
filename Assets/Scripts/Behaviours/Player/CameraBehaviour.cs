@@ -1,10 +1,8 @@
-using BWW.Behaviours.Map;
 using BWW.Behaviours.Map.Items;
 using BWW.Enums;
 using BWW.Managers.Map;
 using BWW.Player;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace BWW.Behaviours.Player
 {
@@ -20,6 +18,7 @@ namespace BWW.Behaviours.Player
 
       public PlayerCameraState State
       {
+         get => m_state;
          set
          {
             m_state = value;
@@ -41,7 +40,7 @@ namespace BWW.Behaviours.Player
          {
             m_state.UpdateState();
 
-            if(m_state.IsClickDown())
+            if(m_state.IsClickDown() && !m_state.IsRotatingItem)
             {
                Ray l_ray = GetComponent<Camera>().ScreenPointToRay(m_state.GetPointerPosition());
 
@@ -76,6 +75,11 @@ namespace BWW.Behaviours.Player
                float l_fAngle = m_state.SimulatedControl == EControls.CAMERA_LEFT ? 1 : -1;
 
                transform.RotateAround(m_vecMovePivot, Vector3.up, l_fAngle);
+
+               if(m_state.IsRotatingItem)
+               {
+                  m_state.RotateCursor.Rotate(l_fAngle);
+               }
             }
          }
       }

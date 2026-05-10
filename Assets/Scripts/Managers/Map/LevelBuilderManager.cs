@@ -13,7 +13,7 @@ namespace BWW.Managers.Map
    {
       public LevelBuilderManager(ScriptableLevelConfiguration p_levelConfig)
       {
-         GridCellBehaviour[] l_lstCells = Object.FindObjectsByType<GridCellBehaviour>(FindObjectsInactive.Include);
+         GridCellBehaviour[] l_lstCells = Object.FindObjectsByType<GridCellBehaviour>(FindObjectsInactive.Include, FindObjectsSortMode.None);
 
          foreach(GridCellBehaviour l_cell in l_lstCells)
          {
@@ -36,7 +36,7 @@ namespace BWW.Managers.Map
 
       private List<int> EnableTowers(int p_mainSpawnerCount)
       {
-         TowerBehaviour[] l_lstSpawners = Object.FindObjectsByType<TowerBehaviour>(FindObjectsInactive.Include);
+         TowerBehaviour[] l_lstSpawners = Object.FindObjectsByType<TowerBehaviour>(FindObjectsInactive.Include, FindObjectsSortMode.None);
 
          int l_dTowerCount = l_lstSpawners.Length;
 
@@ -152,7 +152,7 @@ namespace BWW.Managers.Map
 
       private void InitSwitchableParts(List<SwitchablePartCount> p_lstSwitchablePartCount, List<int> p_lstEnabledTowers)
       {
-         SwitchablePartBehaviour[] l_lstSwitchableParts = Object.FindObjectsByType<SwitchablePartBehaviour>(FindObjectsInactive.Include);
+         SwitchablePartBehaviour[] l_lstSwitchableParts = Object.FindObjectsByType<SwitchablePartBehaviour>(FindObjectsInactive.Include, FindObjectsSortMode.None);
 
          int l_dSwitchablePartsCount = l_lstSwitchableParts.Length;
 
@@ -304,7 +304,7 @@ namespace BWW.Managers.Map
 
       private void PlaceHayRollStacks()
       {
-         HayRollBehaviour[] l_lstHayRolls = Object.FindObjectsByType<HayRollBehaviour>();
+         HayRollBehaviour[] l_lstHayRolls = Object.FindObjectsByType<HayRollBehaviour>(FindObjectsSortMode.None);
 
          foreach (HayRollBehaviour l_hayRoll in l_lstHayRolls)
          {

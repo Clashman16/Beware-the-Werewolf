@@ -1,6 +1,5 @@
 using BWW.Enums;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 namespace BWW.Player
 {

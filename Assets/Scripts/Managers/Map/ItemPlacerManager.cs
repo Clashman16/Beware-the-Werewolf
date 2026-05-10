@@ -38,7 +38,7 @@ namespace BWW.Managers.Map
             m_lstHayRollPossiblePlaces.Add(l_i, new List<GridCellBehaviour>());
          }
 
-         GridCellBehaviour[] l_lstCells = Object.FindObjectsByType<GridCellBehaviour>();
+         GridCellBehaviour[] l_lstCells = Object.FindObjectsByType<GridCellBehaviour>(FindObjectsSortMode.None);
 
          foreach (GridCellBehaviour l_cell in l_lstCells)
          {
