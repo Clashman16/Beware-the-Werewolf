@@ -2,6 +2,7 @@ using BWW.Behaviours.Map;
 using BWW.Behaviours.Map.Items;
 using BWW.Behaviours.UI;
 using BWW.Enums;
+using BWW.Managers.Map;
 using BWW.Managers.UI;
 using BWW.Utils.UI;
 using System.Collections.Generic;
@@ -65,6 +66,8 @@ namespace BWW.Managers.Player
       public void HoldItem(MovableItem p_item)
       {
          m_heldItem = p_item;
+
+         NavMeshManager.Instance.DisableObstacle(p_item.gameObject);
 
          p_item.gameObject.SetActive(false);
       }
