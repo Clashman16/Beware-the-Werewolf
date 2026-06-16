@@ -35,10 +35,10 @@ namespace BWW.Utils.Map
 
             l_goPlacedItem.SetActive(true);
 
-            if(l_goPlacedItem.transform.parent.GetComponent<HayRollBehaviour>() == null)
-            {
-               LevelLauncherBehaviour l_levelLauncher = Object.FindAnyObjectByType<LevelLauncherBehaviour>();
+            LevelLauncherBehaviour l_levelLauncher = Object.FindAnyObjectByType<LevelLauncherBehaviour>();
 
+            if (l_goPlacedItem.transform.parent.GetComponent<HayRollBehaviour>() == null)
+            {
                if(l_levelLauncher.IsLevelBuilt)
                {
                   CameraBehaviour l_camera = PlayerCameraManager.Instance.BWWCamera;
@@ -51,10 +51,17 @@ namespace BWW.Utils.Map
                }
             }
 
+            if(l_levelLauncher.IsLevelBuilt)
+            {
+               NavMeshManager.Instance.RaiseFlag(l_goPlacedItem);
+            }
+
             return l_goPlacedItem.GetComponent<MovableItem>();
          }
          else
          {
+            NavMeshManager.Instance.DisableObstacle(p_cell.PlacedItem.gameObject);
+
             p_cell.PlacedItem.gameObject.SetActive(false);
 
             return p_cell.PlacedItem;
