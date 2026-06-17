@@ -1,15 +1,13 @@
 using BWW.Behaviours.Map.Items;
+using BWW.Enums;
 using BWW.Managers.Map;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace BWW.Behaviours.Map
 {
    public class GridCellBehaviour : MonoBehaviour
    {
-      private Button m_button;
-
       private MovableItem m_placedItem;
 
       public MovableItem PlacedItem
@@ -32,6 +30,13 @@ namespace BWW.Behaviours.Map
          get => m_lstNeighbors;
       }
 
+        private EGridCellState m_eState;
+
+        public EGridCellState State
+        {
+            get => m_eState;
+            set => m_eState = value;
+        }
 
       /**private void Start()
       {
@@ -40,12 +45,7 @@ namespace BWW.Behaviours.Map
 
       public void Init()
       {
-         m_button = GetComponent<Button>();
-
-         m_button.onClick.AddListener(() =>
-         {
-            GridManager.Instance.SelectedCell = this;
-         });
+            m_eState = EGridCellState.NORMAL;
 
          m_lstNeighbors = new Dictionary<int, GridCellBehaviour>();
 
