@@ -73,7 +73,7 @@ namespace BWW.Behaviours.Player
                     {
                         Vector3 l_vecZoomDirection = transform.forward * (m_state.IsForwardZoom ? 1 : -1);
 
-                        transform.Translate(l_vecZoomDirection * Time.deltaTime * m_fSpeed, Space.World);
+                        transform.Translate(l_vecZoomDirection * Time.deltaTime * m_fSpeed/2, Space.World);
                     }
                 }
                 else
