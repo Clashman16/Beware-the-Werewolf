@@ -188,14 +188,16 @@ namespace BWW.Utils.Map
                         l_dAngle = -1;
 
                         break;
+
                     case -7:
 
-                        l_dAngle = 2;
+                        l_dAngle = p_sItemKey == "Bricks" ? 0 : 2;
 
                         break;
+
                     case 7:
 
-                        l_dAngle = 0;
+                        l_dAngle = p_sItemKey == "Bricks" ? 2 : 0;
 
                         break;
 
