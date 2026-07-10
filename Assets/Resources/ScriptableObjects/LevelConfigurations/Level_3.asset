@@ -22,3 +22,4 @@ MonoBehaviour:
     m_dCount: 1
   m_lstWaves:
   - {fileID: 11400000, guid: 0328da666a4d7644bbda383f5d54b617, type: 2}
+  m_dItemBricksCount: 7

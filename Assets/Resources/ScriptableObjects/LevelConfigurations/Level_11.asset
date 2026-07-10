@@ -22,3 +22,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 0328da666a4d7644bbda383f5d54b617, type: 2}
   - {fileID: 11400000, guid: d8e7b6e5f824a9b418c0742dc6b1d4cb, type: 2}
   - {fileID: 11400000, guid: a5af7878b1747b44bb9dac77b83a7f1a, type: 2}
+  m_dItemBricksCount: 4
