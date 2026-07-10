@@ -2,53 +2,46 @@ using UnityEngine;
 
 namespace BWW.Behaviours.UI
 {
-   public class RotateCursorBehaviour : MonoBehaviour
-   {
-      private Transform m_targetTrf;
+    public class RotateCursorBehaviour : MonoBehaviour
+    {
+        private Transform m_targetTrf;
 
         private RectTransform m_trf;
 
         private Camera m_camera;
 
-      public void Init(Transform p_targetTrf, float p_fAngle)
-      {
+        public void Init(Transform p_targetTrf)
+        {
             if (m_trf == null)
             {
                 m_trf = GetComponent<RectTransform>();
             }
 
-         m_targetTrf = p_targetTrf;
+            m_targetTrf = p_targetTrf;
 
             UpdateScreenPosition();
 
-            m_trf.localRotation = Quaternion.identity;
+            //m_trf.localRotation = Quaternion.identity;
+        }
 
-         Rotate(p_fAngle);
-      }
+        public void Check()
+        {
+            m_targetTrf = null;
 
-      public void Rotate(float p_fAngle)
-      {
-            transform.RotateAround(transform.position, Vector3.forward, p_fAngle);
-      }
+            gameObject.SetActive(false);
+        }
 
-      public void Check()
-      {
-         m_targetTrf = null;
+        public void RotateTarget(bool p_bClockwise)
+        {
+            int l_dAngle = 90;
 
-         gameObject.SetActive(false);
-      }
+            if (!p_bClockwise)
+            {
+                l_dAngle *= -1;
+            }
 
-      public void RotateTarget(bool p_bClockwise)
-      {
-         int l_dAngle = 90;
-
-         if(!p_bClockwise)
-         {
-            l_dAngle *= -1;
-         }
-
-         m_targetTrf.RotateAround(m_targetTrf.position, Vector3.up, l_dAngle);
-      }
+            m_targetTrf.RotateAround(m_targetTrf.position, Vector3.up, l_dAngle);
+        }
 
         private void LateUpdate()
         {
@@ -69,5 +62,5 @@ namespace BWW.Behaviours.UI
 
             m_trf.position = l_vecScreenPos;
         }
-   }
+    }
 }

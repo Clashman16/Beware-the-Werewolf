@@ -47,7 +47,7 @@ namespace BWW.Utils.Map
 
                         l_rotateCursor.gameObject.SetActive(true);
 
-                        l_rotateCursor.Init(p_cell.transform, l_camera.transform.rotation.eulerAngles.y);
+                        l_rotateCursor.Init(p_cell.transform);
                     }
                 }
 
