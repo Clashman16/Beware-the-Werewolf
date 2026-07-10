@@ -28,7 +28,7 @@ namespace BWW.Behaviours.UI
 
       public void Rotate(float p_fAngle)
       {
-         transform.RotateAround(transform.position, Vector3.up, p_fAngle);
+            transform.RotateAround(transform.position, Vector3.forward, p_fAngle);
       }
 
       public void Check()
