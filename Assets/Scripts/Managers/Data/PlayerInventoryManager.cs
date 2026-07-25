@@ -94,12 +94,16 @@ namespace BWW.Managers.Player
                 m_lstMaterialOrder.Add(p_sMaterialKey);
             }
 
-            GameObject.Find("ItemCounter").transform.Find(p_sMaterialKey).GetComponent<ItemCounterBehaviour>().UpdateCount(m_lstMaterialCount[p_sMaterialKey]);
-
             if(m_lstMaterialCount[p_sMaterialKey] == 0)
             {
                 m_lstMaterialOrder.Remove(p_sMaterialKey);
             }
+
+            Transform l_trfItemCounter = GameObject.Find("ItemCounter").transform.Find(p_sMaterialKey);
+
+            l_trfItemCounter.GetComponent<ItemCounterBehaviour>().UpdateCount(m_lstMaterialCount[p_sMaterialKey]);
+
+            l_trfItemCounter.SetSiblingIndex(m_lstMaterialOrder.IndexOf(p_sMaterialKey));
         }
 
         private PlayerInventoryManager()
