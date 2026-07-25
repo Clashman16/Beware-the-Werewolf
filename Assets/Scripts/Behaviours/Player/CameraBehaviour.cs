@@ -14,11 +14,11 @@ namespace BWW.Behaviours.Player
 
         private float[] m_lstZoomLimits;
 
-        PlayerCameraState m_state;
+        private PlayerCameraState m_state;
 
         [SerializeField] private float m_fSpeed = 50f;
 
-        Camera m_camera;
+        private Camera m_camera;
 
         public PlayerCameraState State
         {
