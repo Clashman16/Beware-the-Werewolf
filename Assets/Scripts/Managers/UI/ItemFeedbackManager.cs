@@ -1,7 +1,6 @@
 using BWW.Behaviours.UI;
 using BWW.Enums;
 using BWW.Utils.UI;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace BWW.Managers.UI
@@ -42,6 +41,7 @@ namespace BWW.Managers.UI
          switch(p_data.Type)
          {
             case EItemFeedbackType.PLACE_ITEM:
+            case EItemFeedbackType.TAKE_MATERIAL:
 
                m_placeItemFeedbackLauncher.HandleFeedback(p_data);
 
@@ -65,10 +65,6 @@ namespace BWW.Managers.UI
             case EItemFeedbackType.RELEASE_ITEM:
 
                m_heldItemFeedback.gameObject.SetActive(false);
-
-               break;
-
-            default:
 
                break;
          }
