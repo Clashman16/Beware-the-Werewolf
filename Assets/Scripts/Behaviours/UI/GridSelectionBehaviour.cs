@@ -21,7 +21,7 @@ namespace BWW.Behaviours.UI
 
         private void Start()
         {
-            m_camera = Camera.main;
+            m_camera = PlayerCameraManager.Instance.BWWCamera.UnityCamera;
         }
 
         private void Update()

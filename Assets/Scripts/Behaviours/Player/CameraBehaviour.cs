@@ -10,15 +10,13 @@ namespace BWW.Behaviours.Player
     {
         [SerializeField] private string[] m_lstItemSelectionMasks;
 
+        [SerializeField] private float m_fSpeed = 50f;
+
         private Vector3 m_vecMovePivot;
 
         private float[] m_lstZoomLimits;
 
         private PlayerCameraState m_state;
-
-        [SerializeField] private float m_fSpeed = 50f;
-
-        private Camera m_camera;
 
         public PlayerCameraState State
         {
@@ -29,6 +27,13 @@ namespace BWW.Behaviours.Player
 
                 m_state.IsMoving = false;
             }
+        }
+
+        private Camera m_camera;
+
+        public Camera UnityCamera
+        {
+            get => m_camera;
         }
 
         private void Start()
@@ -46,15 +51,15 @@ namespace BWW.Behaviours.Player
             {
                 m_state.UpdateState();
 
-            if(m_state.IsClickDown() && !m_state.IsRotatingItem)
+                if (m_state.IsClickDown() && !m_state.IsRotatingItem)
                 {
                     Ray l_ray = m_camera.ScreenPointToRay(m_state.GetPointerPosition());
 
-                    foreach(string l_sMask in m_lstItemSelectionMasks)
+                    foreach (string l_sMask in m_lstItemSelectionMasks)
                     {
                         if (Physics.Raycast(l_ray, out RaycastHit l_hit, 100f, LayerMask.GetMask(l_sMask)))
                         {
-                            if(l_sMask == "MovableItem")
+                            if (l_sMask == "MovableItem")
                             {
                                 new ItemSelectionMovable().HandleItemSelection(l_hit.collider);
                             }
@@ -67,9 +72,9 @@ namespace BWW.Behaviours.Player
                 }
             }
 
-         if(m_state.IsMoving)
+            if (m_state.IsMoving)
             {
-            if(m_state.SimulatedControl == EControls.ZOOM)
+                if (m_state.SimulatedControl == EControls.ZOOM)
                 {
                     float l_fCurrentPosition = transform.position.y;
 
@@ -78,7 +83,7 @@ namespace BWW.Behaviours.Player
                     {
                         Vector3 l_vecZoomDirection = transform.forward * (m_state.IsForwardZoom ? 1 : -1);
 
-                        transform.Translate(l_vecZoomDirection * Time.deltaTime * m_fSpeed/2, Space.World);
+                        transform.Translate(l_vecZoomDirection * Time.deltaTime * m_fSpeed / 2, Space.World);
                     }
                 }
                 else

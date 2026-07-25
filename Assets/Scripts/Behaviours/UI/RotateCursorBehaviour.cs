@@ -1,3 +1,4 @@
+using BWW.Managers.Player;
 using UnityEngine;
 
 namespace BWW.Behaviours.UI
@@ -55,7 +56,7 @@ namespace BWW.Behaviours.UI
         {
             if(m_camera == null)
             {
-                m_camera = Camera.main;
+                m_camera = PlayerCameraManager.Instance.BWWCamera.UnityCamera;
             }
 
             Vector3 l_vecScreenPos = m_camera.WorldToScreenPoint(m_targetTrf.position);
