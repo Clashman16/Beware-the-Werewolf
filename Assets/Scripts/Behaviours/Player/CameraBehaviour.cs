@@ -1,14 +1,14 @@
-using BWW.Behaviours.Map.Items;
 using BWW.Enums;
 using BWW.Managers.Map;
 using BWW.Player;
+using BWW.Utils.UI;
 using UnityEngine;
 
 namespace BWW.Behaviours.Player
 {
     public class CameraBehaviour : MonoBehaviour
     {
-        private const string m_sItemSelectionMask = "MovableItem";
+        [SerializeField] private string[] m_lstItemSelectionMasks;
 
         private Vector3 m_vecMovePivot;
 
@@ -50,13 +50,18 @@ namespace BWW.Behaviours.Player
                 {
                     Ray l_ray = m_camera.ScreenPointToRay(m_state.GetPointerPosition());
 
-                    if (Physics.Raycast(l_ray, out RaycastHit l_hit, 100f, LayerMask.GetMask(m_sItemSelectionMask)))
+                    foreach(string l_sMask in m_lstItemSelectionMasks)
                     {
-                        MovableItem l_item = l_hit.collider.GetComponent<MovableItem>();
-
-                        if (l_item != null)
+                        if (Physics.Raycast(l_ray, out RaycastHit l_hit, 100f, LayerMask.GetMask(l_sMask)))
                         {
-                            GridManager.Instance.SelectItemOnGrid(l_item);
+                            if(l_sMask == "MovableItem")
+                            {
+                                new ItemSelectionMovable().HandleItemSelection(l_hit.collider);
+                            }
+                            else
+                            {
+                                new ItemSelectionResource().HandleItemSelection(l_hit.collider);
+                            }
                         }
                     }
                 }

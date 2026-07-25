@@ -2294,6 +2294,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf9997469f023e3438fa2f14cbdb0335, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BWW.Behaviours.Player.CameraBehaviour
+  m_lstItemSelectionMasks:
+  - MovableItem
+  - ResourceItem
   m_fSpeed: 100
 --- !u!1001 &321607465
 PrefabInstance:
