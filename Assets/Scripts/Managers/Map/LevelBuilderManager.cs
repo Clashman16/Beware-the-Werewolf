@@ -46,118 +46,67 @@ namespace BWW.Managers.Map
 
             bool l_bUseAscendingOrder = MathUtils.HeadsOrTails();
 
+            int l_dStartIndex = l_bUseAscendingOrder ? 0 : l_dTowerCount - 1;
+
+            int l_dIncrementValue = l_bUseAscendingOrder ? 1 : -1;
+
+            int l_dLoopStopIndex = l_bUseAscendingOrder ? l_dTowerCount : -1;
+
             List<int> l_lstEnabledSpawners = new List<int>();
 
             int l_dMainSpawnerCount = p_levelConfig.MainSpawnerCount;
 
             l_itemBricksUtility = new ItemBricksUtility(p_levelConfig.BricksCount, l_lstTowers.Length);
 
-            if (l_bUseAscendingOrder)
+            for (; l_dStartIndex != l_dLoopStopIndex; l_dStartIndex += l_dIncrementValue)
             {
-                for (int l_i = 0; l_i < l_dTowerCount; l_i++)
+                TowerBehaviour l_tower = l_lstTowers[l_dStartIndex];
+
+                EnableBricksOnWalls(l_tower);
+
+                if (l_dMainSpawnerCount == l_dTowerCount)
                 {
-                    TowerBehaviour l_tower = l_lstTowers[l_i];
-
-                    EnableBricksOnWalls(l_tower);
-
-                    if (l_dMainSpawnerCount == l_dTowerCount)
+                    l_tower.enabled = true;
+                }
+                else
+                {
+                    if (l_bUseMutltipleOfTwo && l_dStartIndex % 2 == 0 && l_dMainSpawnerCount > 0)
                     {
                         l_tower.enabled = true;
+
+                        l_dMainSpawnerCount -= 1;
+                    }
+                    else if (!l_bUseMutltipleOfTwo && l_dStartIndex % 2 != 0 && l_dMainSpawnerCount > 0)
+                    {
+                        l_tower.enabled = true;
+
+                        l_dMainSpawnerCount -= 1;
                     }
                     else
                     {
-                        if (l_bUseMutltipleOfTwo && l_i % 2 == 0 && l_dMainSpawnerCount > 0)
+                        if (l_dMainSpawnerCount == l_dTowerCount - 1)
                         {
-                            l_tower.enabled = true;
+                            l_tower.enabled = MathUtils.HeadsOrTails();
 
-                            l_dMainSpawnerCount -= 1;
+                            if (l_tower.enabled == true)
+                            {
+                                l_dMainSpawnerCount -= 1;
+                            }
                         }
-                        else if (!l_bUseMutltipleOfTwo && l_i % 2 != 0 && l_dMainSpawnerCount > 0)
+                        else if (l_dMainSpawnerCount == 1)
                         {
                             l_tower.enabled = true;
-
-                            l_dMainSpawnerCount -= 1;
                         }
                         else
                         {
-                            if (l_dMainSpawnerCount == l_dTowerCount - 1)
-                            {
-                                l_tower.enabled = MathUtils.HeadsOrTails();
-
-                                if (l_tower.enabled == true)
-                                {
-                                    l_dMainSpawnerCount -= 1;
-                                }
-                            }
-                            else if (l_dMainSpawnerCount == 1)
-                            {
-                                l_tower.enabled = true;
-                            }
-                            else
-                            {
-                                l_tower.enabled = false;
-                            }
+                            l_tower.enabled = false;
                         }
-                    }
-
-                    if (l_tower.enabled)
-                    {
-                        l_lstEnabledSpawners.Add(l_tower.SpawnerId);
                     }
                 }
-            }
-            else
-            {
-                for (int l_i = l_dTowerCount - 1; l_i >= 0; l_i--)
+
+                if (l_tower.enabled)
                 {
-                    TowerBehaviour l_tower = l_lstTowers[l_i];
-
-                    EnableBricksOnWalls(l_tower);
-
-                    if (l_dMainSpawnerCount == l_dTowerCount)
-                    {
-                        l_tower.enabled = true;
-                    }
-                    else
-                    {
-                        if (l_bUseMutltipleOfTwo && l_i % 2 == 0 && l_dMainSpawnerCount > 0)
-                        {
-                            l_tower.enabled = true;
-
-                            l_dMainSpawnerCount -= 1;
-                        }
-                        else if (!l_bUseMutltipleOfTwo && l_i % 2 != 0 && l_dMainSpawnerCount > 0)
-                        {
-                            l_tower.enabled = true;
-
-                            l_dMainSpawnerCount -= 1;
-                        }
-                        else
-                        {
-                            if (l_dMainSpawnerCount == l_dTowerCount - 1)
-                            {
-                                l_tower.enabled = MathUtils.HeadsOrTails();
-
-                                if (l_tower.enabled == true)
-                                {
-                                    l_dMainSpawnerCount -= 1;
-                                }
-                            }
-                            else if (l_dMainSpawnerCount == 1)
-                            {
-                                l_tower.enabled = true;
-                            }
-                            else
-                            {
-                                l_tower.enabled = false;
-                            }
-                        }
-                    }
-
-                    if (l_tower.enabled)
-                    {
-                        l_lstEnabledSpawners.Add(l_lstTowers[l_i].SpawnerId);
-                    }
+                    l_lstEnabledSpawners.Add(l_tower.SpawnerId);
                 }
             }
 
@@ -186,142 +135,76 @@ namespace BWW.Managers.Map
 
             bool l_bUseAscendingOrder = MathUtils.HeadsOrTails();
 
+            int l_dStartIndex = l_bUseAscendingOrder ? 0 : l_dSwitchablePartsCount - 1;
+
+            int l_dIncrementValue = l_bUseAscendingOrder ? 1 : -1;
+
+            int l_dLoopStopIndex = l_bUseAscendingOrder ? l_dSwitchablePartsCount : -1;
+
             SwitchablePartUtility l_utility = null;
 
-            if (l_bUseAscendingOrder)
+            for (; l_dStartIndex != l_dLoopStopIndex; l_dStartIndex += l_dIncrementValue)
             {
-                for (int l_i = 0; l_i < l_dSwitchablePartsCount; l_i++)
+                SwitchablePartBehaviour l_switchablePart = l_lstSwitchableParts[l_dStartIndex];
+
+                if (l_utility == null)
                 {
-                    SwitchablePartBehaviour l_switchablePart = l_lstSwitchableParts[l_i];
-
-                    if (l_utility == null)
-                    {
-                        l_utility = new SwitchablePartUtility(l_switchablePart, p_lstSwitchablePartCount);
-                    }
-                    else
-                    {
-                        l_utility.SwitchablePart = l_switchablePart;
-                    }
-
-                    bool l_bHasSwitched = false;
-
-                    if (l_i == l_dSwitchablePartsCount - 1)
-                    {
-                        l_bHasSwitched = l_utility.SwitchPartToStairs(true);
-                    }
-
-                    if (!l_bHasSwitched)
-                    {
-                        if (l_bUseMutltipleOfTwo && l_i % 2 == 0)
-                        {
-                            bool l_bCloseToSpawner = l_switchablePart.IsCloseToSpawner(p_lstEnabledTowers);
-
-                            if (l_bCloseToSpawner)
-                            {
-                                l_bHasSwitched = l_utility.SwitchPartToStairs();
-                            }
-
-                            if (!l_bHasSwitched)
-                            {
-                                l_utility.SwitchPartToRandom(l_bCloseToSpawner);
-                            }
-                        }
-                        else if (!l_bUseMutltipleOfTwo && l_i % 2 != 0)
-                        {
-                            bool l_bCloseToSpawner = l_switchablePart.IsCloseToSpawner(p_lstEnabledTowers);
-
-                            if (l_bCloseToSpawner)
-                            {
-                                l_bHasSwitched = l_utility.SwitchPartToStairs();
-                            }
-
-                            if (!l_bHasSwitched)
-                            {
-                                l_utility.SwitchPartToRandom(l_bCloseToSpawner);
-                            }
-                        }
-                        else
-                        {
-                            bool l_bCloseToSpawner = l_switchablePart.IsCloseToSpawner(p_lstEnabledTowers);
-
-                            if (l_bCloseToSpawner)
-                            {
-                                l_bHasSwitched = l_utility.SwitchPartToStairs();
-                            }
-
-                            if (!l_bHasSwitched)
-                            {
-                                l_utility.SwitchPartToRandom(l_bCloseToSpawner);
-                            }
-                        }
-                    }
+                    l_utility = new SwitchablePartUtility(l_switchablePart, p_lstSwitchablePartCount);
                 }
-            }
-            else
-            {
-                for (int l_i = l_dSwitchablePartsCount - 1; l_i >= 0; l_i--)
+                else
                 {
-                    SwitchablePartBehaviour l_switchablePart = l_lstSwitchableParts[l_i];
+                    l_utility.SwitchablePart = l_switchablePart;
+                }
 
-                    if (l_utility == null)
+                bool l_bHasSwitched = false;
+
+                if (l_dStartIndex == l_dSwitchablePartsCount - 1)
+                {
+                    l_bHasSwitched = l_utility.SwitchPartToStairs(true);
+                }
+
+                if (!l_bHasSwitched)
+                {
+                    if (l_bUseMutltipleOfTwo && l_dStartIndex % 2 == 0)
                     {
-                        l_utility = new SwitchablePartUtility(l_switchablePart, p_lstSwitchablePartCount);
+                        bool l_bCloseToSpawner = l_switchablePart.IsCloseToSpawner(p_lstEnabledTowers);
+
+                        if (l_bCloseToSpawner)
+                        {
+                            l_bHasSwitched = l_utility.SwitchPartToStairs();
+                        }
+
+                        if (!l_bHasSwitched)
+                        {
+                            l_utility.SwitchPartToRandom(l_bCloseToSpawner);
+                        }
+                    }
+                    else if (!l_bUseMutltipleOfTwo && l_dStartIndex % 2 != 0)
+                    {
+                        bool l_bCloseToSpawner = l_switchablePart.IsCloseToSpawner(p_lstEnabledTowers);
+
+                        if (l_bCloseToSpawner)
+                        {
+                            l_bHasSwitched = l_utility.SwitchPartToStairs();
+                        }
+
+                        if (!l_bHasSwitched)
+                        {
+                            l_utility.SwitchPartToRandom(l_bCloseToSpawner);
+                        }
                     }
                     else
                     {
-                        l_utility.SwitchablePart = l_switchablePart;
-                    }
+                        bool l_bCloseToSpawner = l_switchablePart.IsCloseToSpawner(p_lstEnabledTowers);
 
-                    bool l_bHasSwitched = false;
-
-                    if (l_i == 0)
-                    {
-                        l_bHasSwitched = l_utility.SwitchPartToStairs(true);
-                    }
-
-                    if (!l_bHasSwitched)
-                    {
-                        if (l_bUseMutltipleOfTwo && l_i % 2 == 0)
+                        if (l_bCloseToSpawner)
                         {
-                            bool l_bCloseToSpawner = l_switchablePart.IsCloseToSpawner(p_lstEnabledTowers);
-
-                            if (l_bCloseToSpawner)
-                            {
-                                l_bHasSwitched = l_utility.SwitchPartToStairs();
-                            }
-
-                            if (!l_bHasSwitched)
-                            {
-                                l_utility.SwitchPartToRandom(l_bCloseToSpawner);
-                            }
+                            l_bHasSwitched = l_utility.SwitchPartToStairs();
                         }
-                        else if (!l_bUseMutltipleOfTwo && l_i % 2 != 0)
+
+                        if (!l_bHasSwitched)
                         {
-                            bool l_bCloseToSpawner = l_switchablePart.IsCloseToSpawner(p_lstEnabledTowers);
-
-                            if (l_bCloseToSpawner)
-                            {
-                                l_bHasSwitched = l_utility.SwitchPartToStairs();
-                            }
-
-                            if (!l_bHasSwitched)
-                            {
-                                l_utility.SwitchPartToRandom(l_bCloseToSpawner);
-                            }
-                        }
-                        else
-                        {
-                            bool l_bCloseToSpawner = l_switchablePart.IsCloseToSpawner(p_lstEnabledTowers);
-
-                            if (l_bCloseToSpawner)
-                            {
-                                l_bHasSwitched = l_utility.SwitchPartToStairs();
-                            }
-
-                            if (!l_bHasSwitched)
-                            {
-                                l_utility.SwitchPartToRandom(l_bCloseToSpawner);
-                            }
+                            l_utility.SwitchPartToRandom(l_bCloseToSpawner);
                         }
                     }
                 }
