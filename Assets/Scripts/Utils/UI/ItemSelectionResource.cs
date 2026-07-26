@@ -15,6 +15,8 @@ public class ItemSelectionResource : IItemSelection
             ItemFeedbackData l_feedback = new ItemFeedbackData(EItemFeedbackType.TAKE_MATERIAL, l_item.ID, l_item.transform.position);
 
             ItemFeedbackManager.Instance.AddToWaitingFeedbackPool(l_feedback);
+
+            l_item.gameObject.SetActive(false);
         }
     }
 }
