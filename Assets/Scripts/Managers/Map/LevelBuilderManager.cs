@@ -9,311 +9,220 @@ using UnityEngine;
 
 namespace BWW.Managers.Map
 {
-   public class LevelBuilderManager
-   {
-      public LevelBuilderManager(ScriptableLevelConfiguration p_levelConfig)
-      {
-         GridCellBehaviour[] l_lstCells = Object.FindObjectsByType<GridCellBehaviour>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+    public class LevelBuilderManager
+    {
+        private ItemBricksUtility l_itemBricksUtility;
 
-         foreach(GridCellBehaviour l_cell in l_lstCells)
-         {
-            l_cell.Init();
-         }
+        public LevelBuilderManager(ScriptableLevelConfiguration p_levelConfig)
+        {
+            GridCellBehaviour[] l_lstCells = Object.FindObjectsByType<GridCellBehaviour>(FindObjectsInactive.Include, FindObjectsSortMode.None);
 
-         BuildLevel(p_levelConfig);
-      }
-
-      public void BuildLevel(ScriptableLevelConfiguration p_levelConfig)
-      {
-         PlaceHayRollStacks();
-
-         List<int> l_lstEnabledTowers = EnableTowers(p_levelConfig.MainSpawnerCount);
-
-         InitSwitchableParts(p_levelConfig.AllPossibleParts, l_lstEnabledTowers);
-
-         VillagersSpawnManager.Instance.Init(l_lstEnabledTowers, p_levelConfig.AllWaves);
-      }
-
-      private List<int> EnableTowers(int p_mainSpawnerCount)
-      {
-         TowerBehaviour[] l_lstSpawners = Object.FindObjectsByType<TowerBehaviour>(FindObjectsInactive.Include, FindObjectsSortMode.None);
-
-         int l_dTowerCount = l_lstSpawners.Length;
-
-         bool l_bUseMutltipleOfTwo = MathUtils.HeadsOrTails();
-
-         bool l_bUseAscendingOrder = MathUtils.HeadsOrTails();
-
-         List<int> l_lstEnabledSpawners = new List<int>();
-
-         if (l_bUseAscendingOrder)
-         {
-            for (int l_i = 0; l_i < l_dTowerCount; l_i++)
+            foreach (GridCellBehaviour l_cell in l_lstCells)
             {
-               if (p_mainSpawnerCount == l_dTowerCount)
-               {
-                  l_lstSpawners[l_i].enabled = true;
-               }
-               else
-               {
-                  if (l_bUseMutltipleOfTwo && l_i % 2 == 0 && p_mainSpawnerCount > 0)
-                  {
-                     l_lstSpawners[l_i].enabled = true;
+                l_cell.Init();
+            }
 
-                     p_mainSpawnerCount -= 1;
-                  }
-                  else if (!l_bUseMutltipleOfTwo && l_i % 2 != 0 && p_mainSpawnerCount > 0)
-                  {
-                     l_lstSpawners[l_i].enabled = true;
+            BuildLevel(p_levelConfig);
+        }
 
-                     p_mainSpawnerCount -= 1;
-                  }
-                  else
-                  {
-                     if (p_mainSpawnerCount == l_dTowerCount - 1)
-                     {
-                        l_lstSpawners[l_i].enabled = MathUtils.HeadsOrTails();
+        public void BuildLevel(ScriptableLevelConfiguration p_levelConfig)
+        {
+            PlaceHayRollStacks();
 
-                        if (l_lstSpawners[l_i].enabled == true)
+            List<int> l_lstEnabledTowers = EnableTowers(p_levelConfig);
+
+            InitSwitchableParts(p_levelConfig.AllPossibleParts, l_lstEnabledTowers);
+
+            VillagersSpawnManager.Instance.Init(l_lstEnabledTowers, p_levelConfig.AllWaves);
+        }
+
+        private List<int> EnableTowers(ScriptableLevelConfiguration p_levelConfig)
+        {
+            TowerBehaviour[] l_lstTowers = Object.FindObjectsByType<TowerBehaviour>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+
+            int l_dTowerCount = l_lstTowers.Length;
+
+            bool l_bUseMutltipleOfTwo = MathUtils.HeadsOrTails();
+
+            bool l_bUseAscendingOrder = MathUtils.HeadsOrTails();
+
+            int l_dStartIndex = l_bUseAscendingOrder ? 0 : l_dTowerCount - 1;
+
+            int l_dIncrementValue = l_bUseAscendingOrder ? 1 : -1;
+
+            int l_dLoopStopIndex = l_bUseAscendingOrder ? l_dTowerCount : -1;
+
+            List<int> l_lstEnabledSpawners = new List<int>();
+
+            int l_dMainSpawnerCount = p_levelConfig.MainSpawnerCount;
+
+            l_itemBricksUtility = new ItemBricksUtility(p_levelConfig.BricksCount, l_lstTowers.Length);
+
+            for (; l_dStartIndex != l_dLoopStopIndex; l_dStartIndex += l_dIncrementValue)
+            {
+                TowerBehaviour l_tower = l_lstTowers[l_dStartIndex];
+
+                EnableBricksOnWalls(l_tower);
+
+                if (l_dMainSpawnerCount == l_dTowerCount)
+                {
+                    l_tower.enabled = true;
+                }
+                else
+                {
+                    if (l_bUseMutltipleOfTwo && l_dStartIndex % 2 == 0 && l_dMainSpawnerCount > 0)
+                    {
+                        l_tower.enabled = true;
+
+                        l_dMainSpawnerCount -= 1;
+                    }
+                    else if (!l_bUseMutltipleOfTwo && l_dStartIndex % 2 != 0 && l_dMainSpawnerCount > 0)
+                    {
+                        l_tower.enabled = true;
+
+                        l_dMainSpawnerCount -= 1;
+                    }
+                    else
+                    {
+                        if (l_dMainSpawnerCount == l_dTowerCount - 1)
                         {
-                           p_mainSpawnerCount -= 1;
+                            l_tower.enabled = MathUtils.HeadsOrTails();
+
+                            if (l_tower.enabled == true)
+                            {
+                                l_dMainSpawnerCount -= 1;
+                            }
                         }
-                     }
-                     else if (p_mainSpawnerCount == 1)
-                     {
-                        l_lstSpawners[l_i].enabled = true;
-                     }
-                     else
-                     {
-                        l_lstSpawners[l_i].enabled = false;
-                     }
-                  }
-               }
-
-               if (l_lstSpawners[l_i].enabled)
-               {
-                  l_lstEnabledSpawners.Add(l_lstSpawners[l_i].SpawnerId);
-               }
-            }
-         }
-         else
-         {
-            for (int l_i = l_dTowerCount - 1; l_i >= 0; l_i--)
-            {
-               if (p_mainSpawnerCount == l_dTowerCount)
-               {
-                  l_lstSpawners[l_i].enabled = true;
-               }
-               else
-               {
-                  if (l_bUseMutltipleOfTwo && l_i % 2 == 0 && p_mainSpawnerCount > 0)
-                  {
-                     l_lstSpawners[l_i].enabled = true;
-
-                     p_mainSpawnerCount -= 1;
-                  }
-                  else if (!l_bUseMutltipleOfTwo && l_i % 2 != 0 && p_mainSpawnerCount > 0)
-                  {
-                     l_lstSpawners[l_i].enabled = true;
-
-                     p_mainSpawnerCount -= 1;
-                  }
-                  else
-                  {
-                     if (p_mainSpawnerCount == l_dTowerCount - 1)
-                     {
-                        l_lstSpawners[l_i].enabled = MathUtils.HeadsOrTails();
-
-                        if (l_lstSpawners[l_i].enabled == true)
+                        else if (l_dMainSpawnerCount == 1)
                         {
-                           p_mainSpawnerCount -= 1;
+                            l_tower.enabled = true;
                         }
-                     }
-                     else if (p_mainSpawnerCount == 1)
-                     {
-                        l_lstSpawners[l_i].enabled = true;
-                     }
-                     else
-                     {
-                        l_lstSpawners[l_i].enabled = false;
-                     }
-                  }
-               }
+                        else
+                        {
+                            l_tower.enabled = false;
+                        }
+                    }
+                }
 
-               if (l_lstSpawners[l_i].enabled)
-               {
-                  l_lstEnabledSpawners.Add(l_lstSpawners[l_i].SpawnerId);
-               }
+                if (l_tower.enabled)
+                {
+                    l_lstEnabledSpawners.Add(l_tower.SpawnerId);
+                }
             }
-         }
 
-         return l_lstEnabledSpawners;
-      }
+            return l_lstEnabledSpawners;
+        }
 
-      private void InitSwitchableParts(List<SwitchablePartCount> p_lstSwitchablePartCount, List<int> p_lstEnabledTowers)
-      {
-         SwitchablePartBehaviour[] l_lstSwitchableParts = Object.FindObjectsByType<SwitchablePartBehaviour>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+        private void EnableBricksOnWalls(TowerBehaviour p_tower)
+        {
+            int[] l_lstBrickCounts = new int[2];
 
-         int l_dSwitchablePartsCount = l_lstSwitchableParts.Length;
-
-         bool l_bUseMutltipleOfTwo = MathUtils.HeadsOrTails();
-
-         bool l_bUseAscendingOrder = MathUtils.HeadsOrTails();
-
-         SwitchablePartUtility l_utility = null;
-
-         if (l_bUseAscendingOrder)
-         {
-            for (int l_i = 0; l_i < l_dSwitchablePartsCount; l_i++)
+            for (int l_j = 0; l_j <= 1; l_j++)
             {
-               SwitchablePartBehaviour l_switchablePart = l_lstSwitchableParts[l_i];
-
-               if (l_utility == null)
-               {
-                  l_utility = new SwitchablePartUtility(l_switchablePart, p_lstSwitchablePartCount);
-               }
-               else
-               {
-                  l_utility.SwitchablePart = l_switchablePart;
-               }
-
-               bool l_bHasSwitched = false;
-
-               if (l_i == l_dSwitchablePartsCount - 1)
-               {
-                  l_bHasSwitched = l_utility.SwitchPartToStairs(true);
-               }
-
-               if (!l_bHasSwitched)
-               {
-                  if (l_bUseMutltipleOfTwo && l_i % 2 == 0)
-                  {
-                     bool l_bCloseToSpawner = l_switchablePart.IsCloseToSpawner(p_lstEnabledTowers);
-
-                     if (l_bCloseToSpawner)
-                     {
-                        l_bHasSwitched = l_utility.SwitchPartToStairs();
-                     }
-
-                     if (!l_bHasSwitched)
-                     {
-                        l_utility.SwitchPartToRandom(l_bCloseToSpawner);
-                     }
-                  }
-                  else if (!l_bUseMutltipleOfTwo && l_i % 2 != 0)
-                  {
-                     bool l_bCloseToSpawner = l_switchablePart.IsCloseToSpawner(p_lstEnabledTowers);
-
-                     if (l_bCloseToSpawner)
-                     {
-                        l_bHasSwitched = l_utility.SwitchPartToStairs();
-                     }
-
-                     if (!l_bHasSwitched)
-                     {
-                        l_utility.SwitchPartToRandom(l_bCloseToSpawner);
-                     }
-                  }
-                  else
-                  {
-                     bool l_bCloseToSpawner = l_switchablePart.IsCloseToSpawner(p_lstEnabledTowers);
-
-                     if (l_bCloseToSpawner)
-                     {
-                        l_bHasSwitched = l_utility.SwitchPartToStairs();
-                     }
-
-                     if (!l_bHasSwitched)
-                     {
-                        l_utility.SwitchPartToRandom(l_bCloseToSpawner);
-                     }
-                  }
-               }
+                l_lstBrickCounts[l_j] = l_itemBricksUtility.Pick();
             }
-         }
-         else
-         {
-            for (int l_i = l_dSwitchablePartsCount - 1; l_i >= 0; l_i--)
+
+            p_tower.EnableItemBricks(l_lstBrickCounts);
+        }
+
+        private void InitSwitchableParts(List<SwitchablePartCount> p_lstSwitchablePartCount, List<int> p_lstEnabledTowers)
+        {
+            SwitchablePartBehaviour[] l_lstSwitchableParts = Object.FindObjectsByType<SwitchablePartBehaviour>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+
+            int l_dSwitchablePartsCount = l_lstSwitchableParts.Length;
+
+            bool l_bUseMutltipleOfTwo = MathUtils.HeadsOrTails();
+
+            bool l_bUseAscendingOrder = MathUtils.HeadsOrTails();
+
+            int l_dStartIndex = l_bUseAscendingOrder ? 0 : l_dSwitchablePartsCount - 1;
+
+            int l_dIncrementValue = l_bUseAscendingOrder ? 1 : -1;
+
+            int l_dLoopStopIndex = l_bUseAscendingOrder ? l_dSwitchablePartsCount : -1;
+
+            SwitchablePartUtility l_utility = null;
+
+            for (; l_dStartIndex != l_dLoopStopIndex; l_dStartIndex += l_dIncrementValue)
             {
-               SwitchablePartBehaviour l_switchablePart = l_lstSwitchableParts[l_i];
+                SwitchablePartBehaviour l_switchablePart = l_lstSwitchableParts[l_dStartIndex];
 
-               if (l_utility == null)
-               {
-                  l_utility = new SwitchablePartUtility(l_switchablePart, p_lstSwitchablePartCount);
-               }
-               else
-               {
-                  l_utility.SwitchablePart = l_switchablePart;
-               }
+                if (l_utility == null)
+                {
+                    l_utility = new SwitchablePartUtility(l_switchablePart, p_lstSwitchablePartCount);
+                }
+                else
+                {
+                    l_utility.SwitchablePart = l_switchablePart;
+                }
 
-               bool l_bHasSwitched = false;
+                bool l_bHasSwitched = false;
 
-               if (l_i == 0)
-               {
-                  l_bHasSwitched = l_utility.SwitchPartToStairs(true);
-               }
+                if (l_dStartIndex == l_dSwitchablePartsCount - 1)
+                {
+                    l_bHasSwitched = l_utility.SwitchPartToStairs(true);
+                }
 
-               if (!l_bHasSwitched)
-               {
-                  if (l_bUseMutltipleOfTwo && l_i % 2 == 0)
-                  {
-                     bool l_bCloseToSpawner = l_switchablePart.IsCloseToSpawner(p_lstEnabledTowers);
+                if (!l_bHasSwitched)
+                {
+                    if (l_bUseMutltipleOfTwo && l_dStartIndex % 2 == 0)
+                    {
+                        bool l_bCloseToSpawner = l_switchablePart.IsCloseToSpawner(p_lstEnabledTowers);
 
-                     if (l_bCloseToSpawner)
-                     {
-                        l_bHasSwitched = l_utility.SwitchPartToStairs();
-                     }
+                        if (l_bCloseToSpawner)
+                        {
+                            l_bHasSwitched = l_utility.SwitchPartToStairs();
+                        }
 
-                     if (!l_bHasSwitched)
-                     {
-                        l_utility.SwitchPartToRandom(l_bCloseToSpawner);
-                     }
-                  }
-                  else if (!l_bUseMutltipleOfTwo && l_i % 2 != 0)
-                  {
-                     bool l_bCloseToSpawner = l_switchablePart.IsCloseToSpawner(p_lstEnabledTowers);
+                        if (!l_bHasSwitched)
+                        {
+                            l_utility.SwitchPartToRandom(l_bCloseToSpawner);
+                        }
+                    }
+                    else if (!l_bUseMutltipleOfTwo && l_dStartIndex % 2 != 0)
+                    {
+                        bool l_bCloseToSpawner = l_switchablePart.IsCloseToSpawner(p_lstEnabledTowers);
 
-                     if (l_bCloseToSpawner)
-                     {
-                        l_bHasSwitched = l_utility.SwitchPartToStairs();
-                     }
+                        if (l_bCloseToSpawner)
+                        {
+                            l_bHasSwitched = l_utility.SwitchPartToStairs();
+                        }
 
-                     if (!l_bHasSwitched)
-                     {
-                        l_utility.SwitchPartToRandom(l_bCloseToSpawner);
-                     }
-                  }
-                  else
-                  {
-                     bool l_bCloseToSpawner = l_switchablePart.IsCloseToSpawner(p_lstEnabledTowers);
+                        if (!l_bHasSwitched)
+                        {
+                            l_utility.SwitchPartToRandom(l_bCloseToSpawner);
+                        }
+                    }
+                    else
+                    {
+                        bool l_bCloseToSpawner = l_switchablePart.IsCloseToSpawner(p_lstEnabledTowers);
 
-                     if (l_bCloseToSpawner)
-                     {
-                        l_bHasSwitched = l_utility.SwitchPartToStairs();
-                     }
+                        if (l_bCloseToSpawner)
+                        {
+                            l_bHasSwitched = l_utility.SwitchPartToStairs();
+                        }
 
-                     if (!l_bHasSwitched)
-                     {
-                        l_utility.SwitchPartToRandom(l_bCloseToSpawner);
-                     }
-                  }
-               }
+                        if (!l_bHasSwitched)
+                        {
+                            l_utility.SwitchPartToRandom(l_bCloseToSpawner);
+                        }
+                    }
+                }
             }
-         }
-      }
+        }
 
-      private void PlaceHayRollStacks()
-      {
-         HayRollBehaviour[] l_lstHayRolls = Object.FindObjectsByType<HayRollBehaviour>(FindObjectsSortMode.None);
+        private void PlaceHayRollStacks()
+        {
+            HayRollBehaviour[] l_lstHayRolls = Object.FindObjectsByType<HayRollBehaviour>(FindObjectsSortMode.None);
 
-         foreach (HayRollBehaviour l_hayRoll in l_lstHayRolls)
-         {
-            PlayerInventoryManager.Instance.HoldItem(l_hayRoll);
+            foreach (HayRollBehaviour l_hayRoll in l_lstHayRolls)
+            {
+                PlayerInventoryManager.Instance.HoldItem(l_hayRoll);
 
-            GridCellBehaviour l_cell = ItemPlacerManager.Instance.GetCellToPlaceHayRoll(l_hayRoll);
+                GridCellBehaviour l_cell = ItemPlacerManager.Instance.GetCellToPlaceHayRoll(l_hayRoll);
 
-            PlayerInventoryManager.Instance.PlaceHeldItem(l_cell);
-         }
-      }
-   }
+                PlayerInventoryManager.Instance.PlaceHeldItem(l_cell);
+            }
+        }
+    }
 }

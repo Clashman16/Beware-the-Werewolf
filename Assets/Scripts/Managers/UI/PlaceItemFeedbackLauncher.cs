@@ -26,16 +26,23 @@ namespace BWW.Managers.UI
 
                string l_sItemKey = l_feedbackObject.ItemKey;
 
-               l_feedbackObject.Cell.PlaceItem(l_sItemKey);
+                if (l_feedbackObject.Cell != null)
+                {
+                    l_feedbackObject.Cell.PlaceItem(l_sItemKey);
 
-               l_feedbackObject.gameObject.SetActive(false);
+                    if (PlayerInventoryManager.Instance.MaterialCount[l_sItemKey] == 0)
+                    {
+                        ItemFeedbackData l_feedback = new ItemFeedbackData(EItemFeedbackType.LOOSE_MATERIAL, l_sItemKey, Vector3.zero);
 
-               if (PlayerInventoryManager.Instance.MaterialCount[l_sItemKey] == 0)
-               {
-                  ItemFeedbackData l_feedback = new ItemFeedbackData(EItemFeedbackType.LOOSE_MATERIAL, l_sItemKey, Vector3.zero);
+                        ItemFeedbackManager.Instance.AddToWaitingFeedbackPool(l_feedback);
+                    }
+                }
+                else
+                {
+                    PlayerInventoryManager.Instance.AddMaterial(l_sItemKey, 1);
+                }
 
-                  ItemFeedbackManager.Instance.AddToWaitingFeedbackPool(l_feedback);
-               }
+                l_feedbackObject.gameObject.SetActive(false);
             };
 
             l_feedbackObject.gameObject.SetActive(false);

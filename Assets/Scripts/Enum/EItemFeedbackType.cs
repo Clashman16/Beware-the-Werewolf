@@ -5,6 +5,7 @@ namespace BWW.Enums
       PLACE_ITEM,
       GET_MATERIAL,
       LOOSE_MATERIAL,
+      TAKE_MATERIAL,
       TAKE_ITEM,
       RELEASE_ITEM
    }

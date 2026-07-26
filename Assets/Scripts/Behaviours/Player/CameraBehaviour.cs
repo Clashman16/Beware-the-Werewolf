@@ -1,24 +1,22 @@
-using BWW.Behaviours.Map.Items;
 using BWW.Enums;
 using BWW.Managers.Map;
 using BWW.Player;
+using BWW.Utils.UI;
 using UnityEngine;
 
 namespace BWW.Behaviours.Player
 {
     public class CameraBehaviour : MonoBehaviour
     {
-        private const string m_sItemSelectionMask = "MovableItem";
+        [SerializeField] private string[] m_lstItemSelectionMasks;
+
+        [SerializeField] private float m_fSpeed = 50f;
 
         private Vector3 m_vecMovePivot;
 
         private float[] m_lstZoomLimits;
 
-        PlayerCameraState m_state;
-
-        [SerializeField] private float m_fSpeed = 50f;
-
-        Camera m_camera;
+        private PlayerCameraState m_state;
 
         public PlayerCameraState State
         {
@@ -29,6 +27,13 @@ namespace BWW.Behaviours.Player
 
                 m_state.IsMoving = false;
             }
+        }
+
+        private Camera m_camera;
+
+        public Camera UnityCamera
+        {
+            get => m_camera;
         }
 
         private void Start()
@@ -46,25 +51,30 @@ namespace BWW.Behaviours.Player
             {
                 m_state.UpdateState();
 
-            if(m_state.IsClickDown() && !m_state.IsRotatingItem)
+                if (m_state.IsClickDown() && !m_state.IsRotatingItem)
                 {
                     Ray l_ray = m_camera.ScreenPointToRay(m_state.GetPointerPosition());
 
-                    if (Physics.Raycast(l_ray, out RaycastHit l_hit, 100f, LayerMask.GetMask(m_sItemSelectionMask)))
+                    foreach (string l_sMask in m_lstItemSelectionMasks)
                     {
-                        MovableItem l_item = l_hit.collider.GetComponent<MovableItem>();
-
-                        if (l_item != null)
+                        if (Physics.Raycast(l_ray, out RaycastHit l_hit, 100f, LayerMask.GetMask(l_sMask)))
                         {
-                            GridManager.Instance.SelectItemOnGrid(l_item);
+                            if (l_sMask == "MovableItem")
+                            {
+                                new ItemSelectionMovable().HandleItemSelection(l_hit.collider);
+                            }
+                            else
+                            {
+                                new ItemSelectionResource().HandleItemSelection(l_hit.collider);
+                            }
                         }
                     }
                 }
             }
 
-         if(m_state.IsMoving)
+            if (m_state.IsMoving)
             {
-            if(m_state.SimulatedControl == EControls.ZOOM)
+                if (m_state.SimulatedControl == EControls.ZOOM)
                 {
                     float l_fCurrentPosition = transform.position.y;
 
@@ -73,7 +83,7 @@ namespace BWW.Behaviours.Player
                     {
                         Vector3 l_vecZoomDirection = transform.forward * (m_state.IsForwardZoom ? 1 : -1);
 
-                        transform.Translate(l_vecZoomDirection * Time.deltaTime * m_fSpeed/2, Space.World);
+                        transform.Translate(l_vecZoomDirection * Time.deltaTime * m_fSpeed / 2, Space.World);
                     }
                 }
                 else

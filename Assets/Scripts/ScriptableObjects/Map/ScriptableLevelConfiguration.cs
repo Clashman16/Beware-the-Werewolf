@@ -26,5 +26,14 @@ namespace BWW.ScriptableObjects.Map
         {
             get => m_lstWaves;
         }
+
+        [SerializeField]
+        [Range(4, 8)]
+        private int m_dItemBricksCount;
+
+        public int BricksCount
+        {
+            get => m_dItemBricksCount;
+        }
     }
 }
