@@ -19,7 +19,7 @@ namespace BWW.Utils.Map
 
                 switch (p_sItemKey)
                 {
-                    case "Bricks":
+                    case "Brick":
                     case "Wood":
 
                         l_goPlacedItem = GetWoodOrBricksPart(p_cell, p_sItemKey);
