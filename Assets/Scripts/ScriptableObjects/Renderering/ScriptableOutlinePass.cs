@@ -26,6 +26,8 @@ namespace BWW.ScriptableObjects.Rendering
             m_settings = p_settings;
 
             renderPassEvent = p_settings.RenderPassEvent;
+
+            ConfigureInput(ScriptableRenderPassInput.Depth);
         }
 
         public override void RecordRenderGraph(RenderGraph p_renderGraph, ContextContainer p_frameContext)
@@ -126,7 +128,7 @@ namespace BWW.ScriptableObjects.Rendering
                  * Ainsi, un objet caché derrière un mur
                  * ne produit pas de contour à travers le mur.
                  */
-                //l_builder.SetRenderAttachmentDepth(l_resourceData.activeDepthTexture, AccessFlags.Read);
+                l_builder.SetRenderAttachmentDepth(l_resourceData.cameraDepthTexture, AccessFlags.Read);
 
                 /*
                  * Rend le masque accessible au pass suivant
