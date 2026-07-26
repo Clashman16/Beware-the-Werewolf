@@ -1,5 +1,26 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-5805457240945491931
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e199aad19498604ba1d5e066ef078ca, type: 3}
+  m_Name: ScriptableOutlineRendererFeature
+  m_EditorClassIdentifier: 
+  m_Active: 1
+  m_settings:
+    m_outlineLayer:
+      serializedVersion: 2
+      m_Bits: 256
+    m_maskMaterial: {fileID: 2100000, guid: 76c3de16de21d32489ac66c58a327da0, type: 2}
+    m_compositeMaterial: {fileID: 2100000, guid: 860f09d6073e1b54ab79bc3fbe81a14e,
+      type: 2}
+    m_renderPassEvent: 300
 --- !u!114 &-1878332245247344467
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -54,14 +75,12 @@ MonoBehaviour:
     probeVolumeBlendStatesCS: {fileID: 0}
   m_RendererFeatures:
   - {fileID: -1878332245247344467}
-  m_RendererFeatureMap: adc0de57c6d2eee5
+  - {fileID: -5805457240945491931}
+  m_RendererFeatureMap: adc0de57c6d2eee52580b9e265df6eaf
   m_UseNativeRenderPass: 0
   xrSystemData: {fileID: 11400000, guid: 60e1133243b97e347b653163a8c01b64, type: 2}
   postProcessData: {fileID: 11400000, guid: 41439944d30ece34e96484bdb6645b55, type: 2}
-  m_AssetVersion: 3
-  m_PrepassLayerMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
+  m_AssetVersion: 2
   m_OpaqueLayerMask:
     serializedVersion: 2
     m_Bits: 4294967295
