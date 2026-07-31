@@ -1,14 +1,24 @@
-Shader "BWW/OutlineComposite"
+Shader "BWW/OutlineCompositeMulticolor"
 {
     Properties
     {
-        _OutlineColor(
-            "Outline Color",
+        _YellowOutlineColor(
+            "Yellow Outline Color",
             Color
         ) = (1, 1, 0, 1)
 
-        _OutlineThickness(
-            "Outline Thickness",
+        _BlueOutlineColor(
+            "Blue Outline Color",
+            Color
+        ) = (0, 0.5, 1, 1)
+
+        _YellowThickness(
+            "Yellow Thickness",
+            Range(1, 10)
+        ) = 2
+
+        _BlueThickness(
+            "Blue Thickness",
             Range(1, 10)
         ) = 2
 
@@ -49,9 +59,14 @@ Shader "BWW/OutlineComposite"
 
             float4 _OutlineMaskTexture_TexelSize;
 
-            float4 _OutlineColor;
-            float _OutlineThickness;
-            float _Threshold;
+            CBUFFER_START(UnityPerMaterial)
+                float4 _YellowOutlineColor;
+                float4 _BlueOutlineColor;
+
+                float _YellowThickness;
+                float _BlueThickness;
+                float _Threshold;
+            CBUFFER_END
 
             struct Attributes
             {
@@ -69,75 +84,185 @@ Shader "BWW/OutlineComposite"
                 Varyings output;
 
                 output.positionHCS =
-                    GetFullScreenTriangleVertexPosition(input.vertexID);
+                    GetFullScreenTriangleVertexPosition(
+                        input.vertexID
+                    );
 
                 output.uv =
-                    GetFullScreenTriangleTexCoord(input.vertexID);
+                    GetFullScreenTriangleTexCoord(
+                        input.vertexID
+                    );
 
                 return output;
             }
 
-            float SampleMask(float2 uv)
+            float4 SampleMask(float2 uv)
             {
                 return SAMPLE_TEXTURE2D(
                     _OutlineMaskTexture,
                     sampler_OutlineMaskTexture,
                     uv
-                ).r;
+                );
+            }
+
+            float FindChannelEdge(
+                float2 uv,
+                float thickness,
+                int channel)
+            {
+                float2 texel =
+                    _OutlineMaskTexture_TexelSize.xy
+                    * thickness;
+
+                float4 centerSample =
+                    SampleMask(uv);
+
+                float center =
+                    centerSample[channel];
+
+                float edge = 0;
+
+                edge = max(
+                    edge,
+                    abs(
+                        center -
+                        SampleMask(
+                            uv + float2(-texel.x, 0)
+                        )[channel]
+                    )
+                );
+
+                edge = max(
+                    edge,
+                    abs(
+                        center -
+                        SampleMask(
+                            uv + float2(texel.x, 0)
+                        )[channel]
+                    )
+                );
+
+                edge = max(
+                    edge,
+                    abs(
+                        center -
+                        SampleMask(
+                            uv + float2(0, texel.y)
+                        )[channel]
+                    )
+                );
+
+                edge = max(
+                    edge,
+                    abs(
+                        center -
+                        SampleMask(
+                            uv + float2(0, -texel.y)
+                        )[channel]
+                    )
+                );
+
+                edge = max(
+                    edge,
+                    abs(
+                        center -
+                        SampleMask(
+                            uv + float2(-texel.x, texel.y)
+                        )[channel]
+                    )
+                );
+
+                edge = max(
+                    edge,
+                    abs(
+                        center -
+                        SampleMask(
+                            uv + float2(texel.x, texel.y)
+                        )[channel]
+                    )
+                );
+
+                edge = max(
+                    edge,
+                    abs(
+                        center -
+                        SampleMask(
+                            uv + float2(-texel.x, -texel.y)
+                        )[channel]
+                    )
+                );
+
+                edge = max(
+                    edge,
+                    abs(
+                        center -
+                        SampleMask(
+                            uv + float2(texel.x, -texel.y)
+                        )[channel]
+                    )
+                );
+
+                edge = step(
+                    _Threshold,
+                    edge
+                );
+
+                // Ne conserve que le bord extérieur.
+                edge *= 1.0 - center;
+
+                return edge;
             }
 
             half4 Frag(Varyings input) : SV_Target
             {
-                float2 texel =
-                    _OutlineMaskTexture_TexelSize.xy
-                    * _OutlineThickness;
+                // Canal R = jaune.
+                float yellowEdge =
+                    FindChannelEdge(
+                        input.uv,
+                        _YellowThickness,
+                        0
+                    );
 
-                float center = SampleMask(input.uv);
+                // Canal G = bleu.
+                float blueEdge =
+                    FindChannelEdge(
+                        input.uv,
+                        _BlueThickness,
+                        1
+                    );
 
-                float left =
-                    SampleMask(input.uv + float2(-texel.x, 0));
+                float edgeSum =
+                    yellowEdge + blueEdge;
 
-                float right =
-                    SampleMask(input.uv + float2(texel.x, 0));
+                if (edgeSum <= 0.0001)
+                {
+                    return half4(0, 0, 0, 0);
+                }
 
-                float up =
-                    SampleMask(input.uv + float2(0, texel.y));
+                /*
+                 * Si les deux contours se superposent,
+                 * on calcule une moyenne des couleurs.
+                 */
+                float3 outlineColor =
+                    (
+                        _YellowOutlineColor.rgb
+                        * yellowEdge
+                        +
+                        _BlueOutlineColor.rgb
+                        * blueEdge
+                    )
+                    / max(edgeSum, 0.0001);
 
-                float down =
-                    SampleMask(input.uv + float2(0, -texel.y));
-
-                float topLeft =
-                    SampleMask(input.uv + float2(-texel.x, texel.y));
-
-                float topRight =
-                    SampleMask(input.uv + float2(texel.x, texel.y));
-
-                float bottomLeft =
-                    SampleMask(input.uv + float2(-texel.x, -texel.y));
-
-                float bottomRight =
-                    SampleMask(input.uv + float2(texel.x, -texel.y));
-
-                float edge = 0;
-
-                edge = max(edge, abs(center - left));
-                edge = max(edge, abs(center - right));
-                edge = max(edge, abs(center - up));
-                edge = max(edge, abs(center - down));
-
-                edge = max(edge, abs(center - topLeft));
-                edge = max(edge, abs(center - topRight));
-                edge = max(edge, abs(center - bottomLeft));
-                edge = max(edge, abs(center - bottomRight));
-
-                edge = step(_Threshold, edge);
-
-                // Seulement à l'extérieur de la silhouette.
-                edge *= 1.0 - center;
+                float alpha = max(
+                    _YellowOutlineColor.a
+                    * yellowEdge,
+                    _BlueOutlineColor.a
+                    * blueEdge
+                );
 
                 return half4(
-                    _OutlineColor.rgb,
-                    _OutlineColor.a * edge
+                    outlineColor,
+                    alpha
                 );
             }
 

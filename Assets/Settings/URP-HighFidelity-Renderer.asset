@@ -14,10 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Active: 1
   m_settings:
-    m_outlineLayer:
+    m_yellowOutlineLayer:
       serializedVersion: 2
       m_Bits: 384
-    m_maskMaterial: {fileID: 2100000, guid: 76c3de16de21d32489ac66c58a327da0, type: 2}
+    m_blueOutlineLayer:
+      serializedVersion: 2
+      m_Bits: 512
+    m_yellowMaskMaterial: {fileID: 2100000, guid: 76c3de16de21d32489ac66c58a327da0,
+      type: 2}
+    m_blueMaskMaterial: {fileID: 2100000, guid: 6d47f954ad1ccc343900b84276d01115,
+      type: 2}
     m_compositeMaterial: {fileID: 2100000, guid: 860f09d6073e1b54ab79bc3fbe81a14e,
       type: 2}
     m_renderPassEvent: 300
