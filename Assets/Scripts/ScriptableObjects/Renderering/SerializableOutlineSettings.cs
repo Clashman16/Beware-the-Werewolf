@@ -8,19 +8,32 @@ namespace BWW.ScriptableObjects.Rendering
     {
         [Header("Filtering")]
 
-        [SerializeField] private LayerMask m_outlineLayer;
-        public LayerMask OutlineLayer
+        [SerializeField] private LayerMask m_yellowOutlineLayer;
+        public LayerMask YellowOutlineLayer
         {
-            get => m_outlineLayer;
+            get => m_yellowOutlineLayer;
+        }
+
+        [SerializeField] private LayerMask m_blueOutlineLayer;
+        public LayerMask BlueOutlineLayer
+        {
+            get => m_blueOutlineLayer;
         }
 
         [Header("Materials")]
 
-        [SerializeField] private Material m_maskMaterial;
+        [SerializeField] private Material m_yellowMaskMaterial;
 
-        public Material MaskMaterial
+        public Material YellowMaskMaterial
         {
-            get => m_maskMaterial;
+            get => m_yellowMaskMaterial;
+        }
+
+        [SerializeField] private Material m_blueMaskMaterial;
+
+        public Material BlueMaskMaterial
+        {
+            get => m_blueMaskMaterial;
         }
 
         [SerializeField] private Material m_compositeMaterial;

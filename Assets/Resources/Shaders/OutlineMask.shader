@@ -2,6 +2,11 @@ Shader "BWW/OutlineMask"
 {
     Properties
     {
+        _MaskColor(
+            "Mask Color",
+            Color
+        ) = (1, 0, 0, 1)
+
         _DepthTolerance(
             "Depth Tolerance",
             Range(0.0001, 0.1)
@@ -22,11 +27,7 @@ Shader "BWW/OutlineMask"
             Name "OutlineMask"
 
             Cull Back
-
-            // Le masque n'écrit pas dans la profondeur.
             ZWrite Off
-
-            // On fait nous-mêmes la comparaison dans le fragment shader.
             ZTest Always
 
             HLSLPROGRAM
@@ -38,6 +39,7 @@ Shader "BWW/OutlineMask"
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/DeclareDepthTexture.hlsl"
 
             CBUFFER_START(UnityPerMaterial)
+                float4 _MaskColor;
                 float _DepthTolerance;
             CBUFFER_END
 
@@ -49,8 +51,6 @@ Shader "BWW/OutlineMask"
             struct Varyings
             {
                 float4 positionHCS : SV_POSITION;
-
-                // Profondeur du ResourceItem en espace vue.
                 float viewDepth : TEXCOORD0;
             };
 
@@ -67,8 +67,6 @@ Shader "BWW/OutlineMask"
                 output.positionHCS =
                     TransformWorldToHClip(positionWS);
 
-                // Devant la caméra, Z est négatif dans l'espace vue.
-                // On transforme donc la distance en valeur positive.
                 output.viewDepth = -positionVS.z;
 
                 return output;
@@ -76,11 +74,10 @@ Shader "BWW/OutlineMask"
 
             half4 Frag(Varyings input) : SV_Target
             {
-                // SV_POSITION est exprimée en pixels dans le fragment shader.
                 float2 screenUV =
-                    input.positionHCS.xy / _ScaledScreenParams.xy;
+                    input.positionHCS.xy /
+                    _ScaledScreenParams.xy;
 
-                // Profondeur de la scène à cet endroit de l'écran.
                 float sceneRawDepth =
                     SampleSceneDepth(screenUV);
 
@@ -90,20 +87,14 @@ Shader "BWW/OutlineMask"
                         _ZBufferParams
                     );
 
-                /*
-                 * Si le ResourceItem est plus loin que ce qui est déjà
-                 * visible à cet endroit, cela signifie qu'un autre objet
-                 * le cache.
-                 */
+                // Élimine les parties masquées par la scène.
                 if (input.viewDepth >
                     sceneDepth + _DepthTolerance)
                 {
                     discard;
                 }
 
-                // Pixel visible du ResourceItem :
-                // il participe au masque.
-                return half4(1, 1, 1, 1);
+                return _MaskColor;
             }
 
             ENDHLSL

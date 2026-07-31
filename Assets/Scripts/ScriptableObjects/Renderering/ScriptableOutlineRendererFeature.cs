@@ -16,7 +16,9 @@ namespace BWW.ScriptableObjects.Rendering
 
         public override void AddRenderPasses(ScriptableRenderer p_renderer, ref RenderingData p_renderingData)
         {
-            if (m_settings.MaskMaterial == null || m_settings.CompositeMaterial == null)
+            if (m_settings.YellowMaskMaterial == null
+            || m_settings.BlueMaskMaterial == null
+            || m_settings.CompositeMaterial == null)
             {
                 return;
             }
