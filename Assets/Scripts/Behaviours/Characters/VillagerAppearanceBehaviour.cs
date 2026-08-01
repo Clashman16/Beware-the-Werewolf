@@ -73,7 +73,7 @@ namespace BWW.Behaviours.Characters
 
          SkinnedMeshRenderer l_renderer = GetComponentInChildren<SkinnedMeshRenderer>();
 
-         Material l_material = l_renderer.sharedMaterial;
+         Material l_material = new Material(l_renderer.sharedMaterial);
 
          l_material.SetTexture(m_sShaderTexturePropertyName, l_text);
 
