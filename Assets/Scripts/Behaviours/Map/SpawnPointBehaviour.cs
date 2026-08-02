@@ -33,7 +33,7 @@ namespace BWW.Behaviours.Map
 
             l_villager.UpdateAppearance(l_bIsCharacterFemale);
 
-            CharacterDataBehaviour l_data = l_villager.GetComponent<CharacterDataBehaviour>();
+            VillagerDataBehaviour l_data = l_villager.GetComponent<VillagerDataBehaviour>();
 
             l_data.Init();
 
