@@ -1,4 +1,5 @@
 using BWW.Behaviours.Map;
+using BWW.Enums;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
@@ -13,12 +14,20 @@ namespace BWW.Behaviours.Characters
 
       private NavMeshPath m_path;
 
-      public Vector3 HitPosition
+        public Vector3 HitPosition => transform.position + Vector3.up * 0.5f;
+
+        private Vector3 m_vecPreviousPosition;
+
+        private CharacterDataBehaviour m_data;
+
+        public void Init(CharacterDataBehaviour p_data)
       {
-         get => transform.position + Vector3.up * 0.5f;
+            m_data = p_data;
+
+            ResetInstance();
       }
 
-      private void Start()
+        private void ResetInstance()
       {
          StartCoroutine(LaunchNavMeshAgent());
       }
@@ -40,6 +49,8 @@ namespace BWW.Behaviours.Characters
 
          transform.position = l_hit.position;
          m_agent.enabled = true;
+
+            m_vecPreviousPosition = transform.position;
 
          PrepareToMove();
       }
@@ -75,7 +86,26 @@ namespace BWW.Behaviours.Characters
 
             l_dGateCount += 1;
          }
+
+            Vector3 l_vecCurrentPosition = transform.position;
+
+            if (l_vecCurrentPosition != m_vecPreviousPosition)
+            {
+                if(m_data.State != ECharacterState.WALKING)
+                {
+                    m_data.State = ECharacterState.WALKING;
       }
+
+                m_vecPreviousPosition = l_vecCurrentPosition;
+            }
+            else
+            {
+                if (m_data.State != ECharacterState.IDDLE)
+                {
+                    m_data.State = ECharacterState.IDDLE;
+                }
+            }
+        }
 
       private void PrepareToMove()
       {

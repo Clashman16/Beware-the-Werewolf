@@ -37,6 +37,8 @@ namespace BWW.Behaviours.Map
 
             l_data.Init();
 
+            l_villager.GetComponent<VillagerMovementBehaviour>().Init(l_data);
+
             l_villager.GetComponent<VillagerAnimationBehaviour>().Init(l_data);
 
             //StartCoroutine(LoopSpawn());
