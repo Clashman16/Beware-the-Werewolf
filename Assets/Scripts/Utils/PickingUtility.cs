@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace BWW.Utils.Map
+namespace BWW.Utils
 {
-   public class SpawnPickingUtility
+   public class PickingUtility
    {
       private List<int> m_lstPossiblePicks;
 
@@ -20,7 +20,7 @@ namespace BWW.Utils.Map
          set => m_dLastPickedId = value;
       }
 
-      public SpawnPickingUtility()
+      public PickingUtility()
       {
          m_lstPossiblePicks = new List<int>();
       }

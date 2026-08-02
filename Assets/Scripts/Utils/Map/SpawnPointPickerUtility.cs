@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace BWW.Utils.Map
 {
-   public class SpawnPointPickerUtility : SpawnPickingUtility
+   public class SpawnPointPickerUtility : PickingUtility
    {
       private Dictionary<int, SpawnPointBehaviour> m_lstAvailableSpawners;
 
