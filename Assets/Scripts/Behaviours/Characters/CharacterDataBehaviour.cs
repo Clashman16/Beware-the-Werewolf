@@ -29,9 +29,14 @@ namespace BWW.Behaviours.Characters
          set => m_bIsBurnt = value;
       }
 
+        private float m_fBaseHealthPoints;
+
+        public bool IsWounded => m_fHealthPoints <= m_fBaseHealthPoints / 2;
+
+
       public void Init()
       {
-         m_eState = ECharacterState.WALKING;
+            m_eState = ECharacterState.IDDLE;
 
          VillagerAppearanceBehaviour l_villager = GetComponent<VillagerAppearanceBehaviour>();
 
@@ -60,6 +65,8 @@ namespace BWW.Behaviours.Characters
          {
             m_fHealthPoints = 150f;
          }
+
+            m_fBaseHealthPoints = m_fHealthPoints;
       }
    }
 }
