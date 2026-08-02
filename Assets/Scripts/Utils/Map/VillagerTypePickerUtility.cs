@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace BWW.Utils.Map
 {
-   public class VillagerTypePickerUtility : SpawnPickingUtility
+   public class VillagerTypePickerUtility : PickingUtility
    {
       private List<ScriptableVillagersWave> m_lstWaves;
 

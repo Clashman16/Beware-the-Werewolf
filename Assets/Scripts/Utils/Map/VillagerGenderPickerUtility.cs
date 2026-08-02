@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace BWW.Utils.Characters
 {
-   public class VillagerGenderPickerUtility : SpawnPickingUtility
+   public class VillagerGenderPickerUtility : PickingUtility
    {
       private const string m_sDatabasePath = "ScriptableObjects/Characters/VillagerGenderDatabase";
 

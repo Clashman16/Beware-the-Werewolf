@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace BWW.Utils.Map
 {
-    public class ItemBricksUtility : SpawnPickingUtility
+    public class ItemBricksUtility : PickingUtility
     {
         private int m_dItemBricksCount;
 
