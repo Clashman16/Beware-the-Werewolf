@@ -34,39 +34,11 @@ namespace BWW.Behaviours.Characters
         public bool IsWounded => m_fHealthPoints <= m_fBaseHealthPoints / 2;
 
 
-      public void Init()
-      {
+        public void Init()
+        {
             m_eState = ECharacterState.IDDLE;
 
-         VillagerAppearanceBehaviour l_villager = GetComponent<VillagerAppearanceBehaviour>();
-
-         if (l_villager != null)
-         {
-            switch(l_villager.Title)
-            {
-               case EVillagerTitle.KNIGHT:
-
-                  m_fHealthPoints = 100f;
-
-                  break;
-               case EVillagerTitle.RICH:
-
-                  m_fHealthPoints = 80f;
-
-                  break;
-
-               default: 
-                  m_fHealthPoints = 50f;
-
-                  break;
-            }
-         }
-         else // This is the werewolf
-         {
-            m_fHealthPoints = 150f;
-         }
-
             m_fBaseHealthPoints = m_fHealthPoints;
-      }
-   }
+        }
+    }
 }
