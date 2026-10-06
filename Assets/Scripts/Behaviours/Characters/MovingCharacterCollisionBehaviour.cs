@@ -9,19 +9,43 @@ namespace BWW.Behaviours.Characters
 {
     public class MovingCharacterCollisionBehaviour : CharacterCollisionBehaviour
     {
-        private UnityAction m_OnCharacterPushed;
+        [SerializeField] private LayerMask m_obstacleLayerMask;
 
-        private CharacterDirectionPicker m_directionPicker;
+        private UnityAction m_OnCharacterPushed;
 
         private CharacterMovementBehaviour m_movement;
 
         private bool m_bIsPushed;
 
+        #region Movement after collision
+
+        private CharacterDirectionPicker m_directionPicker;
+
         private Vector3 m_vecPushDestination;
 
         private Vector3 m_vecPushDirection;
 
-        private float m_fPushSpeed;
+        private const float m_fPushSpeed = 1.5f;
+
+        #endregion
+
+        #region Collision damages
+
+        private const float m_fDamageRatio = 0.005f;
+
+        private float m_fSampleDuration = 0.05f;
+
+        private float m_fSampleDistance;
+
+        private bool m_bDamagePushActive;
+
+        private float m_fNextDamageDistance;
+
+        private Vector3 m_vecDamagePushStart;
+
+        private Vector3 m_vecDamagePushDirection;
+
+        private float m_fDamagePushDistance;
 
         private CharacterHealthBarBehaviour m_healthBar;
 
@@ -30,26 +54,39 @@ namespace BWW.Behaviours.Characters
             set => m_healthBar = value;
         }
 
-        [SerializeField] private LayerMask m_obstacleLayerMask;
+        #endregion
 
         public void Start()
         {
             m_OnCharacterPushed += OnCharacterPushed;
-
-            m_fPushSpeed = 1.5f;
         }
 
         public void Update()
         {
             if(m_bIsPushed)
             {
-                transform.position = Vector3.MoveTowards( transform.position, m_vecPushDestination, m_fPushSpeed * Time.deltaTime);;
+                CharacterDataBehaviour l_data = GetComponent<CharacterDataBehaviour>();
 
-                if(transform.position == m_vecPushDestination)
+                transform.position = Vector3.MoveTowards(transform.position, m_vecPushDestination, m_fPushSpeed * Time.deltaTime);
+
+                Vector3 l_vecFromFirstCollision = transform.position - m_vecDamagePushStart;
+
+                float l_fFirstPushDistanceTravelled = Vector3.Dot(l_vecFromFirstCollision, m_vecDamagePushDirection);
+
+                l_fFirstPushDistanceTravelled = Mathf.Clamp(l_fFirstPushDistanceTravelled, 0f, m_fDamagePushDistance);
+
+                while (l_fFirstPushDistanceTravelled >= m_fNextDamageDistance)
+                {
+                    l_data.ApplyDamage(m_fDamageRatio);
+
+                    m_fNextDamageDistance += m_fSampleDistance;
+                }
+
+                if (transform.position == m_vecPushDestination)
                 {
                     m_bIsPushed = false;
 
-                    GetComponent<CharacterDataBehaviour>().State = Enums.ECharacterState.IDDLE;
+                    l_data.State = Enums.ECharacterState.IDDLE;
 
                     m_movement.ResumeMove();
                 }
@@ -58,21 +95,36 @@ namespace BWW.Behaviours.Characters
 
         private void OnCharacterPushed()
         {
-            if(m_movement == null)
+            if (m_movement == null)
             {
                 m_movement = GetComponent<CharacterMovementBehaviour>();
             }
-
+                
             if (m_directionPicker == null)
             {
                 m_directionPicker = new CharacterDirectionPicker(m_movement.Agent, m_obstacleLayerMask);
             }
-
-            (Vector3, float) l_pick = m_directionPicker.PickDestination();
+                
+            (Vector3, float) l_pick =  m_directionPicker.PickDestination();
 
             m_vecPushDirection = l_pick.Item1;
 
             m_vecPushDestination = transform.position + m_vecPushDirection * l_pick.Item2;
+
+            if (m_bDamagePushActive)
+            {
+                m_vecDamagePushStart = transform.position;
+
+                m_vecDamagePushDirection = m_vecPushDirection;
+
+                m_fDamagePushDistance = l_pick.Item2;
+
+                m_fSampleDistance = m_fPushSpeed * m_fSampleDuration;
+
+                m_fNextDamageDistance = m_fSampleDistance;
+
+                m_bDamagePushActive = false;
+            }
 
             m_bIsPushed = true;
 
@@ -89,10 +141,11 @@ namespace BWW.Behaviours.Characters
                 if (l_data.State == Enums.ECharacterState.PUSHED)
                 {
                     m_OnCharacterPushed.Invoke();
-                    // The villager must take damages according to his speed for the distance between the place where he was hurt and the place where he is now
                 }
                 else
                 {
+                    m_bDamagePushActive = true;
+
                     l_data.State = Enums.ECharacterState.PUSHED;
 
                     m_healthBar.gameObject.SetActive(true);
