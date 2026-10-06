@@ -35,7 +35,7 @@ namespace BWW.Behaviours.Map
 
             VillagerDataBehaviour l_data = l_villager.GetComponent<VillagerDataBehaviour>();
 
-            l_data.Init();
+            l_data.Init(p_eEnemyType);
 
             l_villager.GetComponent<VillagerMovementBehaviour>().Init(l_data);
 
