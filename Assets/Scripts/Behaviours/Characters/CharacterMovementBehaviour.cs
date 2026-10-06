@@ -81,7 +81,29 @@ namespace BWW.Behaviours.Characters
 
         public void ResumeMove()
         {
-            m_agent.SetPath(m_path);
+            m_agent.nextPosition = transform.position;
+
+            m_agent.updatePosition = true;
+
+            m_agent.updateRotation = true;
+
+            m_agent.isStopped = false;
+
+            m_path = new NavMeshPath();
+
+            if (m_agent.CalculatePath(m_vecTarget, m_path))
+            {
+                m_agent.SetPath(m_path);
+            }
+        }
+
+        public void StopMove()
+        {
+            m_agent.isStopped = true;
+
+            m_agent.updatePosition = false;
+
+            m_agent.updateRotation = false;
         }
     }
 }
