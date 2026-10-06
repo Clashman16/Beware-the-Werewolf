@@ -1,4 +1,5 @@
 using BWW.Behaviours.Map.Items;
+using BWW.Behaviours.UI;
 using BWW.Managers.Map;
 using BWW.Utils.Characters;
 using UnityEngine;
@@ -21,6 +22,13 @@ namespace BWW.Behaviours.Characters
         private Vector3 m_vecPushDirection;
 
         private float m_fPushSpeed;
+
+        private CharacterHealthBarBehaviour m_healthBar;
+
+        public CharacterHealthBarBehaviour HealthBar
+        {
+            set => m_healthBar = value;
+        }
 
         [SerializeField] private LayerMask m_obstacleLayerMask;
 
@@ -86,6 +94,10 @@ namespace BWW.Behaviours.Characters
                 else
                 {
                     l_data.State = Enums.ECharacterState.PUSHED;
+
+                    m_healthBar.gameObject.SetActive(true);
+
+                    m_healthBar.MustDisappear = false;
 
                     m_OnCharacterPushed.Invoke();
                 }

@@ -1,6 +1,7 @@
 using BWW.Behaviours.Characters;
 using BWW.Enums;
 using BWW.Managers.Map;
+using BWW.Managers.UI;
 using BWW.Utils.Characters;
 using System.Collections;
 using UnityEngine;
@@ -40,6 +41,8 @@ namespace BWW.Behaviours.Map
             l_villager.GetComponent<VillagerMovementBehaviour>().Init(l_data);
 
             l_villager.GetComponent<VillagerAnimationBehaviour>().Init(l_data);
+
+            CharacterHealthBarLinker.Instance.LinkBarToCharacterData(l_data);
 
             //StartCoroutine(LoopSpawn());
 
