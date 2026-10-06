@@ -2110,6 +2110,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac53f790661278f4a8342f5cd040a365, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_obstacleLayerMask:
+    serializedVersion: 2
+    m_Bits: 640
 --- !u!195 &-5670833391371462438
 NavMeshAgent:
   m_ObjectHideFlags: 0
