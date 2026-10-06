@@ -1,5 +1,5 @@
 using BWW.Behaviours.Map;
-using BWW.Managers.Player;
+using BWW.Utils;
 using BWW.Utils.Items;
 using BWW.Utils.UI;
 using UnityEngine;
@@ -14,8 +14,6 @@ namespace BWW.Behaviours.UI
         private Image m_imgIcon;
 
         private Vector3 m_vecAnimEndPosition;
-
-        private Camera m_camera;
 
         private GridCellBehaviour m_cell;
 
@@ -40,7 +38,7 @@ namespace BWW.Behaviours.UI
 
                 transform.position = l_counterTrf.position;
 
-                m_vecAnimEndPosition = GetScreenPosition(p_data.Position);
+                m_vecAnimEndPosition = MathUtils.GetScreenPosition(p_data.Position);
 
                 m_cell = p_data.Cell;
             }
@@ -48,7 +46,7 @@ namespace BWW.Behaviours.UI
             {
                 m_imgIcon.sprite = InventoryItemGetter.Instance.GetItemFromKey(p_data.ItemKey).Icon;
 
-                transform.position = GetScreenPosition(p_data.Position);
+                transform.position = MathUtils.GetScreenPosition(p_data.Position);
 
                 m_vecAnimEndPosition = l_counterTrf.position;
 
@@ -63,21 +61,11 @@ namespace BWW.Behaviours.UI
             return GameObject.Find("ItemCounter").transform.Find(p_sItemKey);
         }
 
-        private Vector2 GetScreenPosition(Vector3 p_vecPositionToConvert)
-        {
-            if(m_camera == null)
-            {
-                m_camera = PlayerCameraManager.Instance.BWWCamera.UnityCamera;
-            }
-
-            return RectTransformUtility.WorldToScreenPoint(m_camera, p_vecPositionToConvert);
-        }
-
         public override void Animate()
         {
             if(m_cell != null)
             {
-                m_vecAnimEndPosition = GetScreenPosition(m_cell.transform.position);
+                m_vecAnimEndPosition = MathUtils.GetScreenPosition(m_cell.transform.position);
             }
             else
             {
