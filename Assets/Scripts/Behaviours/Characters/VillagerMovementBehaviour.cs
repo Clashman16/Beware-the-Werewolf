@@ -79,6 +79,17 @@ namespace BWW.Behaviours.Characters
 
                 Vector3 l_vecDirection = (l_vecNextPosition - l_vecStartPosition).normalized;
 
+                l_vecDirection.y = 0f;
+
+                if (l_vecDirection != Vector3.zero)
+                {
+                    transform.rotation =
+                        Quaternion.LookRotation(
+                            l_vecDirection,
+                            Vector3.up
+                        );
+                }
+
                 float l_fDistance = Vector3.Distance(l_vecNextPosition, l_vecStartPosition);
 
                 int l_dLayerMaskId = LayerMask.GetMask("CastleGate");
