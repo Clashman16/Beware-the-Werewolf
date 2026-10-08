@@ -9,9 +9,9 @@ namespace BWW.Behaviours.Map
     {
         [SerializeField] private GameObject[] m_lstWalls;
 
-        public override GameObject InstantiateVillager(EVillagerType p_eEnemyType)
+        public override GameObject InstantiateVillager(EVillagerType p_eEnemyType, int p_dWalkAnimationId)
         {
-            GameObject l_goVillager = base.InstantiateVillager(p_eEnemyType);
+            GameObject l_goVillager = base.InstantiateVillager(p_eEnemyType, p_dWalkAnimationId);
 
             l_goVillager.transform.SetParent(transform.GetChild(2), true);
 

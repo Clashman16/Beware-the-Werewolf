@@ -24,7 +24,7 @@ namespace BWW.Behaviours.Map
             set => m_villagerGenderPicker = value;
         }
 
-        public virtual GameObject InstantiateVillager(EVillagerType p_eEnemyType)
+        public virtual GameObject InstantiateVillager(EVillagerType p_eEnemyType, int p_dWalkAnimationId)
         {
             bool l_bIsCharacterFemale = m_villagerGenderPicker.Pick() == 1;
 
@@ -40,7 +40,7 @@ namespace BWW.Behaviours.Map
 
             l_villager.GetComponent<VillagerMovementBehaviour>().Init(l_data);
 
-            l_villager.GetComponent<VillagerAnimationBehaviour>().Init(l_data);
+            l_villager.GetComponent<VillagerAnimationBehaviour>().Init(l_data, p_dWalkAnimationId);
 
             CharacterHealthBarLinker.Instance.LinkBarToCharacterData(l_data);
 

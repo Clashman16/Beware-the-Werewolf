@@ -17,7 +17,7 @@ namespace BWW.Behaviours.Characters
 
         private PickingUtility m_animationIndexPicker;
 
-        public void Init(CharacterDataBehaviour p_currentData)
+        public void Init(CharacterDataBehaviour p_currentData, int p_dWalkAnimationId)
         {
             m_animator = GetComponent<Animator>();
 
@@ -32,14 +32,14 @@ namespace BWW.Behaviours.Characters
 
             m_OnDataUpdated += UpdateAnimation;
 
-            ResetInstance();
+            ResetInstance(p_dWalkAnimationId);
         }
 
-        private void ResetInstance()
+        private void ResetInstance(int p_dWalkAnimationId)
         {
             m_data = new CharacterAnimationData(ECharacterState.IDDLE, false, false);
 
-            m_animator.SetInteger("WalkIndex", m_animationIndexPicker.Pick());
+            m_animator.SetInteger("WalkIndex", p_dWalkAnimationId);
 
             m_OnDataUpdated.Invoke();
         }
