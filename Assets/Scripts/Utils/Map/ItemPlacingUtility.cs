@@ -6,6 +6,7 @@ using BWW.Managers.Map;
 using BWW.Managers.Player;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace BWW.Utils.Map
 {
@@ -54,6 +55,10 @@ namespace BWW.Utils.Map
                 if (l_levelLauncher.IsLevelBuilt)
                 {
                     NavMeshManager.Instance.RaiseFlag(l_goPlacedItem);
+                }
+                else
+                {
+                    NavMeshManager.Instance.EnableObstacle(l_goPlacedItem.GetComponent<NavMeshObstacle>());
                 }
 
                 return l_goPlacedItem.GetComponent<MovableItem>();

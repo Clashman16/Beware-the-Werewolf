@@ -17,6 +17,27 @@ namespace BWW.Behaviours.Characters
         {
             m_eType = p_eVillagerType;
 
+            VillagerAppearanceBehaviour l_villager = GetComponent<VillagerAppearanceBehaviour>();
+
+            switch (l_villager.Title)
+            {
+                case EVillagerTitle.KNIGHT:
+
+                    HealthPoints = 100f;
+
+                    break;
+                case EVillagerTitle.RICH:
+
+                    HealthPoints = 80f;
+
+                    break;
+
+                default:
+                    HealthPoints = 50f;
+
+                    break;
+            }
+
             Init();
         }
     }

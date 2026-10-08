@@ -57,7 +57,7 @@ namespace BWW.Managers.Map
             NavMeshObstacle l_flag = p_goFlag.GetComponent<NavMeshObstacle>();
             if (m_lstFlags.Contains(l_flag))
             {
-                p_goFlag.GetComponent<MovableItem>().StartCoroutine(EnableObstacle(l_flag));
+                p_goFlag.GetComponent<MovableItem>().StartCoroutine(WaitToEnableObstacle(l_flag));
 
                 m_lstFlags.Remove(l_flag);
             }
@@ -72,10 +72,15 @@ namespace BWW.Managers.Map
             l_obstacle.enabled = false;
         }
 
-        private IEnumerator EnableObstacle(NavMeshObstacle p_obstacle)
+        private IEnumerator WaitToEnableObstacle(NavMeshObstacle p_obstacle)
         {
             yield return null; // Wait next frame
 
+            EnableObstacle(p_obstacle);
+        }
+
+        public void EnableObstacle(NavMeshObstacle p_obstacle)
+        {
             p_obstacle.enabled = true;
 
             p_obstacle.carving = true;
