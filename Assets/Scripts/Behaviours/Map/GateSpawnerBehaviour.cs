@@ -5,9 +5,9 @@ namespace BWW.Behaviours.Map
 {
    public class GateSpawnerBehaviour : SpawnPointBehaviour
    {
-      public override GameObject InstantiateVillager(EVillagerType p_eEnemyType)
+      public override GameObject InstantiateVillager(EVillagerType p_eEnemyType, int p_dWalkAnimationId)
       {
-         GameObject l_goVillager = base.InstantiateVillager(p_eEnemyType);
+         GameObject l_goVillager = base.InstantiateVillager(p_eEnemyType, p_dWalkAnimationId);
 
          l_goVillager.transform.SetParent(transform, true);
 

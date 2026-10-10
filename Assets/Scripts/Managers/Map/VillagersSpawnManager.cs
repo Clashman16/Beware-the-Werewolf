@@ -1,72 +1,79 @@
 using BWW.Enums;
 using BWW.ScriptableObjects.Map;
+using BWW.Utils;
 using BWW.Utils.Characters;
 using BWW.Utils.Map;
 using System.Collections.Generic;
 
 namespace BWW.Managers.Map
 {
-   public sealed class VillagersSpawnManager
-   {
-      private static VillagersSpawnManager m_instance;
+    public sealed class VillagersSpawnManager
+    {
+        private static VillagersSpawnManager m_instance;
 
-      public static VillagersSpawnManager Instance
-      {
-         get
-         {
-            if(m_instance == null)
+        public static VillagersSpawnManager Instance
+        {
+            get
             {
-               m_instance = new VillagersSpawnManager();
+                if (m_instance == null)
+                {
+                    m_instance = new VillagersSpawnManager();
+                }
+
+                return m_instance;
             }
+        }
 
-            return m_instance;
-         }
-      }
+        private VillagerTypePickerUtility m_villagerTypePicker;
 
-      VillagerTypePickerUtility m_villagerTypePicker;
+        private VillagerGenderPickerUtility m_villagerGenderPicker;
 
-      VillagerGenderPickerUtility m_villagerGenderPicker;
+        private SpawnPointPickerUtility m_spawnerPicker;
 
-      SpawnPointPickerUtility m_spawnerPicker;
+        private PickingUtility m_walkAnimationIndexPicker;
 
-      private bool m_bIsReady;
+        private bool m_bIsReady;
 
-      public bool IsReady
-      {
-         get => m_bIsReady;
-         set
-         {
-            m_bIsReady = value;
-
-            if(m_bIsReady)
+        public bool IsReady
+        {
+            get => m_bIsReady;
+            set
             {
-               Spawn();
+                m_bIsReady = value;
+
+                if (m_bIsReady)
+                {
+                    Spawn();
+                }
             }
-         }
-      }
+        }
 
-      private VillagersSpawnManager()
-      {
-         m_villagerGenderPicker = new VillagerGenderPickerUtility();
-      }
+        private VillagersSpawnManager()
+        {
+            m_villagerGenderPicker = new VillagerGenderPickerUtility();
+        }
 
-      public void Init(List<int> p_lstEnabledTowerIds, List<ScriptableVillagersWave> p_lstWaves)
-      {
-         m_spawnerPicker = new SpawnPointPickerUtility(p_lstEnabledTowerIds, m_villagerGenderPicker);
+        public void Init(List<int> p_lstEnabledTowerIds, List<ScriptableVillagersWave> p_lstWaves)
+        {
+            m_spawnerPicker = new SpawnPointPickerUtility(p_lstEnabledTowerIds, m_villagerGenderPicker);
 
-         m_villagerTypePicker = new VillagerTypePickerUtility(p_lstWaves);
+            m_villagerTypePicker = new VillagerTypePickerUtility(p_lstWaves);
 
-         m_bIsReady = false;
-      }
-      
+            m_walkAnimationIndexPicker = new PickingUtility();
 
-      public void Spawn()
-      {
-         EVillagerType l_eVillagerType = (EVillagerType) m_villagerTypePicker.Pick();
+            m_bIsReady = false;
+        }
 
-         m_spawnerPicker.Pick();
 
-         m_spawnerPicker.CurrentSpawnPoint.InstantiateVillager(l_eVillagerType);
-      }
-   }
+        public void Spawn()
+        {
+            EVillagerType l_eVillagerType = (EVillagerType)m_villagerTypePicker.Pick();
+
+            m_spawnerPicker.Pick();
+
+            int l_dWalkAnimationId = m_walkAnimationIndexPicker.Pick();
+
+            m_spawnerPicker.CurrentSpawnPoint.InstantiateVillager(l_eVillagerType, l_dWalkAnimationId);
+        }
+    }
 }
