@@ -61,6 +61,8 @@ namespace BWW.Managers.Map
 
             m_walkAnimationIndexPicker = new PickingUtility();
 
+            m_walkAnimationIndexPicker.PossiblePicks.AddRange(new[] { 0, 1, 2 });
+
             m_bIsReady = false;
         }
 

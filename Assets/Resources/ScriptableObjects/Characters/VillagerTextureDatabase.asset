@@ -21,6 +21,10 @@ MonoBehaviour:
     m_texture: {fileID: 2800000, guid: 1f751b626658c5a4580f5e3c1c80f73e, type: 3}
   - m_sTextureKey: skin_her_poor_1
     m_texture: {fileID: 2800000, guid: 0a38c28aba72c9d4d8773879032c7ab4, type: 3}
+  - m_sTextureKey: skin_her_poor_2
+    m_texture: {fileID: 2800000, guid: 0fcda5d229f7b4f44821e22f0ee5e02f, type: 3}
+  - m_sTextureKey: skin_her_poor_3
+    m_texture: {fileID: 2800000, guid: 2716133dc0a9a664da2f25def424365f, type: 3}
   - m_sTextureKey: skin_her_rich_0
     m_texture: {fileID: 2800000, guid: 13c8ce83f94442d47978d72947ad9b8c, type: 3}
   - m_sTextureKey: skin_her_rich_1
@@ -33,6 +37,10 @@ MonoBehaviour:
     m_texture: {fileID: 2800000, guid: 58c49bfa38cabfe40b94c78479d67491, type: 3}
   - m_sTextureKey: skin_him_poor_1
     m_texture: {fileID: 2800000, guid: 35e3e4f6178f9f2479b1b468088d33e1, type: 3}
+  - m_sTextureKey: skin_him_poor_2
+    m_texture: {fileID: 2800000, guid: 3697ba5a0fd3955488574e6a723bde3f, type: 3}
+  - m_sTextureKey: skin_him_poor_3
+    m_texture: {fileID: 2800000, guid: 9d79ec3b2219bea45aeb623855ea587c, type: 3}
   - m_sTextureKey: skin_him_rich_0
     m_texture: {fileID: 2800000, guid: beef3de3d50ae5e49a33f71ec2686dc9, type: 3}
   - m_sTextureKey: skin_him_rich_1

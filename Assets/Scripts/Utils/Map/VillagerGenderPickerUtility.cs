@@ -5,49 +5,51 @@ using UnityEngine;
 
 namespace BWW.Utils.Characters
 {
-   public class VillagerGenderPickerUtility : PickingUtility
-   {
-      private const string m_sDatabasePath = "ScriptableObjects/Characters/VillagerGenderDatabase";
+    public class VillagerGenderPickerUtility : PickingUtility
+    {
+        private string m_sDatabasePath;
 
-      private ScriptableVillagerGenderDatabase m_database;
+        private ScriptableVillagerGenderDatabase m_database;
 
-      private GameObject m_goCurrentGender;
+        private GameObject m_goCurrentGender;
 
-      public GameObject CurrentGender
-      {
-         get => m_goCurrentGender;
-      }
+        public GameObject CurrentGender
+        {
+            get => m_goCurrentGender;
+        }
 
-      public VillagerGenderPickerUtility() : base()
-      {
-         m_database = Resources.Load<ScriptableVillagerGenderDatabase>(m_sDatabasePath);
+        public VillagerGenderPickerUtility(bool p_bIsPrisoner = false) : base()
+        {
+            m_sDatabasePath = string.Concat("ScriptableObjects/Characters/", p_bIsPrisoner ? "Prisoner" : "Villager", "GenderDatabase");
 
-         for(int l_i = 0; l_i < m_database.Genders.Count; l_i++)
-         {
-            PossiblePicks.Add(l_i);
-         }
-      }
+            m_database = Resources.Load<ScriptableVillagerGenderDatabase>(m_sDatabasePath);
 
-      public override int Pick()
-      {
-         int l_dRandomIndex;
+            for (int l_i = 0; l_i < m_database.Genders.Count; l_i++)
+            {
+                PossiblePicks.Add(l_i);
+            }
+        }
 
-         Dictionary<bool, int> l_lstAreVillagerWomenCount = CurrentGameVillagersDatabase.Instance.Village.AreVillagerWomenCount;
+        public override int Pick()
+        {
+            int l_dRandomIndex;
 
-         if (l_lstAreVillagerWomenCount[true] == l_lstAreVillagerWomenCount[false])
-         {
-            l_dRandomIndex = base.Pick();
-         }
-         else
-         {
-            l_dRandomIndex = l_lstAreVillagerWomenCount[true] > l_lstAreVillagerWomenCount[false] ? 0 : 1;
-         }
+            Dictionary<bool, int> l_lstAreVillagerWomenCount = CurrentGameVillagersDatabase.Instance.Village.AreVillagerWomenCount;
 
-         int l_dAppearanceId = PossiblePicks[l_dRandomIndex];
+            if (l_lstAreVillagerWomenCount[true] == l_lstAreVillagerWomenCount[false])
+            {
+                l_dRandomIndex = base.Pick();
+            }
+            else
+            {
+                l_dRandomIndex = l_lstAreVillagerWomenCount[true] > l_lstAreVillagerWomenCount[false] ? 0 : 1;
+            }
 
-         m_goCurrentGender = m_database.Genders[l_dAppearanceId];
+            int l_dAppearanceId = PossiblePicks[l_dRandomIndex];
 
-         return l_dAppearanceId;
-      }
-   }
+            m_goCurrentGender = m_database.Genders[l_dAppearanceId];
+
+            return l_dAppearanceId;
+        }
+    }
 }
