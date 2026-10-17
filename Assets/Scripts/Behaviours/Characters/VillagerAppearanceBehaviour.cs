@@ -1,21 +1,11 @@
 using BWW.Enums;
-using BWW.Utils.Characters;
 using BWW.Utils.Map;
 using UnityEngine;
 
 namespace BWW.Behaviours.Characters
 {
-   public class VillagerAppearanceBehaviour : MonoBehaviour
-   {
-      private const string m_sShaderTexturePropertyName = "_DetailAlbedoMap";
-
-      private bool m_bIsCharacterFemale;
-
-      public bool IsCharacterFemale
-      {
-         get => m_bIsCharacterFemale;
-      }
-
+   public class VillagerAppearanceBehaviour : HumanAppearanceBehaviour
+    {
       private EVillagerTitle m_eTitle;
 
       public EVillagerTitle Title
@@ -30,9 +20,9 @@ namespace BWW.Behaviours.Characters
          get => IsSkinColorBlack;
       }
 
-      public void UpdateAppearance(bool p_bIsCharacterFemale)
+      public override void UpdateAppearance(bool p_bIsCharacterFemale)
       {
-         m_bIsCharacterFemale = p_bIsCharacterFemale;
+         IsCharacterFemale = p_bIsCharacterFemale;
 
          VillageData l_data = CurrentGameVillagersDatabase.Instance.Village;
 
@@ -61,23 +51,17 @@ namespace BWW.Behaviours.Characters
             m_bIsSkinColorBlack = false;
          }
 
-         string l_sTextureKey = string.Concat("skin_h", m_bIsCharacterFemale ? "er_" : "im_", m_eTitle.ToString().ToLower(), m_bIsSkinColorBlack ? "_1" : "_0");
+         string l_sTextureKey = string.Concat("skin_h", IsCharacterFemale ? "er_" : "im_", m_eTitle.ToString().ToLower(), m_bIsSkinColorBlack ? "_1" : "_0");
 
-         Texture2D l_text = VillagerTextureGetter.Instance.GetTextureFromKey(l_sTextureKey);
+         Texture2D l_text = GetTextureFromKey(l_sTextureKey);
 
          l_data.VillagerTitleCount[m_eTitle] += 1;
 
          l_data.AreSkinColorBlackCount[m_bIsSkinColorBlack] += 1;
 
-         l_data.AreVillagerWomenCount[m_bIsCharacterFemale] += 1;
+         l_data.AreVillagerWomenCount[IsCharacterFemale] += 1;
 
-         SkinnedMeshRenderer l_renderer = GetComponentInChildren<SkinnedMeshRenderer>();
-
-         Material l_material = new Material(l_renderer.sharedMaterial);
-
-         l_material.SetTexture(m_sShaderTexturePropertyName, l_text);
-
-         l_renderer.material = l_material;
+         ApplyTexture(l_text);
       }
    }
 }
