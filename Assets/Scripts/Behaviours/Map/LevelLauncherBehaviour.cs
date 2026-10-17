@@ -1,3 +1,4 @@
+using BWW.Enums;
 using BWW.Managers.Map;
 using BWW.Managers.Player;
 using BWW.Managers.Save;
@@ -51,6 +52,8 @@ namespace BWW.Behaviours.Map
          NavMeshManager.Instance.BuildSurface();
 
          PlayerCameraManager l_camera = PlayerCameraManager.Instance; // Init the player camera
+
+         PrisonerSpawnManager.Instance.SpawnPrisoner(EWerewolfType.STILL_HUMAN);
 
          m_bIsLevelBuilt = true;
       }
