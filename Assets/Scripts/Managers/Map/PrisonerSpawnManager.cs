@@ -12,6 +12,10 @@ namespace BWW.Managers.Map
 
         private PickingUtility m_textureIdPicker;
 
+        private Vector3 m_vecPrisonerPosition = new Vector3(18.1289997f, 0.223000005f, -35.0660019f);
+
+        private Vector3 m_vecPrisonerRotation = new Vector3(12.669425f, 0, 0);
+
         private static PrisonerSpawnManager m_instance;
 
         public static PrisonerSpawnManager Instance
@@ -51,6 +55,10 @@ namespace BWW.Managers.Map
             WerewolfDataBehaviour l_data = l_goPrisoner.GetComponent<WerewolfDataBehaviour>();
 
             l_data.Init(p_eWerewolfType);
+
+            l_goPrisoner.transform.position = m_vecPrisonerPosition;
+
+            l_goPrisoner.transform.rotation = Quaternion.Euler(m_vecPrisonerRotation);
         }
     }
 }
