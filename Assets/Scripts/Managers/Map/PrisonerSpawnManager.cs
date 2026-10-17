@@ -1,4 +1,5 @@
 using BWW.Behaviours.Characters;
+using BWW.Behaviours.Map;
 using BWW.Enums;
 using BWW.Utils;
 using BWW.Utils.Characters;
@@ -15,6 +16,8 @@ namespace BWW.Managers.Map
         private Vector3 m_vecPrisonerPosition = new Vector3(18.1289997f, 0.223000005f, -35.0660019f);
 
         private Vector3 m_vecPrisonerRotation = new Vector3(12.669425f, 0, 0);
+
+        private CrossBehaviour m_cross;
 
         private static PrisonerSpawnManager m_instance;
 
@@ -38,6 +41,8 @@ namespace BWW.Managers.Map
             m_textureIdPicker = new PickingUtility();
 
             m_textureIdPicker.PossiblePicks.AddRange(new[] { 0, 1, 2, 3 });
+
+            m_cross = Object.FindFirstObjectByType<CrossBehaviour>();
         }
 
         public void SpawnPrisoner(EWerewolfType p_eWerewolfType)
@@ -59,6 +64,10 @@ namespace BWW.Managers.Map
             l_goPrisoner.transform.position = m_vecPrisonerPosition;
 
             l_goPrisoner.transform.rotation = Quaternion.Euler(m_vecPrisonerRotation);
+
+            l_goPrisoner.transform.SetParent(m_cross.transform);
+
+            m_cross.LookAtStairs();
         }
     }
 }
